@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tủ Gốc Cà Phê Bằng Vỏ Trấu – Bí Quyết Giữ Ẩm Mùa Khô | Daktri</title>
+<meta name="description" content="Kỹ thuật tủ gốc cà phê bằng vỏ trấu giúp giữ ẩm đất, kiểm soát cỏ dại, cải thiện đất lâu dài. Hướng dẫn thực hành cho nông dân Tây Nguyên." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --moss:   #2e6b3f;
+    --moss2:  #245530;
+    --honey:  #f5a623;
+    --cream:  #faf7f0;
+    --dark:   #1a2e1e;
+    --text:   #2c2c2c;
+    --muted:  #666;
+    --border: #e0dbd0;
+  }
+
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.75;
+    font-size: 16px;
+  }
+
+  /* ─── layout ─── */
+  .wrap        { max-width: 740px; margin: 0 auto; padding: 0 20px; }
+  .wrap--wide  { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+
+  /* ─── BLOCK 1 : HERO ─── */
+  .hero {
+    background: var(--moss);
+    padding: 52px 40px 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.06);
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    bottom: -30px; left: 80px;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: rgba(245,166,35,.14);
+  }
+  .hero__badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--honey);
+    color: var(--dark);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase;
+    padding: 5px 14px; border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  .hero__tagline {
+    color: rgba(255,255,255,.72);
+    font-style: italic;
+    font-size: 15px;
+    margin-bottom: 10px;
+    letter-spacing: .02em;
+  }
+  .hero__title {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.25;
+    max-width: 600px;
+  }
+  .hero__meta {
+    margin-top: 28px;
+    display: flex; align-items: center; gap: 20px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: rgba(255,255,255,.6);
+    position: relative; z-index: 1;
+  }
+  .hero__hotline { color: var(--honey); font-weight: 700; font-size: 15px; }
+
+  /* ─── BLOCK 2 : SLUG + DATE ─── */
+  .post-meta {
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0 14px;
+    display: flex; align-items: center;
+    gap: 16px; flex-wrap: wrap;
+    font-size: 12px; color: var(--muted);
+  }
+  .post-meta__slug { font-family: monospace; color: var(--moss); font-size: 12px; }
+  .post-meta__tag {
+    background: rgba(46,107,63,.1);
+    color: var(--moss);
+    font-size: 11px; font-weight: 600;
+    padding: 3px 10px; border-radius: 20px;
+  }
+
+  /* ─── BLOCK 3 : INTRO BLOCKQUOTE ─── */
+  .intro {
+    border-left: 4px solid var(--moss);
+    padding: 18px 24px;
+    margin: 32px 0;
+    background: rgba(46,107,63,.04);
+    border-radius: 0 8px 8px 0;
+  }
+  .intro p {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.8;
+    color: #333;
+    font-style: italic;
+  }
+
+  /* ─── INFOGRAPHIC SHARED ─── */
+  .infographic {
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin: 36px 0;
+  }
+  .infographic--green {
+    background: linear-gradient(135deg, rgba(46,107,63,.1), rgba(46,107,63,.03));
+    border: 1.5px solid rgba(46,107,63,.3);
+  }
+  .infographic--honey {
+    background: linear-gradient(135deg, rgba(245,166,35,.12), rgba(245,166,35,.03));
+    border: 1.5px solid rgba(245,166,35,.4);
+  }
+  .infographic__title {
+    font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .08em;
+    margin-bottom: 20px;
+  }
+  .infographic--green .infographic__title { color: var(--moss); }
+  .infographic--honey .infographic__title { color: #8b6914; }
+  .infographic__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 14px;
+  }
+  .infographic__card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 16px 12px;
+    text-align: center;
+    box-shadow: 0 1px 6px rgba(0,0,0,.07);
+  }
+  .infographic__icon  { font-size: 26px; margin-bottom: 6px; }
+  .infographic__value {
+    font-size: 15px; font-weight: 700; color: var(--dark);
+    margin-bottom: 4px; line-height: 1.2;
+  }
+  .infographic__label { font-size: 11px; color: #666; line-height: 1.3; }
+
+  /* ─── SECTIONS ─── */
+  .section { margin-bottom: 36px; }
+  .section__heading {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 21px; font-weight: 700;
+    color: var(--dark);
+    border-left: 4px solid var(--honey);
+    padding-left: 14px;
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+  .section p  { font-size: 15.5px; line-height: 1.85; margin-bottom: 12px; color: var(--text); }
+  .section ul, .section ol { padding-left: 22px; }
+  .section li {
+    font-size: 15.5px; line-height: 1.85;
+    margin-bottom: 8px; color: var(--text);
+  }
+  .section ol li { padding-left: 4px; }
+  .section li strong { color: var(--moss); }
+
+  /* ─── BLOCK 7 : TIP BOX ─── */
+  .tip-box {
+    background: var(--moss);
+    border-radius: 14px;
+    padding: 22px 28px;
+    margin: 36px 0 32px;
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .tip-box__icon  { font-size: 28px; flex-shrink: 0; margin-top: 2px; }
+  .tip-box__label {
+    color: var(--honey); font-weight: 700; font-size: 12px;
+    text-transform: uppercase; letter-spacing: .07em; margin-bottom: 6px;
+  }
+  .tip-box__text  { color: #fff; font-size: 14.5px; line-height: 1.75; }
+
+  /* ─── CONCLUSION ─── */
+  .conclusion {
+    font-style: italic; font-size: 15.5px;
+    line-height: 1.85; color: #444;
+    margin-bottom: 40px;
+    border-left: 3px solid var(--border);
+    padding-left: 18px;
+  }
+
+  /* ─── BLOCK 8 : FOOTER CTA ─── */
+  .cta {
+    background: #fff;
+    border-top: 3px solid var(--moss);
+    border-radius: 0 0 16px 16px;
+    padding: 28px 40px;
+    display: flex; align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .cta__label  { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+  .cta__phone  { font-size: 28px; font-weight: 700; color: var(--moss); letter-spacing: .01em; }
+  .cta__btn {
+    display: inline-block;
+    background: var(--moss);
+    color: #fff;
+    font-size: 14px; font-weight: 600;
+    padding: 13px 28px; border-radius: 10px;
+    text-decoration: none;
+    letter-spacing: .02em;
+    transition: background .15s;
+  }
+  .cta__btn:hover { background: var(--moss2); }
+
+  /* ─── ARTICLE WRAPPER ─── */
+  .article {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 24px rgba(0,0,0,.07);
+    margin: 32px 0 48px;
+  }
+  .article__body { padding: 0 40px 40px; }
+
+  @media (max-width: 600px) {
+    .hero          { padding: 36px 22px 32px; }
+    .article__body { padding: 0 18px 28px; }
+    .cta           { padding: 22px 18px; flex-direction: column; }
+    .cta__phone    { font-size: 22px; }
+    .infographic__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<main class="wrap" role="main">
+  <article class="article">
+
+    <!-- BLOCK 1: HERO BANNER -->
+    <header class="hero">
+      <div class="hero__badge">🌿 Daktri × Vinaxanh</div>
+      <p class="hero__tagline">Giữ ẩm mùa khô — đất khoẻ cả năm</p>
+      <h1 class="hero__title">Tủ Gốc Cà Phê Bằng Vỏ Trấu: Kỹ Thuật Đơn Giản, Lợi Ích Dài Lâu</h1>
+      <div class="hero__meta">
+        <span>📞 <span class="hero__hotline">0941 336 669</span></span>
+        <span>•</span>
+        <span>Daktri.vn — Nông nghiệp hữu cơ</span>
+      </div>
+    </header>
+
+    <div class="article__body">
+
+      <!-- BLOCK 2: SLUG + DATE -->
+      <div class="post-meta">
+        <span class="post-meta__slug">/blog/tu-goc-ca-phe-bang-vo-trau</span>
+        <span>18/05/2026</span>
+        <span class="post-meta__tag">Kỹ thuật canh tác</span>
+        <span class="post-meta__tag">Cà phê Tây Nguyên</span>
+      </div>
+
+      <!-- BLOCK 3: INTRO BLOCKQUOTE -->
+      <blockquote class="intro">
+        <p>Mùa khô Tây Nguyên, nhìn vào gốc cà phê mà thấy đất nứt nẻ, cỏ dại chen nhau mọc — nhiều bà con phải tưới liên tục, tốn nước, tốn công mà cây vẫn cằn. Vậy mà chỉ cần một lớp vỏ trấu trải quanh gốc, chuyện đó thay đổi hẳn. Cái bí quyết này không mới — người trồng cà phê lâu năm ở Đắk Lắk, Lâm Đồng đã làm từ lâu — nhưng không phải ai cũng biết làm đúng.</p>
+      </blockquote>
+
+      <!-- BLOCK 4: INFOGRAPHIC 1 -->
+      <div class="infographic infographic--green" role="figure" aria-label="Lợi ích khi tủ gốc bằng vỏ trấu">
+        <p class="infographic__title">📊 Vỏ trấu làm được gì cho vườn cà phê?</p>
+        <div class="infographic__grid">
+          <div class="infographic__card">
+            <div class="infographic__icon">💧</div>
+            <div class="infographic__value">Giảm 40%</div>
+            <div class="infographic__label">Lượng nước tưới mùa khô</div>
+          </div>
+          <div class="infographic__card">
+            <div class="infographic__icon">🌡️</div>
+            <div class="infographic__value">Giảm 5–8°C</div>
+            <div class="infographic__label">Nhiệt độ đất buổi trưa nắng</div>
+          </div>
+          <div class="infographic__card">
+            <div class="infographic__icon">🌿</div>
+            <div class="infographic__value">Giảm 70%</div>
+            <div class="infographic__label">Công làm cỏ quanh gốc</div>
+          </div>
+          <div class="infographic__card">
+            <div class="infographic__icon">🪱</div>
+            <div class="infographic__value">Tăng 3×</div>
+            <div class="infographic__label">Mật độ giun đất sau 1 năm</div>
+          </div>
+          <div class="infographic__card">
+            <div class="infographic__icon">🌾</div>
+            <div class="infographic__value">Dày 10–15 cm</div>
+            <div class="infographic__label">Lớp tủ lý tưởng quanh gốc</div>
+          </div>
+          <div class="infographic__card">
+            <div class="infographic__icon">📅</div>
+            <div class="infographic__value">6–8 tháng</div>
+            <div class="infographic__label">Hiệu lực một lần tủ</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOCK 5: SECTIONS ĐẦU -->
+      <section class="section">
+        <h2 class="section__heading">Tại sao vỏ trấu lại phù hợp với vườn cà phê?</h2>
+        <p>Vỏ trấu là phụ phẩm xay xát lúa — rẻ, nhiều, dễ kiếm khắp nơi. Nhưng điều làm nó đặc biệt không phải giá tiền, mà là cấu trúc rỗng xốp bên trong. Lớp trấu dày trải quanh gốc hoạt động như một tấm chăn tự nhiên: ban ngày giữ ẩm cho đất không bốc hơi, ban đêm giữ nhiệt không để rễ bị lạnh đột ngột.</p>
+        <p>Thêm vào đó, vỏ trấu phân huỷ chậm — mất 6 đến 18 tháng mới tan hết — nên không cần tủ lại liên tục. Trong thời gian đó, nó âm thầm làm việc: ngăn cỏ mọc, bổ sung silic và chất hữu cơ vào đất, tạo môi trường tốt cho vi sinh vật và giun đất phát triển.</p>
+      </section>
+
+      <section class="section">
+        <h2 class="section__heading">Ba lợi ích chính bà con hay thấy ngay sau 1 mùa</h2>
+        <ul>
+          <li><strong>Giữ ẩm hiệu quả:</strong> Đất dưới lớp trấu luôn ẩm hơn đất trần 2–3 ngày sau tưới. Mùa khô bà con có thể kéo dài chu kỳ tưới từ 7 ngày lên 10–12 ngày mà cây không héo lá.</li>
+          <li><strong>Kiểm soát cỏ dại:</strong> Lớp trấu dày 10 cm chặn ánh sáng, cỏ không nảy mầm được. Thỉnh thoảng còn vài ngọn cỏ lách ra ở rìa — nhổ đi nhanh thôi, không còn phải cào cả vườn như trước.</li>
+          <li><strong>Cải thiện đất dần theo năm:</strong> Trấu mục ra thành chất hữu cơ, kết hợp với hoạt động của giun đất làm đất tơi xốp hơn. Sau 2–3 mùa, tầng đất mặt dày lên rõ rệt, rễ cà phê ăn nông ít bị sốc hạn hơn.</li>
+        </ul>
+      </section>
+
+      <!-- BLOCK 6: INFOGRAPHIC 2 -->
+      <div class="infographic infographic--honey" role="figure" aria-label="Các bước tủ gốc cà phê đúng kỹ thuật">
+        <p class="infographic__title">🛠️ Cách tủ gốc đúng — bước theo bước</p>
+        <div class="infographic__grid">
+          <div class="infographic__card">
+            <div class="infographic__icon">🌱</div>
+            <div class="infographic__value">Bước 1</div>
+            <div class="infographic__label">Làm sạch cỏ quanh gốc trước khi tủ</div>
+          </div>
+          <div class="infographic__card">
+            <div class="infographic__icon">💦</div>
+            <div class="infographic__value">Bước 2</div>
+            <div class="infographic__label">Tưới ẩm đất rồi mới trải trấu lên</div>
+          </div>
+          <div class="infographic__card">
+            <div class="infographic__icon">⭕</div>
+            <div class="infographic__value">Bước 3</div>
+            <div class="infographic__label">Tủ vòng tròn, cách gốc 10–15 cm</div>
+          </div>
+          <div class="infographic__card">
+            <div class="infimage__icon">📏</div>
+            <div class="infographic__value">Bước 4</div>
+            <div class="infographic__label">Dày 10–15 cm, rộng ra đến tán lá</div>
+          </div>
+          <div class="infographic__card">
+            <div class="infographic__icon">🔄</div>
+            <div class="infographic__value">Bước 5</div>
+            <div class="infographic__label">Bổ sung thêm khi trấu xẹp xuống</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOCK 7: SECTIONS CUỐI -->
+      <section class="section">
+        <h2 class="section__heading">Những điều cần lưu ý để không làm sai</h2>
+        <ul>
+          <li><strong>Không tủ sát gốc:</strong> Để hở vòng 10–15 cm quanh thân cây. Trấu ẩm ôm sát gốc dễ gây nấm cổ rễ — bệnh này không mấy ai nhận ra cho đến khi cây vàng lá hẳn.</li>
+          <li><strong>Tủ sau khi bón phân:</strong> Bón phân hữu cơ hoặc phân vi sinh xuống trước, tưới nước cho ngấm, rồi mới phủ trấu lên. Tủ ngược lại thì phân khó xuống đến rễ.</li>
+          <li><strong>Dùng trấu sống, không dùng trấu mốc:</strong> Trấu đã bị mốc đen mang mầm nấm bệnh, tủ vào đất là rước hoạ. Chọn trấu vàng, khô, không mùi lạ.</li>
+          <li><strong>Năm đầu có thể cần tủ 2 lần:</strong> Đầu mùa khô và giữa mùa mưa (trấu bị dồn, xẹp xuống còn 5–6 cm). Từ năm thứ 2 trở đi, trấu cũ mục một phần thành đất, chỉ cần bổ sung thêm một ít.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2 class="section__heading">Kết hợp với vi sinh vật để đất khoẻ hơn nữa</h2>
+        <p>Vỏ trấu giỏi giữ ẩm và chắn cỏ, nhưng nó không tự phân huỷ nhanh hay cấp dinh dưỡng trực tiếp cho cây. Nếu bà con muốn đẩy nhanh quá trình cải tạo đất, có thể tưới thêm chế phẩm vi sinh có nấm Trichoderma hoặc dòng phân bón hữu cơ sinh học Vinaxanh lên lớp trấu trước khi phủ — vi sinh vật sẽ ăn trấu mà phân huỷ ra chất mùn nhanh hơn, đất đỡ cứng hơn sau mỗi mùa mưa.</p>
+        <p>Sự kết hợp này đặc biệt hiệu quả trên vùng đất đỏ bazan đã canh tác nhiều năm bằng phân hoá học — đất thường bị chai, mất kết cấu. Chỉ cần kiên trì 2–3 mùa, bà con sẽ thấy đất giữ ẩm tốt hơn dù không tủ dày như ban đầu.</p>
+      </section>
+
+      <!-- TIP BOX -->
+      <div class="tip-box" role="note" aria-label="Mẹo vàng Daktri">
+        <div class="tip-box__icon" aria-hidden="true">🌿</div>
+        <div>
+          <p class="tip-box__label">Mẹo vàng Daktri</p>
+          <p class="tip-box__text">Trước khi tủ, tưới một lượt nước pha loãng chế phẩm vi sinh vào đất quanh gốc — vi sinh vật sẽ bắt đầu làm việc ngay bên dưới lớp trấu, phân huỷ tàn dư cữ cũ và bổ sung đạm sinh học cho rễ cà phê hút được ngay trong tuần đầu.</p>
+        </div>
+      </div>
+
+      <!-- CONCLUSION -->
+      <p class="conclusion">Tủ gốc bằng vỏ trấu không tốn nhiều tiền, không cần máy móc — chỉ cần làm đúng một lần đầu mùa khô là vườn cà phê khoẻ hẳn cả mùa. Bà con thử áp dụng vụ này, rồi so sánh với mấy cây không tủ để thấy sự khác biệt bằng mắt thường.</p>
+
+      <!-- BLOCK 8: FOOTER CTA -->
+      <footer class="cta">
+        <div>
+          <p class="cta__label">Cần tư vấn thêm về kỹ thuật canh tác hữu cơ?</p>
+          <p class="cta__phone">0941 336 669</p>
+        </div>
+        <a href="tel:09413366669" class="cta__btn">Đặt hàng ngay →</a>
+      </footer>
+
+    </div><!-- /.article__body -->
+  </article>
+</main>
+
+</body>
+</html>
