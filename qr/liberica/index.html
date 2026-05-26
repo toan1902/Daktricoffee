@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daktri – Đang chuyển hướng...</title>
+
+<!-- ════════════════════════════════════════════
+     ⚙️  CẤU HÌNH — CHỈ SỬA PHẦN NÀY
+     ════════════════════════════════════════════ -->
+<script>
+  const CONFIG = {
+    // 👇 ĐỔI URL ĐÍCH Ở ĐÂY (không cần sửa gì khác)
+    destination: "https://daktri.vn",
+
+    // Tên hiển thị (tuỳ chọn)
+    label: "Cà Phê Liberica – Daktri Khe Sanh",
+
+    // Thời gian chờ trước khi redirect (giây)
+    delay: 1.8
+  };
+</script>
+<!-- ════════════════════════════════════════════ -->
+
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,700;1,400&family=Be+Vietnam+Pro:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green:      #2e6b3f;
+    --green-dark: #1a4025;
+    --cream:      #f5f0e8;
+    --gold:       #c9a84c;
+    --white:      #fdfcf8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--green-dark);
+    font-family: 'Be Vietnam Pro', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.04; pointer-events: none; z-index: 0;
+  }
+
+  /* Background rings */
+  .rings {
+    position: fixed; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    pointer-events: none; z-index: 0;
+  }
+  .ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.08);
+    animation: pulse 4s ease-in-out infinite;
+  }
+  .ring:nth-child(1) { width: 200px; height: 200px; animation-delay: 0s; }
+  .ring:nth-child(2) { width: 350px; height: 350px; animation-delay: 0.6s; }
+  .ring:nth-child(3) { width: 500px; height: 500px; animation-delay: 1.2s; }
+  .ring:nth-child(4) { width: 650px; height: 650px; animation-delay: 1.8s; }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.02); }
+  }
+
+  /* Card */
+  .card {
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 28px;
+    padding: 52px 48px;
+    text-align: center;
+    animation: fadeIn 0.6s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Logo mark */
+  .logo-ring {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(201,168,76,0.5);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .logo-ring::before {
+    content: '';
+    position: absolute; inset: 6px;
+    border-radius: 50%;
+    border: 0.5px solid rgba(201,168,76,0.2);
+  }
+  .logo-ring svg { width: 44px; height: 44px; }
+
+  /* Brand name */
+  .brand-name {
+    font-family: 'Fraunces', serif;
+    font-size: 28px; font-weight: 700;
+    letter-spacing: 5px; text-transform: uppercase;
+    color: var(--white); line-height: 1;
+  }
+  .brand-sub {
+    font-size: 10px; font-weight: 300;
+    letter-spacing: 3.5px; text-transform: uppercase;
+    color: var(--gold); margin-top: 6px;
+  }
+
+  /* Gold divider */
+  .gold-line {
+    width: 48px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  /* Product label */
+  .product-label {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 15px; font-weight: 300;
+    color: rgba(253,252,248,0.7);
+    letter-spacing: 0.5px;
+  }
+
+  /* Progress bar */
+  .progress-wrap {
+    width: 160px;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 10px;
+  }
+  .progress-track {
+    width: 100%; height: 1.5px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px; overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green), var(--gold));
+    border-radius: 2px;
+    width: 0%;
+    transition: width linear;
+  }
+  .progress-text {
+    font-size: 10px; font-weight: 300;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(253,252,248,0.4);
+  }
+
+  /* Destination chip */
+  .dest-chip {
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.06);
+    border: 0.8px solid rgba(201,168,76,0.2);
+    border-radius: 100px;
+    padding: 7px 16px;
+    font-size: 11px; font-weight: 400;
+    color: rgba(253,252,248,0.5);
+    letter-spacing: 0.5px;
+  }
+  .dest-chip .dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.6;
+    animation: blink 1.2s ease-in-out infinite;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 0.15; }
+  }
+
+  /* Manual link */
+  .manual-link {
+    font-size: 10px; font-weight: 300;
+    letter-spacing: 1px;
+    color: rgba(253,252,248,0.25);
+    margin-top: -10px;
+  }
+  .manual-link a {
+    color: rgba(201,168,76,0.6);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .manual-link a:hover { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<div class="rings">
+  <div class="ring"></div>
+  <div class="ring"></div>
+  <div class="ring"></div>
+  <div class="ring"></div>
+</div>
+
+<div class="card">
+
+  <!-- Logo -->
+  <div class="logo-ring">
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="40" cy="40" r="36" stroke="#c9a84c" stroke-width="1" fill="none" opacity="0.3"/>
+      <!-- Mountains -->
+      <path d="M14 60 L28 34 L38 50 L48 28 L66 60Z" fill="#2e6b3f" fill-opacity="0.3"/>
+      <path d="M20 60 L36 36 L52 60Z" fill="#2e6b3f" fill-opacity="0.6"/>
+      <path d="M36 60 L48 40 L60 60Z" fill="#c9a84c" fill-opacity="0.3"/>
+      <!-- Snow cap -->
+      <path d="M34 36 L38 30 L42 36Z" fill="white" opacity="0.8"/>
+      <!-- Ground -->
+      <line x1="14" y1="60" x2="66" y2="60" stroke="#c9a84c" stroke-width="0.8" opacity="0.5"/>
+      <!-- Coffee cherry -->
+      <circle cx="57" cy="30" r="5" fill="#c9543a" opacity="0.6"/>
+      <circle cx="57" cy="30" r="3" fill="#d4643a" opacity="0.8"/>
+    </svg>
+  </div>
+
+  <!-- Brand -->
+  <div>
+    <p class="brand-name">DAKTRI</p>
+    <p class="brand-sub">Khe Sanh &nbsp;·&nbsp; Cooperative</p>
+  </div>
+
+  <div class="gold-line"></div>
+
+  <p class="product-label" id="productLabel">Đang tải...</p>
+
+  <!-- Progress -->
+  <div class="progress-wrap">
+    <div class="progress-track">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <p class="progress-text">Đang chuyển hướng</p>
+  </div>
+
+  <!-- Destination -->
+  <div class="dest-chip">
+    <div class="dot"></div>
+    <span id="destDisplay">...</span>
+  </div>
+
+  <p class="manual-link">
+    Không tự chuyển? <a id="manualLink" href="#">Nhấn vào đây</a>
+  </p>
+
+</div>
+
+<script>
+  // ── Đọc config ──
+  const dest  = CONFIG.destination;
+  const label = CONFIG.label;
+  const delay = CONFIG.delay * 1000; // ms
+
+  // ── Hiện thông tin ──
+  document.getElementById('productLabel').textContent = label;
+  document.getElementById('destDisplay').textContent  = dest.replace('https://','');
+  document.getElementById('manualLink').href          = dest;
+
+  // ── Animate progress bar ──
+  const bar = document.getElementById('progressBar');
+  bar.style.transition = `width ${delay}ms linear`;
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => { bar.style.width = '100%'; });
+  });
+
+  // ── Redirect sau delay ──
+  setTimeout(() => {
+    window.location.href = dest;
+  }, delay);
+</script>
+
+</body>
+</html>
