@@ -1,0 +1,1879 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libérica Admin - Quản trị hệ thống</title>
+<link rel="shortcut icon" href="https://i.ibb.co/Y4pKSXXW/daktri-logo.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        paper: '#F3F4EF',
+                        ink: '#20291F',
+                        forest: { DEFAULT: '#1F2A24', 50: '#2A362E', 100: '#374439' },
+                        moss: { DEFAULT: '#4F6F52', 50: '#EEF2EA', 100: '#DCE6D4', 400: '#7A9573', 500: '#4F6F52', 600: '#3E5A41' },
+                        caramel: { DEFAULT: '#C08552', 100: '#F3E3D3', 500: '#C08552', 600: '#A66C3D' },
+                        success: '#3F7D58',
+                        danger: '#C0392B',
+                        line: '#E1E0D6'
+                    },
+                    fontFamily: {
+                        display: ['Sora', 'sans-serif'],
+                        body: ['Inter', 'sans-serif']
+                    },
+                    boxShadow: {
+                        card: '0 1px 2px rgba(32,41,31,0.04), 0 1px 12px rgba(32,41,31,0.05)',
+                        pop: '0 12px 32px -8px rgba(20,26,20,0.28)',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F3F4EF;
+            background-image:
+                radial-gradient(circle at 100% 0%, rgba(79,111,82,0.05) 0%, transparent 40%),
+                radial-gradient(circle at 0% 100%, rgba(192,133,82,0.05) 0%, transparent 40%);
+        }
+
+        .font-display {
+            font-family: 'Sora', sans-serif;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #C9CBBE;
+            border-radius: 999px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #AEB1A0;
+        }
+
+        .modal-backdrop {
+            background: rgba(20, 26, 20, 0.55);
+            backdrop-filter: blur(3px);
+        }
+
+        .modal-panel {
+            animation: modal-in .2s cubic-bezier(.2,.7,.3,1);
+        }
+
+        @keyframes modal-in {
+            from {
+                opacity: 0;
+                transform: translateY(10px) scale(.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .toast-in {
+            animation: toast-in .3s cubic-bezier(.2,.7,.3,1);
+        }
+
+        @keyframes toast-in {
+            from {
+                opacity: 0;
+                transform: translateX(28px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes toast-bar {
+            from { width: 100%; }
+            to { width: 0%; }
+        }
+
+        .spinner {
+            width: 15px;
+            height: 15px;
+            border-radius: 999px;
+            border: 2px solid rgba(255, 255, 255, .35);
+            border-top-color: #fff;
+            animation: spin .7s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .tab-active {
+            background: #4F6F52;
+            color: #fff;
+            box-shadow: 0 4px 14px -4px rgba(79,111,82,0.55);
+        }
+
+        .tab-inactive {
+            color: rgba(255,255,255,0.55);
+        }
+
+        .tab-inactive:hover {
+            background: rgba(255,255,255,0.06);
+            color: #fff;
+        }
+
+        textarea,
+        input,
+        select {
+            transition: border-color .15s, box-shadow .15s, background-color .15s;
+        }
+
+        textarea:focus,
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #4F6F52;
+            box-shadow: 0 0 0 3.5px rgba(79, 111, 82, 0.14);
+        }
+
+        .table-row {
+            transition: background-color .12s;
+        }
+
+        .table-row:hover {
+            background: #FAFAF7;
+        }
+
+        .icon-btn {
+            transition: background-color .15s, color .15s, transform .1s;
+        }
+        .icon-btn:active { transform: scale(.94); }
+
+        .btn-primary {
+            transition: background-color .15s, box-shadow .15s, transform .05s;
+        }
+        .btn-primary:hover { box-shadow: 0 6px 18px -6px rgba(79,111,82,0.55); }
+        .btn-primary:active { transform: translateY(1px); }
+
+        .dropzone {
+            transition: border-color .15s, background-color .15s;
+        }
+        .dropzone:hover {
+            border-color: #4F6F52;
+            background-color: #EEF2EA;
+        }
+
+        .field-label {
+            letter-spacing: .01em;
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2320291F' fill-opacity='0.45'%3E%3Cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z' clip-rule='evenodd'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right .65rem center;
+            background-size: 1.15em;
+            padding-right: 2.25rem;
+        }
+
+        /* ============ LOGIN SCREEN ============ */
+        #login-screen {
+            background-color: #1F2A24;
+            background-image:
+                radial-gradient(circle at 15% 20%, rgba(79,111,82,0.35) 0%, transparent 45%),
+                radial-gradient(circle at 85% 80%, rgba(192,133,82,0.22) 0%, transparent 45%),
+                linear-gradient(160deg, #1F2A24 0%, #182019 100%);
+        }
+        .login-panel {
+            animation: login-in .45s cubic-bezier(.2,.7,.3,1);
+        }
+        @keyframes login-in {
+            from { opacity: 0; transform: translateY(16px) scale(.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .login-input-wrap:focus-within {
+            border-color: #4F6F52;
+            box-shadow: 0 0 0 3.5px rgba(79, 111, 82, 0.14);
+        }
+
+        /* ============ LOGIN ERROR STATE ============ */
+        .login-input-wrap.login-input-error {
+            border-color: #C0392B !important;
+            box-shadow: 0 0 0 3.5px rgba(192, 57, 43, 0.16) !important;
+            animation: login-shake .4s cubic-bezier(.36,.07,.19,.97);
+        }
+        @keyframes login-shake {
+            10%, 90% { transform: translateX(-1px); }
+            20%, 80% { transform: translateX(2px); }
+            30%, 50%, 70% { transform: translateX(-4px); }
+            40%, 60% { transform: translateX(4px); }
+        }
+        #login-error-banner {
+            animation: toast-in .25s cubic-bezier(.2,.7,.3,1);
+        }
+    </style>
+</head>
+
+<body class="text-ink antialiased">
+
+    <!-- ============ LOGIN SCREEN ============ -->
+    <div id="login-screen" class="fixed inset-0 z-[200] flex items-center justify-center p-4">
+        <div class="login-panel w-full max-w-sm bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-2xl shadow-pop px-8 py-10">
+            <div class="flex flex-col items-center mb-8">
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-moss to-forest-100 ring-1 ring-white/10 flex items-center justify-center shadow-sm mb-4">
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F3E3D3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 9h13a3 3 0 0 1 3 3v1a3 3 0 0 1-3 3H4z"></path>
+                        <path d="M4 9v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-1"></path>
+                        <path d="M8 3c-.6.8-.6 1.5 0 2.3S8.6 7.1 8 8"></path>
+                        <path d="M12 3c-.6.8-.6 1.5 0 2.3s.6 1.8 0 2.7"></path>
+                    </svg>
+                </div>
+                <p class="font-display font-semibold text-2xl text-white tracking-tight">Libérica</p>
+                <p class="text-[13px] text-white/45 mt-1">Đăng nhập vào bảng quản trị</p>
+            </div>
+
+            <!-- Banner báo lỗi đăng nhập (ẩn mặc định, hiển thị khi server trả status=error) -->
+            <div id="login-error-banner" class="hidden mb-4 flex items-start gap-2.5 rounded-lg border border-danger/30 bg-danger/10 px-3.5 py-2.5">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#E57368" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-0.5">
+                    <circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <p id="login-error-text" class="text-[13px] text-danger leading-snug"></p>
+            </div>
+
+            <form id="login-form" onsubmit="handleLoginSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="field-label text-xs font-medium text-white/60">Tên đăng nhập</label>
+                    <div class="login-input-wrap mt-1.5 flex items-center gap-2 border border-white/15 bg-white/[0.04] rounded-lg px-3.5 py-2.5">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-white/35 shrink-0">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <input id="login-username" required type="text" autocomplete="username"
+                            class="w-full bg-transparent text-sm text-white placeholder-white/25 focus:outline-none"
+                            placeholder="admin">
+                    </div>
+                </div>
+                <div>
+                    <label class="field-label text-xs font-medium text-white/60">Mật khẩu</label>
+                    <div class="login-input-wrap mt-1.5 flex items-center gap-2 border border-white/15 bg-white/[0.04] rounded-lg px-3.5 py-2.5">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-white/35 shrink-0">
+                            <rect x="3" y="11" width="18" height="10" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                        <input id="login-password" required type="password" autocomplete="current-password"
+                            class="w-full bg-transparent text-sm text-white placeholder-white/25 focus:outline-none"
+                            placeholder="••••••••">
+                        <button type="button" onclick="toggleLoginPassword()" id="login-password-toggle"
+                            class="icon-btn text-white/35 hover:text-white/70 shrink-0">
+                            <svg id="login-eye-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path><circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" id="login-submit-btn"
+                    class="btn-primary w-full bg-moss hover:bg-moss-600 text-white text-sm font-medium px-4 py-3 rounded-lg flex items-center justify-center gap-2 mt-2">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><path d="M10 17l5-5-5-5"></path><path d="M15 12H3"></path></svg>
+                    Đăng nhập
+                </button>
+            </form>
+
+            <p class="text-center text-[11px] text-white/25 mt-8 leading-relaxed">
+                Copyright © 2026 DAKTRI Cooperative
+            </p>
+        </div>
+    </div>
+
+    <!-- ============ DASHBOARD ROOT (visible only after login) ============ -->
+    <div id="dashboard-root" class="hidden">
+    <div class="flex h-screen overflow-hidden">
+
+        <!-- ============ SIDEBAR ============ -->
+        <aside class="w-64 shrink-0 bg-forest text-white flex flex-col">
+            <div class="px-6 py-6 border-b border-white/10">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-gradient-to-br from-moss to-forest-100 ring-1 ring-white/10 flex items-center justify-center shrink-0 shadow-sm">
+                        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#F3E3D3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 9h13a3 3 0 0 1 3 3v1a3 3 0 0 1-3 3H4z"></path>
+                            <path d="M4 9v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-1"></path>
+                            <path d="M8 3c-.6.8-.6 1.5 0 2.3S8.6 7.1 8 8"></path>
+                            <path d="M12 3c-.6.8-.6 1.5 0 2.3s.6 1.8 0 2.7"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-display font-semibold text-[15px] leading-none tracking-tight">Libérica</p>
+                        <p class="text-[11px] text-white/45 mt-1">Bảng quản trị nội dung</p>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="flex-1 px-3 py-5 space-y-1">
+                <p class="px-3 text-[10px] uppercase tracking-wider text-white/35 font-semibold mb-2">Nội dung</p>
+                <button data-tab="products" onclick="switchTab('products')"
+                    class="nav-btn tab-active w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="shrink-0">
+                        <path d="M21 8l-9-5-9 5 9 5 9-5z"></path>
+                        <path d="M3 8v8l9 5 9-5V8"></path>
+                        <path d="M12 13v8"></path>
+                    </svg>
+                    <span>Sản phẩm</span>
+                </button>
+                <button data-tab="blogs" onclick="switchTab('blogs')"
+                    class="nav-btn tab-inactive w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="shrink-0">
+                        <path d="M14 3v5a1 1 0 0 0 1 1h5"></path>
+                        <path d="M6 3h8l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path>
+                        <path d="M8 13h8M8 17h5"></path>
+                    </svg>
+                    <span>Bài viết</span>
+                </button>
+            </nav>
+
+            <div class="px-4 py-4 border-t border-white/10 space-y-3">
+                <div class="flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-full bg-moss-100/10 border border-white/10 flex items-center justify-center shrink-0 text-white/70">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <div class="min-w-0">
+                            <p id="admin-fullname" class="text-[12px] font-medium text-white truncate">—</p>
+                            <p class="text-[10px] text-white/35">Quản trị viên</p>
+                        </div>
+                    </div>
+                    <button onclick="handleLogout()" title="Đăng xuất"
+                        class="icon-btn w-8 h-8 flex items-center justify-center rounded-lg text-white/40 hover:text-white hover:bg-white/10 shrink-0">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><path d="M16 17l5-5-5-5"></path><path d="M21 12H9"></path>
+                        </svg>
+                    </button>
+                </div>
+                <p class="text-[10px] text-white/25 leading-relaxed pt-2 border-t border-white/5">
+                    Copyright © 2026 DAKTRI Cooperative
+                </p>
+            </div>
+        </aside>
+
+        <!-- ============ MAIN ============ -->
+        <main class="flex-1 flex flex-col overflow-hidden">
+
+            <!-- ---------- PRODUCTS VIEW ---------- -->
+            <section id="view-products" class="flex-1 flex flex-col overflow-hidden">
+                <header class="px-8 py-6 border-b border-line bg-white/70 backdrop-blur-sm flex items-center justify-between shrink-0">
+                    <div>
+                        <p class="text-[11px] uppercase tracking-wider text-moss-600 font-semibold mb-1">Nội dung</p>
+                        <h1 class="font-display text-xl font-semibold tracking-tight">Sản phẩm</h1>
+                        <p class="text-sm text-ink/50 mt-0.5">Quản lý danh mục cà phê đang bán</p>
+                    </div>
+                    <button onclick="openProductModal()"
+                        class="btn-primary bg-moss hover:bg-moss-600 text-white text-sm font-medium px-4 py-2.5 rounded-lg flex items-center gap-2">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
+                        Thêm sản phẩm
+                    </button>
+                </header>
+
+                <div class="px-8 py-4 flex items-center gap-3 shrink-0">
+                    <div class="relative w-80">
+                        <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 text-ink/35" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="7"></circle><path d="M21 21l-3.8-3.8"></path>
+                        </svg>
+                        <input id="product-search" oninput="onProductSearch()" type="text"
+                            placeholder="Tìm theo tên, danh mục, tag..."
+                            class="w-full pl-10 pr-4 py-2.5 border border-line rounded-lg text-sm bg-white shadow-card">
+                    </div>
+                    <span id="product-count" class="text-sm text-ink/40"></span>
+                </div>
+
+                <div class="flex-1 overflow-auto px-8 pb-4">
+                    <div class="bg-white border border-line rounded-xl overflow-hidden shadow-card">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="text-left text-ink/45 text-[11px] uppercase tracking-wide border-b border-line bg-paper/60">
+                                    <th class="px-5 py-3.5 font-semibold">Ảnh</th>
+                                    <th class="px-5 py-3.5 font-semibold">Tên / Slug</th>
+                                    <th class="px-5 py-3.5 font-semibold">Danh mục</th>
+                                    <th class="px-5 py-3.5 font-semibold">Sơ chế</th>
+                                    <th class="px-5 py-3.5 font-semibold">Giá</th>
+                                    <th class="px-5 py-3.5 font-semibold">Khối lượng</th>
+                                    <th class="px-5 py-3.5 font-semibold">Tags</th>
+                                    <th class="px-5 py-3.5 font-semibold text-right">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="products-tbody"></tbody>
+                        </table>
+                        <div id="products-empty" class="hidden py-16 text-center text-ink/40 text-sm">
+                            <svg class="mx-auto mb-3 text-ink/20" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 8l-9-5-9 5 9 5 9-5z"></path><path d="M3 8v8l9 5 9-5V8"></path>
+                            </svg>
+                            Chưa có sản phẩm nào. Nhấn "Thêm sản phẩm" để bắt đầu.
+                        </div>
+                    </div>
+                    <div id="products-pagination" class="flex items-center justify-between py-4 text-sm text-ink/60">
+                    </div>
+                </div>
+            </section>
+
+            <!-- ---------- BLOGS VIEW ---------- -->
+            <section id="view-blogs" class="hidden flex-1 flex-col overflow-hidden">
+                <header class="px-8 py-6 border-b border-line bg-white/70 backdrop-blur-sm flex items-center justify-between shrink-0">
+                    <div>
+                        <p class="text-[11px] uppercase tracking-wider text-moss-600 font-semibold mb-1">Nội dung</p>
+                        <h1 class="font-display text-xl font-semibold tracking-tight">Bài viết</h1>
+                        <p class="text-sm text-ink/50 mt-0.5">Quản lý blog và nội dung khối (blocks)</p>
+                    </div>
+                    <button onclick="openBlogModal()"
+                        class="btn-primary bg-moss hover:bg-moss-600 text-white text-sm font-medium px-4 py-2.5 rounded-lg flex items-center gap-2">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
+                        Thêm bài viết
+                    </button>
+                </header>
+
+                <div class="px-8 py-4 flex items-center gap-3 shrink-0">
+                    <div class="relative w-80">
+                        <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 text-ink/35" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="7"></circle><path d="M21 21l-3.8-3.8"></path>
+                        </svg>
+                        <input id="blog-search" oninput="onBlogSearch()" type="text"
+                            placeholder="Tìm theo tiêu đề, tác giả..."
+                            class="w-full pl-10 pr-4 py-2.5 border border-line rounded-lg text-sm bg-white shadow-card">
+                    </div>
+                    <span id="blog-count" class="text-sm text-ink/40"></span>
+                </div>
+
+                <div class="flex-1 overflow-auto px-8 pb-4">
+                    <div class="bg-white border border-line rounded-xl overflow-hidden shadow-card">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="text-left text-ink/45 text-[11px] uppercase tracking-wide border-b border-line bg-paper/60">
+                                    <th class="px-5 py-3.5 font-semibold">Ảnh bìa</th>
+                                    <th class="px-5 py-3.5 font-semibold">Tiêu đề / Slug</th>
+                                    <th class="px-5 py-3.5 font-semibold">Tác giả</th>
+                                    <th class="px-5 py-3.5 font-semibold">Trạng thái</th>
+                                    <th class="px-5 py-3.5 font-semibold text-right">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="blogs-tbody"></tbody>
+                        </table>
+                        <div id="blogs-empty" class="hidden py-16 text-center text-ink/40 text-sm">
+                            <svg class="mx-auto mb-3 text-ink/20" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 3v5a1 1 0 0 0 1 1h5"></path><path d="M6 3h8l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path>
+                            </svg>
+                            Chưa có bài viết nào. Nhấn "Thêm bài viết" để bắt đầu.
+                        </div>
+                    </div>
+                    <div id="blogs-pagination" class="flex items-center justify-between py-4 text-sm text-ink/60"></div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+    </div>
+    <!-- /#dashboard-root -->
+
+    <!-- ============ TOAST CONTAINER ============ -->
+    <div id="toast-container" class="fixed top-5 right-5 z-[100] flex flex-col gap-2.5 w-80"></div>
+
+    <!-- ============ PRODUCT MODAL ============ -->
+    <div id="product-modal" class="hidden fixed inset-0 z-50 modal-backdrop flex items-center justify-center p-4">
+        <div
+            class="modal-panel bg-white w-full max-w-2xl rounded-2xl shadow-pop max-h-[90vh] overflow-hidden flex flex-col">
+            <div class="px-6 py-5 border-b border-line flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-lg bg-moss-100 text-moss-600 flex items-center justify-center shrink-0">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 8l-9-5-9 5 9 5 9-5z"></path><path d="M3 8v8l9 5 9-5V8"></path>
+                        </svg>
+                    </div>
+                    <h2 id="product-modal-title" class="font-display text-lg font-semibold">Thêm sản phẩm</h2>
+                </div>
+                <button onclick="closeModal('product-modal')"
+                    class="icon-btn w-8 h-8 flex items-center justify-center rounded-lg text-ink/40 hover:text-ink hover:bg-paper">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <form id="product-form" onsubmit="handleProductSubmit(event)" class="px-6 py-5 overflow-y-auto space-y-4">
+                <input type="hidden" id="product-id">
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="field-label text-xs font-medium text-ink/60">Tên sản phẩm *</label>
+                        <input id="product-name" required oninput="autoSlug('product')" type="text"
+                            class="mt-1.5 w-full px-3.5 py-2.5 border border-line rounded-lg text-sm"
+                            placeholder="Cà phê Liberica Khe Sanh">
+                    </div>
+                    <div>
+                        <label class="field-label text-xs font-medium text-ink/60">Slug *</label>
+                        <input id="product-slug" required type="text"
+                            class="mt-1.5 w-full px-3.5 py-2.5 border border-line rounded-lg text-sm font-mono text-[13px]"
+                            placeholder="ca-phe-liberica-khe-sanh">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="field-label text-xs font-medium text-ink/60">Mô tả</label>
+                    <textarea id="product-description" rows="3"
+                        class="mt-1.5 w-full px-3.5 py-2.5 border border-line rounded-lg text-sm"
+                        placeholder="Mô tả hương vị, nguồn gốc..."></textarea>
+                </div>
+
+                <div class="grid grid-cols-3 gap-4">
+                    <div>
+                        <label class="field-label text-xs font-medium text-ink/60">Giá (VNĐ) *</label>
+                        <input id="product-price" required type="number" min="0" step="1000"
+                            class="mt-1.5 w-full px-3.5 py-2.5 border border-line rounded-lg text-sm" placeholder="150000">
+                    </div>
+                    <div>
+                        <label class="field-label text-xs font-medium text-ink/60">Khối lượng (g)</label>
+                        <input id="product-weight" type="number" min="0"
+                            class="mt-1.5 w-full px-3.5 py-2.5 border border-line rounded-lg text-sm" placeholder="250">
+                    </div>
+                    <div>
+                        <label class="field-label text-xs font-medium text-ink/60">Danh mục</label>
+                        <input id="product-category" type="text"
+                            class="mt-1.5 w-full px-3.5 py-2.5 border border-line rounded-lg text-sm"
+                            placeholder="Cà phê rang xay">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="field-label text-xs font-medium text-ink/60">Phương pháp sơ chế</label>
+                        <select id="product-process_type"
+                            class="mt-1.5 w-full px-3.5 py-2.5 border border-line rounded-lg text-sm bg-white">
+                            <option value="">— Chọn —</option>
+                            <option value="washed">Washed (rửa ướt)</option>
+                            <option value="natural">Natural (tự nhiên)</option>
+                            <option value="honey">Honey</option>
+                            <option value="wet-hulled">Wet-hulled</option>
+                            <option value="other">Khác</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="field-label text-xs font-medium text-ink/60">Tags (phân cách bởi dấu phẩy)</label>
+                        <input id="product-tags" type="text"
+                            class="mt-1.5 w-full px-3.5 py-2.5 border border-line rounded-lg text-sm"
+                            placeholder="đặc sản, robusta, khe sanh">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="field-label text-xs font-medium text-ink/60">Hình ảnh sản phẩm</label>
+                    <div class="mt-1.5 flex items-center gap-4">
+                        <div id="product-image-preview"
+                            class="w-20 h-20 rounded-xl border-2 border-dashed border-line bg-paper flex items-center justify-center overflow-hidden text-ink/25 text-[10px] shrink-0">
+                            Chưa có ảnh
+                        </div>
+                        <div class="flex-1">
+                            <label for="product-image-file" class="dropzone cursor-pointer flex items-center gap-2 border border-dashed border-line rounded-lg px-3.5 py-2.5 text-xs text-ink/50">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-moss-600 shrink-0">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M17 8l-5-5-5 5"></path><path d="M12 3v12"></path>
+                                </svg>
+                                <span>Chọn ảnh sản phẩm để tải lên</span>
+                            </label>
+                            <input type="file" id="product-image-file" accept="image/*"
+                                onchange="previewAndUpload(this,'products','product-image-preview','product-image_url')"
+                                class="hidden">
+                            <input type="hidden" id="product-image_url">
+                            <p id="product-upload-status" class="text-xs text-ink/40 mt-1.5"></p>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="px-6 py-4 border-t border-line flex justify-end gap-2 shrink-0 bg-paper/40">
+                <button type="button" onclick="closeModal('product-modal')"
+                    class="px-4 py-2.5 text-sm font-medium rounded-lg border border-line hover:bg-white transition-colors">Hủy</button>
+                <button type="submit" form="product-form" id="product-submit-btn"
+                    class="btn-primary px-4 py-2.5 text-sm rounded-lg bg-moss hover:bg-moss-600 text-white font-medium flex items-center gap-2">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><path d="M17 21v-8H7v8M7 3v5h8"></path></svg>
+                    Lưu sản phẩm
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ BLOG MODAL ============ -->
+    <div id="blog-modal" class="hidden fixed inset-0 z-50 modal-backdrop flex items-center justify-center p-4">
+        <div
+            class="modal-panel bg-white w-full max-w-2xl rounded-2xl shadow-pop max-h-[90vh] overflow-hidden flex flex-col">
+            <div class="px-6 py-5 border-b border-line flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-lg bg-caramel-100 text-caramel-600 flex items-center justify-center shrink-0">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 3v5a1 1 0 0 0 1 1h5"></path><path d="M6 3h8l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path>
+                        </svg>
+                    </div>
+                    <h2 id="blog-modal-title" class="font-display text-lg font-semibold">Thêm bài viết</h2>
+                </div>
+                <button onclick="closeModal('blog-modal')"
+                    class="icon-btn w-8 h-8 flex items-center justify-center rounded-lg text-ink/40 hover:text-ink hover:bg-paper">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <form id="blog-form" onsubmit="handleBlogSubmit(event)" class="px-6 py-5 overflow-y-auto space-y-4">
+                <input type="hidden" id="blog-id">
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="field-label text-xs font-medium text-ink/60">Tiêu đề *</label>
+                        <input id="blog-title" required oninput="autoSlug('blog')" type="text"
+                            class="mt-1.5 w-full px-3.5 py-2.5 border border-line rounded-lg text-sm"
+                            placeholder="Câu chuyện về Liberica Khe Sanh">
+                    </div>
+                    <div>
+                        <label class="field-label text-xs font-medium text-ink/60">Slug *</label>
+                        <input id="blog-slug" required type="text"
+                            class="mt-1.5 w-full px-3.5 py-2.5 border border-line rounded-lg text-sm font-mono text-[13px]"
+                            placeholder="cau-chuyen-lieberica-khe-sanh">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="field-label text-xs font-medium text-ink/60">Tóm tắt</label>
+                    <textarea id="blog-excerpt" rows="2"
+                        class="mt-1.5 w-full px-3.5 py-2.5 border border-line rounded-lg text-sm"
+                        placeholder="Tóm tắt ngắn hiển thị ở trang danh sách..."></textarea>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="field-label text-xs font-medium text-ink/60">Tác giả</label>
+                        <input id="blog-author" type="text"
+                            class="mt-1.5 w-full px-3.5 py-2.5 border border-line rounded-lg text-sm"
+                            placeholder="Ban biên tập">
+                    </div>
+                    <div>
+                        <label class="field-label text-xs font-medium text-ink/60">Trạng thái</label>
+                        <select id="blog-status"
+                            class="mt-1.5 w-full px-3.5 py-2.5 border border-line rounded-lg text-sm bg-white">
+                            <option value="draft">Bản nháp</option>
+                            <option value="published">Đã đăng</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="field-label text-xs font-medium text-ink/60">Ảnh bìa</label>
+                    <div class="mt-1.5 flex items-center gap-4">
+                        <div id="blog-image-preview"
+                            class="w-20 h-20 rounded-xl border-2 border-dashed border-line bg-paper flex items-center justify-center overflow-hidden text-ink/25 text-[10px] shrink-0">
+                            Chưa có ảnh
+                        </div>
+                        <div class="flex-1">
+                            <label for="blog-image-file" class="dropzone cursor-pointer flex items-center gap-2 border border-dashed border-line rounded-lg px-3.5 py-2.5 text-xs text-ink/50">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-caramel-600 shrink-0">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M17 8l-5-5-5 5"></path><path d="M12 3v12"></path>
+                                </svg>
+                                <span>Chọn ảnh bìa để tải lên</span>
+                            </label>
+                            <input type="file" id="blog-image-file" accept="image/*"
+                                onchange="previewAndUpload(this,'blogs','blog-image-preview','blog-cover_image')"
+                                class="hidden">
+                            <input type="hidden" id="blog-cover_image">
+                            <p id="blog-upload-status" class="text-xs text-ink/40 mt-1.5"></p>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="px-6 py-4 border-t border-line flex justify-end gap-2 shrink-0 bg-paper/40">
+                <button type="button" onclick="closeModal('blog-modal')"
+                    class="px-4 py-2.5 text-sm font-medium rounded-lg border border-line hover:bg-white transition-colors">Hủy</button>
+                <button type="submit" form="blog-form" id="blog-submit-btn"
+                    class="btn-primary px-4 py-2.5 text-sm rounded-lg bg-moss hover:bg-moss-600 text-white font-medium flex items-center gap-2">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><path d="M17 21v-8H7v8M7 3v5h8"></path></svg>
+                    Lưu bài viết
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ BLOCKS MODAL ============ -->
+    <div id="blocks-modal" class="hidden fixed inset-0 z-50 modal-backdrop flex items-center justify-center p-4">
+        <div
+            class="modal-panel bg-white w-full max-w-3xl rounded-2xl shadow-pop max-h-[90vh] overflow-hidden flex flex-col">
+            <div class="px-6 py-5 border-b border-line flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-lg bg-forest text-white flex items-center justify-center shrink-0">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                            <rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="font-display text-lg font-semibold">Nội dung bài viết</h2>
+                        <p id="blocks-blog-title" class="text-xs text-ink/45 mt-0.5"></p>
+                    </div>
+                </div>
+                <button onclick="closeModal('blocks-modal')"
+                    class="icon-btn w-8 h-8 flex items-center justify-center rounded-lg text-ink/40 hover:text-ink hover:bg-paper">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <div class="flex-1 overflow-y-auto px-6 py-5">
+                <div id="blocks-list" class="space-y-3 mb-6"></div>
+                <div id="blocks-empty" class="hidden text-center py-10 text-ink/40 text-sm">
+                    <svg class="mx-auto mb-3 text-ink/20" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                        <rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                    </svg>
+                    Chưa có khối nội dung nào.
+                </div>
+
+                <div class="border border-line rounded-xl p-4 bg-paper/50">
+                    <p id="block-form-title" class="text-xs font-semibold text-ink/55 uppercase tracking-wide mb-3">Thêm khối nội dung mới</p>
+                    <div class="flex gap-3 mb-3">
+                        <select id="block-type" onchange="renderBlockTypeFields()"
+                            class="px-3.5 py-2.5 border border-line rounded-lg text-sm bg-white shadow-card">
+                            <option value="text">📄 Văn bản</option>
+                            <option value="list">📋 Danh sách</option>
+                            <option value="image">🖼️ Hình ảnh</option>
+                            <option value="pullquote">💬 Trích dẫn nổi bật</option>
+                        </select>
+                    </div>
+                    <div id="block-fields"></div>
+                    <div class="flex justify-end mt-3 gap-2">
+                        <button type="button" id="block-cancel-edit-btn" onclick="cancelBlockEdit()"
+                            class="hidden px-4 py-2.5 text-sm font-medium rounded-lg border border-line hover:bg-white transition-colors">
+                            Hủy sửa
+                        </button>
+                        <button onclick="handleBlockSubmit()" id="block-submit-btn"
+                            class="btn-primary px-4 py-2.5 text-sm rounded-lg bg-moss hover:bg-moss-600 text-white font-medium flex items-center gap-2">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
+                            Thêm khối
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* =========================================================================
+           CONFIG
+           ========================================================================= */
+        const API_BASE = 'https://libericakhesanh.net/api/index.php';
+        const AUTH_API = 'https://libericakhesanh.net/api/auth.php';
+        const ADMIN_STORAGE_KEY = 'lib_admin';
+
+        let state = {
+            products: [],
+            blogs: [],
+            blocks: [],           // blocks of the blog currently open in blocks-modal
+            currentBlogId: null,
+            editingBlockId: null, // ID của block đang được sửa (null = đang thêm mới)
+
+            // Phân trang phía server (API hỗ trợ ?page=&limit=)
+            productPage: 1,
+            productTotalPages: 1,
+            productTotal: 0,
+
+            blogPage: 1,
+            blogTotalPages: 1,
+            blogTotal: 0,
+
+            pageSize: 8,
+            productSearch: '',
+            blogSearch: '',
+            productSearchTimer: null,
+            blogSearchTimer: null
+        };
+
+        /* =========================================================================
+           CORE: fetchAPI
+           ========================================================================= */
+        async function fetchAPI(params = {}, fetchOptions = {}) {
+            const url = new URL(API_BASE);
+            Object.entries(params).forEach(([k, v]) => {
+                if (v !== undefined && v !== null && v !== '') url.searchParams.append(k, v);
+            });
+
+            const res = await fetch(url.toString(), fetchOptions);
+            let data;
+            try {
+                data = await res.json();
+            } catch (e) {
+                throw new Error('Phản hồi từ máy chủ không hợp lệ (không phải JSON).');
+            }
+            if (!res.ok || data?.status === 'error') {
+                throw new Error(data?.message || 'Đã có lỗi xảy ra từ API.');
+            }
+            return data;
+        }
+
+        // Defensive extraction helpers — actual API response shape may vary
+        function extractList(resp) {
+            if (Array.isArray(resp)) return resp;
+            if (Array.isArray(resp?.data)) return resp.data;
+            if (Array.isArray(resp?.items)) return resp.items;
+            if (Array.isArray(resp?.list)) return resp.list;
+            return [];
+        }
+        function extractItem(resp) {
+            if (resp?.data && typeof resp.data === 'object' && !Array.isArray(resp.data)) return resp.data;
+            return resp?.data || resp;
+        }
+
+        // Trích xuất thông tin phân trang từ response API (định dạng có thể khác nhau tùy backend)
+        function extractPagination(resp, limit) {
+            const total = resp?.total ?? resp?.total_items ?? resp?.count ?? null;
+            const page = Number(resp?.page ?? resp?.current_page ?? 1) || 1;
+            let totalPages = resp?.total_pages ?? resp?.totalPages ?? resp?.pages ?? null;
+            if (!totalPages) {
+                totalPages = total ? Math.max(1, Math.ceil(total / (resp?.limit || limit))) : 1;
+            }
+            return { total: total || 0, totalPages: totalPages || 1, page };
+        }
+
+        async function uploadImage(file, type) {
+            const url = new URL(API_BASE);
+            url.searchParams.append('action', 'upload');
+            url.searchParams.append('type', type); // 'products' | 'blogs'
+            const fd = new FormData();
+            fd.append('image', file);
+            const res = await fetch(url.toString(), { method: 'POST', body: fd });
+            const data = await res.json();
+            if (data.status !== 'success' || !data.url) {
+                throw new Error(data.message || 'Tải ảnh lên thất bại.');
+            }
+            return data.url;
+        }
+
+        /* =========================================================================
+           TOAST
+           ========================================================================= */
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const el = document.createElement('div');
+            const styles = {
+                success: { bar: 'bg-white/40', bg: 'bg-forest', ring: 'ring-1 ring-moss-400/40', iconBg: 'bg-moss' },
+                error: { bar: 'bg-white/40', bg: 'bg-danger', ring: 'ring-1 ring-danger/30', iconBg: 'bg-white/20' }
+            };
+            const s = styles[type] || styles.success;
+            const iconSvg = type === 'success'
+                ? `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>`
+                : `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"></path></svg>`;
+            el.className = `toast-in relative overflow-hidden ${s.bg} text-white ${s.ring} rounded-xl shadow-pop px-4 py-3.5 text-sm font-medium flex items-start gap-3`;
+            el.innerHTML = `
+                <span class="w-5 h-5 rounded-full ${s.iconBg} flex items-center justify-center shrink-0 mt-0.5">${iconSvg}</span>
+                <span class="flex-1 leading-snug">${escapeHtml(message)}</span>
+                <div class="absolute bottom-0 left-0 h-[3px] ${s.bar}" style="animation: toast-bar 3s linear forwards;"></div>`;
+            container.appendChild(el);
+            setTimeout(() => {
+                el.style.transition = 'opacity .25s, transform .25s';
+                el.style.opacity = '0';
+                el.style.transform = 'translateX(24px)';
+                setTimeout(() => el.remove(), 250);
+            }, 3000);
+        }
+
+        /* =========================================================================
+           CONFIRM MODAL (thay thế window.confirm() gốc bằng modal + toast)
+           Modal được tạo động bằng JS để không phải sửa markup gốc.
+           ========================================================================= */
+        function ensureConfirmModal() {
+            if (document.getElementById('confirm-modal')) return;
+            const wrap = document.createElement('div');
+            wrap.id = 'confirm-modal';
+            wrap.className = 'hidden fixed inset-0 z-[70] modal-backdrop flex items-center justify-center p-4';
+            wrap.innerHTML = `
+      <div class="modal-panel bg-white w-full max-w-sm rounded-2xl shadow-pop overflow-hidden">
+        <div class="px-6 pt-6 pb-2 flex items-start gap-3">
+          <div class="w-10 h-10 rounded-full bg-danger/10 text-danger flex items-center justify-center shrink-0">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z"></path></svg>
+          </div>
+          <div>
+            <h3 class="font-display font-semibold text-base">Xác nhận</h3>
+            <p id="confirm-modal-message" class="text-sm text-ink/60 mt-1 leading-relaxed"></p>
+          </div>
+        </div>
+        <div class="px-6 py-4 flex justify-end gap-2 mt-2">
+          <button type="button" id="confirm-modal-no" class="px-4 py-2.5 text-sm font-medium rounded-lg border border-line hover:bg-paper transition-colors">Hủy</button>
+          <button type="button" id="confirm-modal-yes" class="btn-primary px-4 py-2.5 text-sm rounded-lg bg-danger hover:bg-danger/90 text-white font-medium">Xóa</button>
+        </div>
+      </div>`;
+            document.body.appendChild(wrap);
+            document.getElementById('confirm-modal-no').addEventListener('click', () => closeModal('confirm-modal'));
+        }
+
+        // Hiển thị hộp xác nhận dạng modal (thay cho confirm()). onConfirm chạy khi bấm "Xóa".
+        function showConfirm(message, onConfirm) {
+            ensureConfirmModal();
+            document.getElementById('confirm-modal-message').textContent = message;
+
+            const yesBtn = document.getElementById('confirm-modal-yes');
+            // Thay thế node để xóa listener cũ, tránh gọi onConfirm nhiều lần
+            const freshYesBtn = yesBtn.cloneNode(true);
+            yesBtn.parentNode.replaceChild(freshYesBtn, yesBtn);
+            freshYesBtn.addEventListener('click', () => {
+                closeModal('confirm-modal');
+                onConfirm();
+            });
+
+            openModal('confirm-modal');
+        }
+
+        /* =========================================================================
+           UTIL
+           ========================================================================= */
+        function escapeHtml(str) {
+            if (str === null || str === undefined) return '';
+            return String(str)
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+        function slugify(text) {
+            return text.toString().toLowerCase().trim()
+                .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+                .replace(/đ/g, 'd')
+                .replace(/[^a-z0-9\s-]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-');
+        }
+        function autoSlug(prefix) {
+            const nameEl = document.getElementById(`${prefix}-${prefix === 'product' ? 'name' : 'title'}`);
+            const slugEl = document.getElementById(`${prefix}-slug`);
+            if (slugEl.dataset.touched === 'true') return;
+            slugEl.value = slugify(nameEl.value);
+        }
+        document.addEventListener('input', (e) => {
+            if (e.target.id === 'product-slug' || e.target.id === 'blog-slug') {
+                e.target.dataset.touched = 'true';
+            }
+        });
+
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+            document.getElementById(id).classList.add('flex');
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+            document.getElementById(id).classList.remove('flex');
+        }
+        function setBtnLoading(btnId, loading, labelDefault) {
+            const btn = document.getElementById(btnId);
+            if (loading) {
+                btn.dataset.label = btn.innerHTML;
+                btn.disabled = true;
+                btn.classList.add('opacity-70', 'cursor-not-allowed');
+                btn.innerHTML = `<span class="spinner"></span> Đang lưu...`;
+            } else {
+                btn.disabled = false;
+                btn.classList.remove('opacity-70', 'cursor-not-allowed');
+                btn.innerHTML = labelDefault || btn.dataset.label || 'Lưu';
+            }
+        }
+
+        async function previewAndUpload(inputEl, type, previewId, hiddenFieldId) {
+            const file = inputEl.files[0];
+            if (!file) return;
+            const previewEl = document.getElementById(previewId);
+            const statusPrefix = hiddenFieldId.startsWith('product') ? 'product' : 'blog';
+            const statusEl = document.getElementById(`${statusPrefix}-upload-status`);
+
+            // local preview immediately
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                previewEl.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover">`;
+            };
+            reader.readAsDataURL(file);
+
+            statusEl.textContent = 'Đang tải ảnh lên...';
+            statusEl.classList.add('text-moss-600');
+            try {
+                const url = await uploadImage(file, type);
+                document.getElementById(hiddenFieldId).value = url;
+                statusEl.textContent = 'Tải ảnh thành công ✓';
+                statusEl.classList.remove('text-moss-600');
+                statusEl.classList.add('text-success');
+            } catch (err) {
+                statusEl.textContent = 'Tải ảnh thất bại: ' + err.message;
+                statusEl.classList.add('text-danger');
+                showToast(err.message, 'error');
+            }
+        }
+
+        /* =========================================================================
+           AUTH / LOGIN
+           ========================================================================= */
+        function checkAuthOnLoad() {
+            const saved = localStorage.getItem(ADMIN_STORAGE_KEY);
+            if (saved) {
+                try {
+                    const admin = JSON.parse(saved);
+                    showDashboard(admin);
+                } catch (e) {
+                    localStorage.removeItem(ADMIN_STORAGE_KEY);
+                    showLoginScreen();
+                }
+            } else {
+                showLoginScreen();
+            }
+        }
+
+        function showLoginScreen() {
+            document.getElementById('login-screen').classList.remove('hidden');
+            document.getElementById('login-screen').classList.add('flex');
+            document.getElementById('dashboard-root').classList.add('hidden');
+        }
+
+        function showDashboard(admin) {
+            document.getElementById('login-screen').classList.add('hidden');
+            document.getElementById('login-screen').classList.remove('flex');
+            document.getElementById('dashboard-root').classList.remove('hidden');
+            const nameEl = document.getElementById('admin-fullname');
+            if (nameEl) nameEl.textContent = admin?.full_name || admin?.username || 'Quản trị viên';
+            // Initialize dashboard data once authenticated
+            loadProducts();
+        }
+
+        function toggleLoginPassword() {
+            const input = document.getElementById('login-password');
+            const icon = document.getElementById('login-eye-icon');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.innerHTML = `<path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a19.66 19.66 0 0 1 5.06-6.06M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a19.86 19.86 0 0 1-3.22 4.4M14.12 14.12a3 3 0 1 1-4.24-4.24"></path><path d="M1 1l22 22"></path>`;
+            } else {
+                input.type = 'password';
+                icon.innerHTML = `<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path><circle cx="12" cy="12" r="3"></circle>`;
+            }
+        }
+
+        /* ---------- Hiển thị lỗi đăng nhập trên UI ----------
+           Được gọi khi API auth.php trả về { status: "error", msg: "..." }
+           hoặc khi có lỗi mạng/kết nối trong quá trình đăng nhập.
+           Vừa hiện banner lỗi trong form, vừa toast, vừa nhấp nháy viền đỏ
+           trên 2 ô input để người dùng biết ngay là sai thông tin. */
+        function showLoginError(message) {
+            const finalMsg = message || 'Sai tên đăng nhập hoặc mật khẩu.';
+
+            // Toast báo lỗi
+            showToast(finalMsg, 'error');
+
+            // Banner lỗi ngay trong form đăng nhập
+            const banner = document.getElementById('login-error-banner');
+            const bannerText = document.getElementById('login-error-text');
+            bannerText.textContent = finalMsg;
+            banner.classList.remove('hidden');
+
+            // Nhấp nháy viền đỏ + rung nhẹ 2 ô input
+            const userWrap = document.getElementById('login-username').closest('.login-input-wrap');
+            const passWrap = document.getElementById('login-password').closest('.login-input-wrap');
+            [userWrap, passWrap].forEach(wrap => {
+                wrap.classList.remove('login-input-error');
+                // reflow để animation chạy lại nếu lỗi liên tiếp
+                void wrap.offsetWidth;
+                wrap.classList.add('login-input-error');
+            });
+
+            // Xóa mật khẩu đã nhập sai và focus lại để nhập tiếp
+            const passwordInput = document.getElementById('login-password');
+            passwordInput.value = '';
+            passwordInput.focus();
+        }
+
+        function clearLoginError() {
+            document.getElementById('login-error-banner').classList.add('hidden');
+            const userWrap = document.getElementById('login-username').closest('.login-input-wrap');
+            const passWrap = document.getElementById('login-password').closest('.login-input-wrap');
+            [userWrap, passWrap].forEach(wrap => wrap.classList.remove('login-input-error'));
+        }
+
+        // Khi người dùng gõ lại, tự ẩn banner/viền đỏ đi
+        document.addEventListener('input', (e) => {
+            if (e.target.id === 'login-username' || e.target.id === 'login-password') {
+                clearLoginError();
+            }
+        });
+
+        async function handleLoginSubmit(e) {
+            e.preventDefault();
+            const username = document.getElementById('login-username').value.trim();
+            const password = document.getElementById('login-password').value;
+            if (!username || !password) {
+                showLoginError('Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu');
+                return;
+            }
+
+            clearLoginError();
+            setBtnLoading('login-submit-btn', true);
+            try {
+                const res = await fetch(AUTH_API, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                let data;
+                try {
+                    data = await res.json();
+                } catch (e) {
+                    throw new Error('Phản hồi từ máy chủ không hợp lệ.');
+                }
+                // Server trả về dạng: { "status": "error", "msg": "Mật khẩu không đúng" }
+                if (!res.ok || data?.status !== 'success') {
+                    throw new Error(data?.msg || data?.message || 'Sai tên đăng nhập hoặc mật khẩu.');
+                }
+                localStorage.setItem(ADMIN_STORAGE_KEY, JSON.stringify(data.admin || {}));
+                showToast(data.msg || 'Đăng nhập thành công', 'success');
+                document.getElementById('login-form').reset();
+                showDashboard(data.admin || {});
+            } catch (err) {
+                showLoginError(err.message);
+            } finally {
+                setBtnLoading('login-submit-btn', false, `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><path d="M10 17l5-5-5-5"></path><path d="M15 12H3"></path></svg> Đăng nhập`);
+            }
+        }
+
+        function handleLogout() {
+            if (!confirm('Bạn có chắc muốn đăng xuất?')) return;
+            localStorage.removeItem(ADMIN_STORAGE_KEY);
+            location.reload();
+        }
+
+        /* =========================================================================
+           TAB SWITCHING
+           ========================================================================= */
+        function switchTab(tab) {
+            document.getElementById('view-products').classList.toggle('hidden', tab !== 'products');
+            document.getElementById('view-products').classList.toggle('flex', tab === 'products');
+            document.getElementById('view-blogs').classList.toggle('hidden', tab !== 'blogs');
+            document.getElementById('view-blogs').classList.toggle('flex', tab === 'blogs');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                const isActive = btn.dataset.tab === tab;
+                btn.classList.toggle('tab-active', isActive);
+                btn.classList.toggle('tab-inactive', !isActive);
+            });
+
+            if (tab === 'products' && state.products.length === 0) loadProducts();
+            if (tab === 'blogs' && state.blogs.length === 0) loadBlogs();
+        }
+
+        /* =========================================================================
+           PRODUCTS: load / render / CRUD
+           ========================================================================= */
+        // Tải danh sách sản phẩm theo trang từ API (server-side pagination: ?page=&limit=)
+        async function loadProducts(page = 1) {
+            try {
+                const resp = await fetchAPI({
+                    table: 'products',
+                    action: 'list',
+                    page,
+                    limit: state.pageSize,
+                    search: state.productSearch || undefined
+                });
+                state.products = extractList(resp);
+                const meta = extractPagination(resp, state.pageSize);
+                state.productPage = meta.page;
+                state.productTotalPages = meta.totalPages;
+                state.productTotal = meta.total;
+                renderProductsTable();
+            } catch (err) {
+                showToast('Không tải được danh sách sản phẩm: ' + err.message, 'error');
+            }
+        }
+
+        // Debounce tìm kiếm rồi gọi lại API từ trang 1
+        function onProductSearch() {
+            state.productSearch = document.getElementById('product-search').value.trim();
+            clearTimeout(state.productSearchTimer);
+            state.productSearchTimer = setTimeout(() => loadProducts(1), 350);
+        }
+
+        function renderProductsTable() {
+            const tbody = document.getElementById('products-tbody');
+            const empty = document.getElementById('products-empty');
+            const items = state.products;
+
+            document.getElementById('product-count').textContent = `${state.productTotal || items.length} sản phẩm`;
+
+            if (items.length === 0) {
+                tbody.innerHTML = '';
+                empty.classList.remove('hidden');
+                document.getElementById('products-pagination').innerHTML = '';
+                return;
+            }
+            empty.classList.add('hidden');
+
+            const editIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>`;
+            const trashIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z"></path></svg>`;
+
+            tbody.innerHTML = items.map(p => {
+                const tags = (p.tags || '').split(',').map(t => t.trim()).filter(Boolean);
+                return `
+    <tr class="table-row border-b border-line last:border-0">
+      <td class="px-5 py-3">
+        <div class="w-12 h-12 rounded-lg bg-paper border border-line overflow-hidden flex items-center justify-center text-ink/20 text-[10px]">
+          ${p.image_url ? `<img src="${escapeHtml(p.image_url)}" class="w-full h-full object-cover">` : 'N/A'}
+        </div>
+      </td>
+      <td class="px-5 py-3">
+        <p class="font-medium">${escapeHtml(p.name)}</p>
+        <p class="text-xs text-ink/40 font-mono">${escapeHtml(p.slug)}</p>
+      </td>
+      <td class="px-5 py-3 text-ink/70">${escapeHtml(p.category) || '—'}</td>
+      <td class="px-5 py-3">
+        ${p.process_type ? `<span class="px-2.5 py-1 rounded-full bg-caramel-100 text-caramel-600 text-xs font-medium">${escapeHtml(p.process_type)}</span>` : '<span class="text-ink/30">—</span>'}
+      </td>
+      <td class="px-5 py-3 font-semibold text-forest">${p.price ? Number(p.price).toLocaleString('vi-VN') + '₫' : '—'}</td>
+      <td class="px-5 py-3 text-ink/70">${p.weight ? p.weight + 'g' : '—'}</td>
+      <td class="px-5 py-3">
+        <div class="flex flex-wrap gap-1 max-w-[160px]">
+          ${tags.slice(0, 3).map(t => `<span class="px-2 py-0.5 rounded-full bg-moss-100 text-moss-600 text-[11px] font-medium">${escapeHtml(t)}</span>`).join('')}
+          ${tags.length > 3 ? `<span class="text-[11px] text-ink/30">+${tags.length - 3}</span>` : ''}
+        </div>
+      </td>
+      <td class="px-5 py-3 text-right whitespace-nowrap">
+        <button onclick="openProductModal(${p.id})" title="Sửa" class="icon-btn inline-flex items-center justify-center w-8 h-8 rounded-lg text-moss-600 hover:bg-moss-100 mr-1">${editIcon}</button>
+        <button onclick="deleteProduct(${p.id})" title="Xóa" class="icon-btn inline-flex items-center justify-center w-8 h-8 rounded-lg text-danger hover:bg-danger/10">${trashIcon}</button>
+      </td>
+    </tr>`;
+            }).join('');
+
+            renderPagination('products-pagination', state.productPage, state.productTotalPages, (p) => {
+                loadProducts(p);
+            });
+        }
+
+        function renderPagination(containerId, page, totalPages, onGo) {
+            const el = document.getElementById(containerId);
+            if (totalPages <= 1) { el.innerHTML = ''; return; }
+            const chevronLeft = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>`;
+            const chevronRight = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg>`;
+            el.innerHTML = `
+    <span class="font-medium text-ink/50">Trang <span class="text-ink">${page}</span> / ${totalPages}</span>
+    <div class="flex gap-2">
+      <button ${page === 1 ? 'disabled' : ''} class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-line bg-white ${page === 1 ? 'opacity-40 cursor-not-allowed' : 'hover:bg-paper hover:border-moss-400'}" data-pg="${page - 1}">${chevronLeft} Trước</button>
+      <button ${page === totalPages ? 'disabled' : ''} class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-line bg-white ${page === totalPages ? 'opacity-40 cursor-not-allowed' : 'hover:bg-paper hover:border-moss-400'}" data-pg="${page + 1}">Sau ${chevronRight}</button>
+    </div>`;
+            el.querySelectorAll('button[data-pg]').forEach(btn => {
+                btn.addEventListener('click', () => onGo(Number(btn.dataset.pg)));
+            });
+        }
+
+        function openProductModal(id) {
+            const form = document.getElementById('product-form');
+            form.reset();
+            document.getElementById('product-image-preview').innerHTML = 'Chưa có ảnh';
+            document.getElementById('product-image_url').value = '';
+            document.getElementById('product-upload-status').textContent = '';
+            document.getElementById('product-slug').dataset.touched = 'false';
+
+            if (id) {
+                const p = state.products.find(x => String(x.id) === String(id));
+                document.getElementById('product-modal-title').textContent = 'Sửa sản phẩm';
+                document.getElementById('product-id').value = p.id;
+                document.getElementById('product-name').value = p.name || '';
+                document.getElementById('product-slug').value = p.slug || '';
+                document.getElementById('product-slug').dataset.touched = 'true';
+                document.getElementById('product-description').value = p.description || '';
+                document.getElementById('product-price').value = p.price || '';
+                document.getElementById('product-weight').value = p.weight || '';
+                document.getElementById('product-category').value = p.category || '';
+                document.getElementById('product-process_type').value = p.process_type || '';
+                document.getElementById('product-tags').value = p.tags || '';
+                document.getElementById('product-image_url').value = p.image_url || '';
+                if (p.image_url) {
+                    document.getElementById('product-image-preview').innerHTML = `<img src="${escapeHtml(p.image_url)}" class="w-full h-full object-cover">`;
+                }
+            } else {
+                document.getElementById('product-modal-title').textContent = 'Thêm sản phẩm';
+                document.getElementById('product-id').value = '';
+            }
+            openModal('product-modal');
+        }
+
+        async function handleProductSubmit(e) {
+            e.preventDefault();
+            const id = document.getElementById('product-id').value;
+            const isEdit = !!id;
+
+            const fd = new FormData();
+            if (isEdit) fd.append('id', id);
+            fd.append('name', document.getElementById('product-name').value.trim());
+            fd.append('slug', document.getElementById('product-slug').value.trim());
+            fd.append('description', document.getElementById('product-description').value.trim());
+            fd.append('price', document.getElementById('product-price').value);
+            fd.append('weight', document.getElementById('product-weight').value);
+            fd.append('image_url', document.getElementById('product-image_url').value);
+            fd.append('category', document.getElementById('product-category').value.trim());
+            fd.append('process_type', document.getElementById('product-process_type').value);
+            fd.append('tags', document.getElementById('product-tags').value.trim());
+
+            setBtnLoading('product-submit-btn', true);
+            try {
+                await fetchAPI(
+                    { table: 'products', action: isEdit ? 'update' : 'create' },
+                    { method: 'POST', body: fd }
+                );
+                showToast(isEdit ? 'Cập nhật sản phẩm thành công' : 'Thêm sản phẩm thành công', 'success');
+                closeModal('product-modal');
+                document.getElementById('product-form').reset();
+                await loadProducts();
+            } catch (err) {
+                showToast(err.message, 'error');
+            } finally {
+                setBtnLoading('product-submit-btn', false, `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><path d="M17 21v-8H7v8M7 3v5h8"></path></svg> Lưu sản phẩm`);
+            }
+        }
+
+        function deleteProduct(id) {
+            showConfirm('Bạn có chắc muốn xóa sản phẩm này? Hành động không thể hoàn tác.', async () => {
+                try {
+                    const fd = new FormData();
+                    fd.append('id', id);
+                    await fetchAPI({ table: 'products', action: 'delete' }, { method: 'POST', body: fd });
+                    showToast('Đã xóa sản phẩm', 'success');
+                    await loadProducts(state.productPage);
+                } catch (err) {
+                    showToast(err.message, 'error');
+                }
+            });
+        }
+
+        /* =========================================================================
+           BLOGS: load / render / CRUD
+           ========================================================================= */
+        // Tải danh sách bài viết theo trang từ API (server-side pagination: ?page=&limit=)
+        async function loadBlogs(page = 1) {
+            try {
+                const resp = await fetchAPI({
+                    table: 'blogs',
+                    action: 'list',
+                    page,
+                    limit: state.pageSize,
+                    search: state.blogSearch || undefined
+                });
+                state.blogs = extractList(resp);
+                const meta = extractPagination(resp, state.pageSize);
+                state.blogPage = meta.page;
+                state.blogTotalPages = meta.totalPages;
+                state.blogTotal = meta.total;
+                renderBlogsTable();
+            } catch (err) {
+                showToast('Không tải được danh sách bài viết: ' + err.message, 'error');
+            }
+        }
+
+        // Debounce tìm kiếm rồi gọi lại API từ trang 1
+        function onBlogSearch() {
+            state.blogSearch = document.getElementById('blog-search').value.trim();
+            clearTimeout(state.blogSearchTimer);
+            state.blogSearchTimer = setTimeout(() => loadBlogs(1), 350);
+        }
+
+        function renderBlogsTable() {
+            const tbody = document.getElementById('blogs-tbody');
+            const empty = document.getElementById('blogs-empty');
+            const items = state.blogs;
+
+            document.getElementById('blog-count').textContent = `${state.blogTotal || items.length} bài viết`;
+
+            if (items.length === 0) {
+                tbody.innerHTML = '';
+                empty.classList.remove('hidden');
+                document.getElementById('blogs-pagination').innerHTML = '';
+                return;
+            }
+            empty.classList.add('hidden');
+
+            const layersIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 5-9 5-9-5 9-5z"></path><path d="M3 12l9 5 9-5"></path><path d="M3 17l9 5 9-5"></path></svg>`;
+            const editIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>`;
+            const trashIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z"></path></svg>`;
+
+            tbody.innerHTML = items.map(b => {
+                const isPublished = b.status === 'published';
+                return `
+    <tr class="table-row border-b border-line last:border-0">
+      <td class="px-5 py-3">
+        <div class="w-14 h-10 rounded-lg bg-paper border border-line overflow-hidden flex items-center justify-center text-ink/20 text-[10px]">
+          ${b.cover_image ? `<img src="${escapeHtml(b.cover_image)}" class="w-full h-full object-cover">` : 'N/A'}
+        </div>
+      </td>
+      <td class="px-5 py-3">
+        <p class="font-medium">${escapeHtml(b.title)}</p>
+        <p class="text-xs text-ink/40 font-mono">${escapeHtml(b.slug)}</p>
+      </td>
+      <td class="px-5 py-3 text-ink/70">${escapeHtml(b.author) || '—'}</td>
+      <td class="px-5 py-3">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${isPublished ? 'bg-moss-100 text-moss-600' : 'bg-caramel-100 text-caramel-600'}">
+          <span class="w-1.5 h-1.5 rounded-full ${isPublished ? 'bg-moss-600' : 'bg-caramel-600'}"></span>
+          ${isPublished ? 'Đã đăng' : 'Bản nháp'}
+        </span>
+      </td>
+      <td class="px-5 py-3 text-right whitespace-nowrap">
+        <button onclick="openBlocksModal(${b.id})" title="Nội dung" class="icon-btn inline-flex items-center justify-center w-8 h-8 rounded-lg text-ink/50 hover:bg-paper mr-1">${layersIcon}</button>
+        <button onclick="openBlogModal(${b.id})" title="Sửa" class="icon-btn inline-flex items-center justify-center w-8 h-8 rounded-lg text-moss-600 hover:bg-moss-100 mr-1">${editIcon}</button>
+        <button onclick="deleteBlog(${b.id})" title="Xóa" class="icon-btn inline-flex items-center justify-center w-8 h-8 rounded-lg text-danger hover:bg-danger/10">${trashIcon}</button>
+      </td>
+    </tr>`;
+            }).join('');
+
+            renderPagination('blogs-pagination', state.blogPage, state.blogTotalPages, (p) => {
+                loadBlogs(p);
+            });
+        }
+
+        function openBlogModal(id) {
+            const form = document.getElementById('blog-form');
+            form.reset();
+            document.getElementById('blog-image-preview').innerHTML = 'Chưa có ảnh';
+            document.getElementById('blog-cover_image').value = '';
+            document.getElementById('blog-upload-status').textContent = '';
+            document.getElementById('blog-slug').dataset.touched = 'false';
+
+            if (id) {
+                const b = state.blogs.find(x => String(x.id) === String(id));
+                document.getElementById('blog-modal-title').textContent = 'Sửa bài viết';
+                document.getElementById('blog-id').value = b.id;
+                document.getElementById('blog-title').value = b.title || '';
+                document.getElementById('blog-slug').value = b.slug || '';
+                document.getElementById('blog-slug').dataset.touched = 'true';
+                document.getElementById('blog-excerpt').value = b.excerpt || '';
+                document.getElementById('blog-author').value = b.author || '';
+                document.getElementById('blog-status').value = b.status || 'draft';
+                document.getElementById('blog-cover_image').value = b.cover_image || '';
+                if (b.cover_image) {
+                    document.getElementById('blog-image-preview').innerHTML = `<img src="${escapeHtml(b.cover_image)}" class="w-full h-full object-cover">`;
+                }
+            } else {
+                document.getElementById('blog-modal-title').textContent = 'Thêm bài viết';
+                document.getElementById('blog-id').value = '';
+            }
+            openModal('blog-modal');
+        }
+
+        async function handleBlogSubmit(e) {
+            e.preventDefault();
+            const id = document.getElementById('blog-id').value;
+            const isEdit = !!id;
+
+            const fd = new FormData();
+            if (isEdit) fd.append('id', id);
+            fd.append('title', document.getElementById('blog-title').value.trim());
+            fd.append('slug', document.getElementById('blog-slug').value.trim());
+            fd.append('excerpt', document.getElementById('blog-excerpt').value.trim());
+            fd.append('cover_image', document.getElementById('blog-cover_image').value);
+            fd.append('author', document.getElementById('blog-author').value.trim());
+            fd.append('status', document.getElementById('blog-status').value);
+
+            setBtnLoading('blog-submit-btn', true);
+            try {
+                const resp = await fetchAPI(
+                    { table: 'blogs', action: isEdit ? 'update' : 'create' },
+                    { method: 'POST', body: fd }
+                );
+                showToast(isEdit ? 'Cập nhật bài viết thành công' : 'Tạo bài viết thành công. Bạn có thể thêm nội dung ngay.', 'success');
+                closeModal('blog-modal');
+                document.getElementById('blog-form').reset();
+                await loadBlogs();
+
+                // Blog flow: after creating, offer to add blocks right away
+                if (!isEdit) {
+                    const newId = resp?.id || extractItem(resp)?.id;
+                    if (newId) openBlocksModal(newId);
+                }
+            } catch (err) {
+                showToast(err.message, 'error');
+            } finally {
+                setBtnLoading('blog-submit-btn', false, `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><path d="M17 21v-8H7v8M7 3v5h8"></path></svg> Lưu bài viết`);
+            }
+        }
+
+        function deleteBlog(id) {
+            showConfirm('Bạn có chắc muốn xóa bài viết này? Toàn bộ nội dung khối liên quan cũng nên được kiểm tra lại.', async () => {
+                try {
+                    const fd = new FormData();
+                    fd.append('id', id);
+                    await fetchAPI({ table: 'blogs', action: 'delete' }, { method: 'POST', body: fd });
+                    showToast('Đã xóa bài viết', 'success');
+                    await loadBlogs(state.blogPage);
+                } catch (err) {
+                    showToast(err.message, 'error');
+                }
+            });
+        }
+
+        /* =========================================================================
+           BLOG BLOCKS
+           ========================================================================= */
+        async function openBlocksModal(blogId) {
+            state.currentBlogId = blogId;
+            state.editingBlockId = null; // luôn mở modal ở chế độ "thêm mới"
+            const blog = state.blogs.find(x => String(x.id) === String(blogId));
+            document.getElementById('blocks-blog-title').textContent = blog ? blog.title : `Blog #${blogId}`;
+            document.getElementById('block-form-title').textContent = 'Thêm khối nội dung mới';
+            document.getElementById('block-cancel-edit-btn').classList.add('hidden');
+            document.getElementById('block-type').value = 'text';
+            renderBlockTypeFields();
+            openModal('blocks-modal');
+            await loadBlocks(blogId);
+        }
+
+        async function loadBlocks(blogId) {
+            const list = document.getElementById('blocks-list');
+            list.innerHTML = `<p class="text-sm text-ink/40 py-4 text-center flex items-center justify-center gap-2"><span class="spinner" style="border-color: rgba(79,111,82,0.25); border-top-color: #4F6F52;"></span> Đang tải...</p>`;
+            try {
+                const resp = await fetchAPI({ table: 'blog_blocks', action: 'list', blog_id: blogId });
+                state.blocks = extractList(resp).sort((a, b) => (a.position || 0) - (b.position || 0));
+                renderBlocksList();
+            } catch (err) {
+                list.innerHTML = '';
+                showToast('Không tải được nội dung khối: ' + err.message, 'error');
+            }
+        }
+
+    function renderBlocksList() {
+    const list = document.getElementById('blocks-list');
+    const empty = document.getElementById('blocks-empty');
+    
+    if (state.blocks.length === 0) {
+        list.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+    }
+    empty.classList.add('hidden');
+
+    const typeLabels = { 
+        text: '📄 Văn bản', 
+        list: '📋 Danh sách', 
+        image: '🖼️ Hình ảnh', 
+        pullquote: '💬 Trích dẫn',
+        heading: '🔤 Tiêu đề'
+    };
+    const typeColors = {
+        text: 'bg-moss-100 text-moss-600',
+        list: 'bg-caramel-100 text-caramel-600',
+        image: 'bg-forest text-white',
+        pullquote: 'bg-moss-100 text-moss-600',
+        heading: 'bg-caramel-100 text-caramel-600'
+    };
+    const trashIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z"></path></svg>`;
+    const editIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>`;
+
+    list.innerHTML = state.blocks.map((blk, idx) => {
+        let preview = '';
+        let content = blk.content;
+
+        // Parse JSON nếu cần
+        if (typeof content === 'string') {
+            try {
+                content = JSON.parse(content);
+            } catch (e) {
+                content = { value: content }; // fallback
+            }
+        }
+
+        // Xử lý preview theo type
+        if (blk.type === 'text' || blk.type === 'pullquote' || blk.type === 'heading') {
+            const text = content.value || content.quote || content.content || JSON.stringify(content);
+            if (blk.type === 'pullquote') {
+                preview = `<p class="text-sm text-ink/70 italic border-l-2 border-caramel-500 pl-3 line-clamp-2">"${escapeHtml(text)}"</p>`;
+            } else {
+                preview = `<p class="text-sm text-ink/70 line-clamp-2">${escapeHtml(text)}</p>`;
+            }
+        } 
+        else if (blk.type === 'list') {
+            const items = Array.isArray(content.items || content) ? (content.items || content) : [];
+            preview = `<ul class="text-sm text-ink/70 list-disc pl-4 space-y-0.5">${items.slice(0, 3).map(i => 
+                `<li>${escapeHtml(typeof i === 'string' ? i : JSON.stringify(i))}</li>`
+            ).join('')}</ul>`;
+        } 
+        else if (blk.type === 'image') {
+            const img = content || {};
+            preview = `<div class="flex items-center gap-3">
+                <div class="w-14 h-10 rounded bg-paper border border-line overflow-hidden shrink-0">
+                    ${img.url ? `<img src="${escapeHtml(img.url)}" class="w-full h-full object-cover">` : ''}
+                </div>
+                <p class="text-xs text-ink/50">${escapeHtml(img.caption || 'Không có chú thích')}</p>
+            </div>`;
+        } 
+        else {
+            preview = `<p class="text-sm text-ink/70 line-clamp-2">${escapeHtml(JSON.stringify(content))}</p>`;
+        }
+
+        return `
+    <div class="border border-line rounded-xl p-4 flex items-start justify-between gap-4 bg-white hover:border-moss-400/50 transition-colors">
+      <div class="flex-1 min-w-0">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="text-[11px] w-5 h-5 flex items-center justify-center rounded-full bg-forest text-white font-semibold">${idx + 1}</span>
+          <span class="text-[11px] px-2 py-0.5 rounded-full font-semibold ${typeColors[blk.type] || 'bg-paper text-ink/60'}">${typeLabels[blk.type] || blk.type}</span>
+        </div>
+        ${preview}
+      </div>
+      <div class="flex items-center gap-1 shrink-0">
+        <button onclick="editBlock(${blk.id})" title="Sửa khối" class="icon-btn inline-flex items-center justify-center w-8 h-8 rounded-lg text-moss-600 hover:bg-moss-100">${editIcon}</button>
+        <button onclick="deleteBlock(${blk.id})" title="Xóa khối" class="icon-btn inline-flex items-center justify-center w-8 h-8 rounded-lg text-danger hover:bg-danger/10">${trashIcon}</button>
+      </div>
+    </div>`;
+    }).join('');
+}
+        function renderBlockTypeFields() {
+            const type = document.getElementById('block-type').value;
+            const container = document.getElementById('block-fields');
+
+            // Trường "Vị trí" dùng chung cho mọi loại khối (cho phép sửa thứ tự hiển thị)
+            const defaultPosition = state.editingBlockId ? '' : (state.blocks.length + 1);
+            const positionField = `
+      <div class="mb-3">
+        <label class="field-label text-xs font-medium text-ink/60">Vị trí (thứ tự hiển thị)</label>
+        <input type="number" id="block-position" min="1" value="${defaultPosition}"
+          class="mt-1.5 w-32 px-3.5 py-2.5 border border-line rounded-lg text-sm bg-white">
+      </div>`;
+
+            let typeFieldsHtml = '';
+            if (type === 'text') {
+                typeFieldsHtml = `
+      <textarea id="block-content-text" rows="4" placeholder="Nội dung đoạn văn..."
+        class="w-full px-3.5 py-2.5 border border-line rounded-lg text-sm bg-white"></textarea>`;
+            } else if (type === 'list') {
+                typeFieldsHtml = `
+      <textarea id="block-content-list" rows="4" placeholder="Mỗi dòng là một mục:&#10;Hương thơm đậm đà&#10;Hậu vị ngọt kéo dài&#10;Vị đắng nhẹ đặc trưng"
+        class="w-full px-3.5 py-2.5 border border-line rounded-lg text-sm bg-white"></textarea>
+      <p class="text-[11px] text-ink/40 mt-1.5">Mỗi dòng sẽ trở thành một mục trong danh sách.</p>`;
+            } else if (type === 'image') {
+                typeFieldsHtml = `
+      <div class="flex items-center gap-4">
+        <div id="block-image-preview" class="w-16 h-16 rounded-lg border-2 border-dashed border-line bg-white flex items-center justify-center overflow-hidden text-ink/30 text-[10px] shrink-0">Chưa có ảnh</div>
+        <div class="flex-1 space-y-2">
+          <label for="block-image-file" class="dropzone cursor-pointer flex items-center gap-2 border border-dashed border-line rounded-lg px-3 py-2 text-xs text-ink/50 bg-white">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-moss-600 shrink-0"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M17 8l-5-5-5 5"></path><path d="M12 3v12"></path></svg>
+            <span>Chọn ảnh để tải lên</span>
+          </label>
+          <input type="file" id="block-image-file" accept="image/*" onchange="uploadBlockImage(this)" class="hidden">
+          <input type="hidden" id="block-image-url">
+          <input type="text" id="block-image-caption" placeholder="Chú thích ảnh (tùy chọn)" class="w-full px-3 py-2 border border-line rounded-lg text-sm bg-white">
+          <p id="block-image-status" class="text-[11px] text-ink/40"></p>
+        </div>
+      </div>`;
+            } else if (type === 'pullquote') {
+                typeFieldsHtml = `
+      <textarea id="block-content-pullquote" rows="2" placeholder="Câu trích dẫn nổi bật..."
+        class="w-full px-3.5 py-2.5 border border-line rounded-lg text-sm bg-white italic"></textarea>`;
+            }
+
+            container.innerHTML = positionField + typeFieldsHtml;
+        }
+
+        /* ---------- Chuyển form sang chế độ SỬA cho một block cụ thể ---------- */
+        function editBlock(id) {
+            const blk = state.blocks.find(b => String(b.id) === String(id));
+            if (!blk) return;
+
+            state.editingBlockId = id;
+
+            // Cập nhật UI: tiêu đề, nút hủy sửa, nút submit
+            document.getElementById('block-form-title').textContent = 'Sửa khối nội dung';
+            document.getElementById('block-cancel-edit-btn').classList.remove('hidden');
+            document.getElementById('block-submit-btn').innerHTML =
+                `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg> Cập nhật khối`;
+
+            document.getElementById('block-type').value = blk.type;
+            renderBlockTypeFields();
+
+            // Parse nội dung JSON nếu có thể
+            let content = blk.content;
+            if (typeof content === 'string') {
+                try { content = JSON.parse(content); } catch (e) { /* giữ nguyên chuỗi thô cho text/pullquote */ }
+            }
+
+            // Điền dữ liệu hiện có vào form theo từng loại khối
+            if (blk.type === 'text') {
+                document.getElementById('block-content-text').value = (typeof content === 'string') ? content : (content.value || '');
+            } else if (blk.type === 'pullquote') {
+                document.getElementById('block-content-pullquote').value = (typeof content === 'string') ? content : (content.value || content.quote || '');
+            } else if (blk.type === 'list') {
+                const items = Array.isArray(content) ? content : (content.items || []);
+                document.getElementById('block-content-list').value = items.join('\n');
+            } else if (blk.type === 'image') {
+                const img = content || {};
+                document.getElementById('block-image-url').value = img.url || '';
+                document.getElementById('block-image-caption').value = img.caption || '';
+                if (img.url) {
+                    document.getElementById('block-image-preview').innerHTML = `<img src="${escapeHtml(img.url)}" class="w-full h-full object-cover">`;
+                }
+            }
+
+            document.getElementById('block-position').value = blk.position || '';
+
+            // Cuộn tới form để người dùng thấy ngay khu vực chỉnh sửa
+            document.getElementById('block-fields').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /* ---------- Hủy chế độ sửa, quay lại form "thêm mới" ---------- */
+        function cancelBlockEdit() {
+            state.editingBlockId = null;
+            document.getElementById('block-form-title').textContent = 'Thêm khối nội dung mới';
+            document.getElementById('block-cancel-edit-btn').classList.add('hidden');
+            document.getElementById('block-type').value = 'text';
+            renderBlockTypeFields();
+            document.getElementById('block-submit-btn').innerHTML =
+                `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg> Thêm khối`;
+        }
+
+        async function uploadBlockImage(inputEl) {
+            const file = inputEl.files[0];
+            if (!file) return;
+            const preview = document.getElementById('block-image-preview');
+            const status = document.getElementById('block-image-status');
+            const reader = new FileReader();
+            reader.onload = (e) => { preview.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover">`; };
+            reader.readAsDataURL(file);
+
+            status.textContent = 'Đang tải ảnh lên...';
+            try {
+                const url = await uploadImage(file, 'blogs');
+                document.getElementById('block-image-url').value = url;
+                status.textContent = 'Tải ảnh thành công ✓';
+                status.className = 'text-[11px] text-success';
+            } catch (err) {
+                status.textContent = 'Thất bại: ' + err.message;
+                status.className = 'text-[11px] text-danger';
+                showToast(err.message, 'error');
+            }
+        }
+
+        async function handleBlockSubmit() {
+            // ✅ Check blog_id chuẩn (tránh "", 0, null)
+            if (!state.currentBlogId || isNaN(state.currentBlogId)) {
+                showToast("Không tìm thấy blog ID hợp lệ", "error");
+                return;
+            }
+
+            const isEdit = !!state.editingBlockId;
+            const type = document.getElementById('block-type').value;
+            let content = null;
+
+            // ================= TEXT =================
+            if (type === 'text') {
+                content = document.getElementById('block-content-text').value.trim();
+                if (!content) return showToast('Vui lòng nhập nội dung văn bản', 'error');
+            }
+
+            // ================= PULLQUOTE =================
+            else if (type === 'pullquote') {
+                content = document.getElementById('block-content-pullquote').value.trim();
+                if (!content) return showToast('Vui lòng nhập nội dung trích dẫn', 'error');
+            }
+
+            // ================= LIST =================
+            else if (type === 'list') {
+                const raw = document.getElementById('block-content-list').value;
+
+                const items = raw
+                    .split('\n')
+                    .map(l => l.trim())
+                    .filter(Boolean);
+
+                if (items.length === 0) {
+                    return showToast('Vui lòng nhập ít nhất một mục cho danh sách', 'error');
+                }
+
+                content = JSON.stringify(items);
+            }
+
+            // ================= IMAGE =================
+            else if (type === 'image') {
+                const url = document.getElementById('block-image-url').value.trim();
+                const caption = document.getElementById('block-image-caption').value.trim();
+
+                if (!url) {
+                    return showToast('Ảnh chưa upload xong hoặc URL rỗng', 'error');
+                }
+
+                content = JSON.stringify({ url, caption });
+            }
+
+            // ✅ Chặn undefined / null
+            if (!content) {
+                return showToast("Content bị rỗng hoặc lỗi format", "error");
+            }
+
+            // ================= FORM DATA =================
+            const fd = new FormData();
+            fd.append('blog_id', Number(state.currentBlogId));
+            fd.append('type', type);
+
+            // Vị trí hiển thị: lấy từ ô nhập, mặc định là cuối danh sách nếu bỏ trống
+            const positionInput = document.getElementById('block-position');
+            const position = (positionInput && positionInput.value) ? Number(positionInput.value) : (state.blocks.length + 1);
+            fd.append('position', position);
+
+            // 🔥 Đảm bảo luôn là string
+            fd.append('content', typeof content === 'string' ? content : JSON.stringify(content));
+
+            if (isEdit) fd.append('id', state.editingBlockId);
+
+            setBtnLoading('block-submit-btn', true);
+
+            try {
+                const resp = await fetchAPI(
+                    { table: 'blog_blocks', action: isEdit ? 'update' : 'create' },
+                    { method: 'POST', body: fd }
+                );
+
+                // ✅ Check response (cực quan trọng)
+                if (!resp || resp.status !== 'success') {
+                    throw new Error(resp?.msg || "API không trả về success");
+                }
+
+                showToast(isEdit ? 'Đã cập nhật khối nội dung' : 'Đã thêm khối nội dung', 'success');
+
+                // reset form về chế độ "thêm mới"
+                cancelBlockEdit();
+
+                await loadBlocks(state.currentBlogId);
+
+            } catch (err) {
+                console.error("BLOCK SUBMIT ERROR:", err);
+                showToast(err.message || 'Lỗi server', 'error');
+            } finally {
+                setBtnLoading('block-submit-btn', false, isEdit
+                    ? `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg> Cập nhật khối`
+                    : `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg> Thêm khối`);
+            }
+        }
+        function deleteBlock(id) {
+            showConfirm('Xóa khối nội dung này?', async () => {
+                try {
+                    const fd = new FormData();
+                    fd.append('id', id);
+                    await fetchAPI({ table: 'blog_blocks', action: 'delete' }, { method: 'POST', body: fd });
+                    // Nếu đang sửa đúng block vừa xóa thì trả form về chế độ "thêm mới"
+                    if (String(state.editingBlockId) === String(id)) cancelBlockEdit();
+                    showToast('Đã xóa khối nội dung', 'success');
+                    await loadBlocks(state.currentBlogId);
+                } catch (err) {
+                    showToast(err.message, 'error');
+                }
+            });
+        }
+
+        /* =========================================================================
+           INIT
+           ========================================================================= */
+        checkAuthOnLoad();
+    </script>
+</body>
+
+</html>
