@@ -1,303 +1,340 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blog · HTX Daktri Khe Sanh · Vinaxanh Quảng Trị</title>
-<meta name="description" content="Kiến thức nông nghiệp tử tế từ HTX Daktri Khe Sanh và Vinaxanh Quảng Trị — cà phê Liberica, phân hữu cơ vi sinh, đất khỏe.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<!-- Favicon - Cách chuẩn hiện đại -->
-<link rel="icon" href="https://i.ibb.co/Y4pKSXXW/daktri-logo.png" type="image/png">
-<link rel="shortcut icon" href="https://i.ibb.co/Y4pKSXXW/daktri-logo.png" type="image/png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog · HTX Daktri Khe Sanh · Vinaxanh Quảng Trị</title>
+  <meta name="description"
+    content="Kiến thức nông nghiệp tử tế từ HTX Daktri Khe Sanh và Vinaxanh Quảng Trị — cà phê Liberica, phân hữu cơ vi sinh, đất khỏe.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <!-- Favicon - Cách chuẩn hiện đại -->
+  <link rel="icon" href="https://i.ibb.co/Y4pKSXXW/daktri-logo.png" type="image/png">
+  <link rel="shortcut icon" href="https://i.ibb.co/Y4pKSXXW/daktri-logo.png" type="image/png">
 
-<!-- Khuyến nghị thêm các kích thước khác nhau -->
-<link rel="apple-touch-icon" href="https://i.ibb.co/Y4pKSXXW/daktri-logo.png">
-<link rel="icon" sizes="192x192" href="https://i.ibb.co/Y4pKSXXW/daktri-logo.png">
-<link rel="icon" sizes="32x32" href="https://i.ibb.co/Y4pKSXXW/daktri-logo.png">
-<link rel="icon" sizes="16x16" href="https://i.ibb.co/Y4pKSXXW/daktri-logo.png">
-<style>
-  :root {
-    --cream: #f5f0e0;
-    --paper: #faf6e9;
-    --ink: #1c1208;
-    --ink-soft: #3d2c1a;
-    --ink-mid: #5d4830;
-    --moss: #2e6b3f;
-    --moss-deep: #1f4a2c;
-    --gold: #d4af4c;
-    --rule: #c9b88a;
-  }
-  * { box-sizing: border-box; }
-  html, body {
-    margin: 0; padding: 0;
-    background: var(--cream);
-    color: var(--ink);
-    font-family: 'Be Vietnam Pro', sans-serif;
-    line-height: 1.7;
-    -webkit-font-smoothing: antialiased;
-  }
-  .container {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 60px 24px 80px;
-  }
-  .brand {
-    text-align: center;
-    margin-bottom: 56px;
-    padding-bottom: 32px;
-    border-bottom: 1px solid var(--rule);
-  }
-  .brand-tag {
-    font-size: 12px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--moss);
-    font-weight: 600;
-    margin-bottom: 14px;
-  }
-  .brand-name {
-    font-family: 'Fraunces', serif;
-    font-weight: 700;
-    font-size: clamp(36px, 5vw, 52px);
-    line-height: 1.1;
-    color: var(--ink);
-    margin: 0 0 12px;
-    font-variation-settings: "opsz" 144;
-  }
-  .brand-name em {
-    font-style: italic;
-    color: var(--moss-deep);
-    font-weight: 600;
-  }
-  .brand-desc {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 18px;
-    color: var(--ink-mid);
-    max-width: 540px;
-    margin: 0 auto;
-  }
-  .section-title {
-    font-family: 'Fraunces', serif;
-    font-weight: 700;
-    font-size: 28px;
-    color: var(--ink);
-    margin: 0 0 28px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  .section-title::before {
-    content: "";
-    width: 32px; height: 3px;
-    background: var(--moss);
-  }
-  .post-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .post {
-    display: block;
-    padding: 24px 0;
-    border-bottom: 1px solid var(--rule);
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.2s;
-  }
-  .post:hover { transform: translateX(4px); }
-  .post-date {
-    font-size: 12px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--moss);
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
-  .post-title {
-    font-family: 'Fraunces', serif;
-    font-weight: 700;
-    font-size: clamp(22px, 3vw, 28px);
-    line-height: 1.25;
-    color: var(--ink);
-    margin: 0 0 10px;
-    font-variation-settings: "opsz" 144;
-  }
-  .post-title em {
-    font-style: italic;
-    color: var(--moss-deep);
-    font-weight: 600;
-  }
-  .post-desc {
-    font-size: 16px;
-    color: var(--ink-mid);
-    line-height: 1.5;
-    margin: 0;
-  }
-  .loading {
-    text-align: center;
-    padding: 40px 0;
-    color: var(--moss);
-  }
-  footer {
-    margin-top: 80px;
-    padding-top: 32px;
-    border-top: 1px solid var(--rule);
-    text-align: center;
-    font-size: 14px;
-    color: var(--ink-mid);
-  }
-  footer .phone {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    color: var(--moss-deep);
-    font-size: 18px;
-    margin-top: 8px;
-  }
-  .pagination {
-    margin-top: 40px;
-}
-.page-btn {
-    padding: 10px 20px;
-    margin: 0 5px;
-    background: #f0f0f0;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 15px;
-}
-.page-btn:hover {
-    background: #ddd;
-}
-</style>
+  <!-- Khuyến nghị thêm các kích thước khác nhau -->
+  <link rel="apple-touch-icon" href="https://i.ibb.co/Y4pKSXXW/daktri-logo.png">
+  <link rel="icon" sizes="192x192" href="https://i.ibb.co/Y4pKSXXW/daktri-logo.png">
+  <link rel="icon" sizes="32x32" href="https://i.ibb.co/Y4pKSXXW/daktri-logo.png">
+  <link rel="icon" sizes="16x16" href="https://i.ibb.co/Y4pKSXXW/daktri-logo.png">
+  <style>
+    :root {
+      --cream: #f5f0e0;
+      --paper: #faf6e9;
+      --ink: #1c1208;
+      --ink-soft: #3d2c1a;
+      --ink-mid: #5d4830;
+      --moss: #2e6b3f;
+      --moss-deep: #1f4a2c;
+      --gold: #d4af4c;
+      --rule: #c9b88a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Be Vietnam Pro', sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 56px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .brand-tag {
+      font-size: 12px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--moss);
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .brand-name {
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: clamp(36px, 5vw, 52px);
+      line-height: 1.1;
+      color: var(--ink);
+      margin: 0 0 12px;
+      font-variation-settings: "opsz" 144;
+    }
+
+    .brand-name em {
+      font-style: italic;
+      color: var(--moss-deep);
+      font-weight: 600;
+    }
+
+    .brand-desc {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 18px;
+      color: var(--ink-mid);
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: 28px;
+      color: var(--ink);
+      margin: 0 0 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 32px;
+      height: 3px;
+      background: var(--moss);
+    }
+
+    .post-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .post {
+      display: block;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--rule);
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s;
+    }
+
+    .post:hover {
+      transform: translateX(4px);
+    }
+
+    .post-date {
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--moss);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .post-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: clamp(22px, 3vw, 28px);
+      line-height: 1.25;
+      color: var(--ink);
+      margin: 0 0 10px;
+      font-variation-settings: "opsz" 144;
+    }
+
+    .post-title em {
+      font-style: italic;
+      color: var(--moss-deep);
+      font-weight: 600;
+    }
+
+    .post-desc {
+      font-size: 16px;
+      color: var(--ink-mid);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px 0;
+      color: var(--moss);
+    }
+
+    footer {
+      margin-top: 80px;
+      padding-top: 32px;
+      border-top: 1px solid var(--rule);
+      text-align: center;
+      font-size: 14px;
+      color: var(--ink-mid);
+    }
+
+    footer .phone {
+      font-family: 'Fraunces', serif;
+      font-weight: 600;
+      color: var(--moss-deep);
+      font-size: 18px;
+      margin-top: 8px;
+    }
+
+    .pagination {
+      margin-top: 40px;
+    }
+
+    .page-btn {
+      padding: 10px 20px;
+      margin: 0 5px;
+      background: #f0f0f0;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .page-btn:hover {
+      background: #ddd;
+    }
+  </style>
 </head>
+
 <body>
-<div class="container">
+  <div class="container">
 
-  <header class="brand">
-    <div class="brand-tag">HTX Daktri Khe Sanh · Vinaxanh Quảng Trị</div>
-    <h1 class="brand-name">Nông nghiệp <em>tử tế</em></h1>
-    <p class="brand-desc">Kiến thức về đất, cà phê Liberica, và cách nuôi vườn cây bằng triết lý hữu cơ — chia sẻ từ HTX Daktri Khe Sanh và Vinaxanh Quảng Trị.</p>
-  </header>
+    <header class="brand">
+      <div class="brand-tag">HTX Daktri Khe Sanh · Vinaxanh Quảng Trị</div>
+      <h1 class="brand-name">Nông nghiệp <em>tử tế</em></h1>
+      <p class="brand-desc">Kiến thức về đất, cà phê Liberica, và cách nuôi vườn cây bằng triết lý hữu cơ — chia sẻ từ
+        HTX Daktri Khe Sanh và Vinaxanh Quảng Trị.</p>
+    </header>
 
-  <h2 class="section-title">Bài viết</h2>
+    <h2 class="section-title">Bài viết</h2>
 
-  <ul class="post-list" id="post-list">
-  
-  </ul>
+    <ul class="post-list" id="post-list">
 
-  <footer>
-    <div>© 2026 HTX Daktri Khe Sanh · Vinaxanh Quảng Trị</div>
-    <div class="phone">Hotline / Zalo: 0941 336 669</div>
-  </footer>
+    </ul>
 
-</div>
-<script>
-// ======================= CONFIG =======================
-const API_BASE = 'https://libericakhesanh.net/api/index.php';
+    <footer>
+      <div>© 2026 HTX Daktri Khe Sanh · Vinaxanh Quảng Trị</div>
+      <div class="phone">Hotline / Zalo: 0941 336 669</div>
+    </footer>
 
-// ======================= LOAD BLOGS WITH PAGINATION =======================
-async function loadBlogs(page = 1) {
-  const listEl = document.getElementById('post-list');
-  listEl.innerHTML = '<li class="loading">Đang tải bài viết...</li>';
+  </div>
+  <script>
+    // ======================= CONFIG =======================
+    const API_BASE = 'https://libericakhesanh.net/api/index.php';
 
-  try {
-    const res = await fetch(`${API_BASE}?table=blogs&action=list&page=${page}&limit=12`);
-    const result = await res.json();
+    // ======================= LOAD BLOGS WITH PAGINATION =======================
+    async function loadBlogs(page = 1) {
+      const listEl = document.getElementById('post-list');
+      listEl.innerHTML = '<li class="loading">Đang tải bài viết...</li>';
 
-    console.log("DATA FROM SERVER:", result);
+      try {
+        const res = await fetch(`${API_BASE}?table=blogs&action=list&page=${page}&limit=12`);
+        const result = await res.json();
 
-    if (!res.ok || result.status === 'error') {
-      throw new Error(result.msg || 'Không thể tải danh sách bài viết');
-    }
+        console.log("DATA FROM SERVER:", result);
 
-    const blogs = result.data || [];
-    const pagination = result.pagination || {};
+        if (!res.ok || result.status === 'error') {
+          throw new Error(result.msg || 'Không thể tải danh sách bài viết');
+        }
 
-    listEl.innerHTML = '';
+        const blogs = result.data || [];
+        const pagination = result.pagination || {};
 
-    if (blogs.length === 0) {
-      listEl.innerHTML = '<li style="padding: 40px 0; text-align: center; color: #888;">Chưa có bài viết nào.</li>';
-      return;
-    }
+        listEl.innerHTML = '';
 
-    blogs.forEach(blog => {
-      if (!blog.slug || !blog.title) return;
+        if (blogs.length === 0) {
+          listEl.innerHTML = '<li style="padding: 40px 0; text-align: center; color: #888;">Chưa có bài viết nào.</li>';
+          return;
+        }
 
-      const date = formatDate(blog.created_at || blog.updated_at || '');
+        blogs.forEach(blog => {
+          if (!blog.slug || !blog.title) return;
 
-      const item = document.createElement('a');
-      item.href = `blog-detail.html?slug=${encodeURIComponent(blog.slug)}`;
-      item.className = 'post';
-      item.innerHTML = `
+          const date = formatDate(blog.created_at || blog.updated_at || '');
+
+          const item = document.createElement('a');
+          item.href = `/blog/${encodeURIComponent(blog.slug)}`;
+          item.className = 'post';
+          item.innerHTML = `
         <div class="post-date">${date}</div>
         <h3 class="post-title">${escapeHtml(blog.title)}</h3>
         <p class="post-desc">${escapeHtml(blog.excerpt || '')}</p>
       `;
-      listEl.appendChild(item);
-    });
+          listEl.appendChild(item);
+        });
 
-    // Hiển thị phân trang
-    renderPagination(pagination);
+        // Hiển thị phân trang
+        renderPagination(pagination);
 
-  } catch (err) {
-    console.error(err);
-    listEl.innerHTML = `
+      } catch (err) {
+        console.error(err);
+        listEl.innerHTML = `
       <li style="padding: 40px 0; text-align: center; color: #c00;">
         Không thể tải danh sách bài viết.<br>
         <small>Vui lòng thử tải lại trang.</small>
       </li>`;
-  }
-}
+      }
+    }
 
-// ======================= RENDER PAGINATION =======================
-function renderPagination(pagination) {
-  const { current_page, total_pages } = pagination;
-  if (!total_pages || total_pages <= 1) return;
+    // ======================= RENDER PAGINATION =======================
+    function renderPagination(pagination) {
+      const { current_page, total_pages } = pagination;
+      if (!total_pages || total_pages <= 1) return;
 
-  const paginationHTML = `
+      const paginationHTML = `
     <div class="pagination" style="margin-top: 30px; text-align: center;">
-      ${current_page > 1 ? 
-        `<button onclick="loadBlogs(${current_page - 1})" class="page-btn">← Trước</button>` : ''}
+      ${current_page > 1 ?
+          `<button onclick="loadBlogs(${current_page - 1})" class="page-btn">← Trước</button>` : ''}
       
       <span style="margin: 0 15px; font-weight: 500;">
         Trang ${current_page} / ${total_pages}
       </span>
       
-      ${current_page < total_pages ? 
-        `<button onclick="loadBlogs(${current_page + 1})" class="page-btn">Sau →</button>` : ''}
+      ${current_page < total_pages ?
+          `<button onclick="loadBlogs(${current_page + 1})" class="page-btn">Sau →</button>` : ''}
     </div>
   `;
 
-  // Thêm phân trang vào sau danh sách
-  const listEl = document.getElementById('post-list');
-  listEl.insertAdjacentHTML('afterend', paginationHTML);
-}
+      // Thêm phân trang vào sau danh sách
+      const listEl = document.getElementById('post-list');
+      listEl.insertAdjacentHTML('afterend', paginationHTML);
+    }
 
-// ======================= HELPERS =======================
-function formatDate(raw) {
-  if (!raw) return 'N/A';
-  const d = new Date(raw);
-  if (isNaN(d.getTime())) return String(raw).slice(0, 10);
-  return `${d.getDate().toString().padStart(2,'0')} · ${(d.getMonth()+1).toString().padStart(2,'0')} · ${d.getFullYear()}`;
-}
+    // ======================= HELPERS =======================
+    function formatDate(raw) {
+      if (!raw) return 'N/A';
+      const d = new Date(raw);
+      if (isNaN(d.getTime())) return String(raw).slice(0, 10);
+      return `${d.getDate().toString().padStart(2, '0')} · ${(d.getMonth() + 1).toString().padStart(2, '0')} · ${d.getFullYear()}`;
+    }
 
-function escapeHtml(str) {
-  if (str == null) return '';
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
-}
+    function escapeHtml(str) {
+      if (str == null) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
 
-// Load khi trang sẵn sàng
-document.addEventListener('DOMContentLoaded', () => {
-  loadBlogs(1);
-});
-</script>
+    // Load khi trang sẵn sàng
+    document.addEventListener('DOMContentLoaded', () => {
+      loadBlogs(1);
+    });
+  </script>
 
 </body>
+
 </html>
