@@ -242,9 +242,6 @@
       try {
         const res = await fetch(`${API_BASE}?table=blogs&action=list&page=${page}&limit=12`);
         const result = await res.json();
-
-        console.log("DATA FROM SERVER:", result);
-
         if (!res.ok || result.status === 'error') {
           throw new Error(result.msg || 'Không thể tải danh sách bài viết');
         }
