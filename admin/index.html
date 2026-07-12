@@ -5,7 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Libérica Admin - Quản trị hệ thống</title>
-<link rel="shortcut icon" href="https://i.ibb.co/Y4pKSXXW/daktri-logo.png" type="image/x-icon">
+    <meta name="description"
+        content="Hệ thống quản trị Daktri Khe Sanh – nơi vận hành hành trình giữ giống cà phê Liberica và phát triển bền vững từ vùng đất Quảng Trị." />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="author" content="Daktri Khe Sanh" />
+    <link rel="shortcut icon" href="https://i.ibb.co/Y4pKSXXW/daktri-logo.png" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -43,8 +47,8 @@
             font-family: 'Inter', sans-serif;
             background-color: #F3F4EF;
             background-image:
-                radial-gradient(circle at 100% 0%, rgba(79,111,82,0.05) 0%, transparent 40%),
-                radial-gradient(circle at 0% 100%, rgba(192,133,82,0.05) 0%, transparent 40%);
+                radial-gradient(circle at 100% 0%, rgba(79, 111, 82, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 0% 100%, rgba(192, 133, 82, 0.05) 0%, transparent 40%);
         }
 
         .font-display {
@@ -75,7 +79,7 @@
         }
 
         .modal-panel {
-            animation: modal-in .2s cubic-bezier(.2,.7,.3,1);
+            animation: modal-in .2s cubic-bezier(.2, .7, .3, 1);
         }
 
         @keyframes modal-in {
@@ -91,7 +95,7 @@
         }
 
         .toast-in {
-            animation: toast-in .3s cubic-bezier(.2,.7,.3,1);
+            animation: toast-in .3s cubic-bezier(.2, .7, .3, 1);
         }
 
         @keyframes toast-in {
@@ -107,8 +111,13 @@
         }
 
         @keyframes toast-bar {
-            from { width: 100%; }
-            to { width: 0%; }
+            from {
+                width: 100%;
+            }
+
+            to {
+                width: 0%;
+            }
         }
 
         .spinner {
@@ -130,15 +139,15 @@
         .tab-active {
             background: #4F6F52;
             color: #fff;
-            box-shadow: 0 4px 14px -4px rgba(79,111,82,0.55);
+            box-shadow: 0 4px 14px -4px rgba(79, 111, 82, 0.55);
         }
 
         .tab-inactive {
-            color: rgba(255,255,255,0.55);
+            color: rgba(255, 255, 255, 0.55);
         }
 
         .tab-inactive:hover {
-            background: rgba(255,255,255,0.06);
+            background: rgba(255, 255, 255, 0.06);
             color: #fff;
         }
 
@@ -167,17 +176,27 @@
         .icon-btn {
             transition: background-color .15s, color .15s, transform .1s;
         }
-        .icon-btn:active { transform: scale(.94); }
+
+        .icon-btn:active {
+            transform: scale(.94);
+        }
 
         .btn-primary {
             transition: background-color .15s, box-shadow .15s, transform .05s;
         }
-        .btn-primary:hover { box-shadow: 0 6px 18px -6px rgba(79,111,82,0.55); }
-        .btn-primary:active { transform: translateY(1px); }
+
+        .btn-primary:hover {
+            box-shadow: 0 6px 18px -6px rgba(79, 111, 82, 0.55);
+        }
+
+        .btn-primary:active {
+            transform: translateY(1px);
+        }
 
         .dropzone {
             transition: border-color .15s, background-color .15s;
         }
+
         .dropzone:hover {
             border-color: #4F6F52;
             background-color: #EEF2EA;
@@ -200,17 +219,27 @@
         #login-screen {
             background-color: #1F2A24;
             background-image:
-                radial-gradient(circle at 15% 20%, rgba(79,111,82,0.35) 0%, transparent 45%),
-                radial-gradient(circle at 85% 80%, rgba(192,133,82,0.22) 0%, transparent 45%),
+                radial-gradient(circle at 15% 20%, rgba(79, 111, 82, 0.35) 0%, transparent 45%),
+                radial-gradient(circle at 85% 80%, rgba(192, 133, 82, 0.22) 0%, transparent 45%),
                 linear-gradient(160deg, #1F2A24 0%, #182019 100%);
         }
+
         .login-panel {
-            animation: login-in .45s cubic-bezier(.2,.7,.3,1);
+            animation: login-in .45s cubic-bezier(.2, .7, .3, 1);
         }
+
         @keyframes login-in {
-            from { opacity: 0; transform: translateY(16px) scale(.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            from {
+                opacity: 0;
+                transform: translateY(16px) scale(.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
+
         .login-input-wrap:focus-within {
             border-color: #4F6F52;
             box-shadow: 0 0 0 3.5px rgba(79, 111, 82, 0.14);
@@ -220,16 +249,35 @@
         .login-input-wrap.login-input-error {
             border-color: #C0392B !important;
             box-shadow: 0 0 0 3.5px rgba(192, 57, 43, 0.16) !important;
-            animation: login-shake .4s cubic-bezier(.36,.07,.19,.97);
+            animation: login-shake .4s cubic-bezier(.36, .07, .19, .97);
         }
+
         @keyframes login-shake {
-            10%, 90% { transform: translateX(-1px); }
-            20%, 80% { transform: translateX(2px); }
-            30%, 50%, 70% { transform: translateX(-4px); }
-            40%, 60% { transform: translateX(4px); }
+
+            10%,
+            90% {
+                transform: translateX(-1px);
+            }
+
+            20%,
+            80% {
+                transform: translateX(2px);
+            }
+
+            30%,
+            50%,
+            70% {
+                transform: translateX(-4px);
+            }
+
+            40%,
+            60% {
+                transform: translateX(4px);
+            }
         }
+
         #login-error-banner {
-            animation: toast-in .25s cubic-bezier(.2,.7,.3,1);
+            animation: toast-in .25s cubic-bezier(.2, .7, .3, 1);
         }
     </style>
 </head>
@@ -238,10 +286,13 @@
 
     <!-- ============ LOGIN SCREEN ============ -->
     <div id="login-screen" class="fixed inset-0 z-[200] flex items-center justify-center p-4">
-        <div class="login-panel w-full max-w-sm bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-2xl shadow-pop px-8 py-10">
+        <div
+            class="login-panel w-full max-w-sm bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-2xl shadow-pop px-8 py-10">
             <div class="flex flex-col items-center mb-8">
-                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-moss to-forest-100 ring-1 ring-white/10 flex items-center justify-center shadow-sm mb-4">
-                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F3E3D3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <div
+                    class="w-16 h-16 rounded-2xl bg-gradient-to-br from-moss to-forest-100 ring-1 ring-white/10 flex items-center justify-center shadow-sm mb-4">
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F3E3D3" stroke-width="1.6"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <path d="M4 9h13a3 3 0 0 1 3 3v1a3 3 0 0 1-3 3H4z"></path>
                         <path d="M4 9v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-1"></path>
                         <path d="M8 3c-.6.8-.6 1.5 0 2.3S8.6 7.1 8 8"></path>
@@ -253,9 +304,13 @@
             </div>
 
             <!-- Banner báo lỗi đăng nhập (ẩn mặc định, hiển thị khi server trả status=error) -->
-            <div id="login-error-banner" class="hidden mb-4 flex items-start gap-2.5 rounded-lg border border-danger/30 bg-danger/10 px-3.5 py-2.5">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#E57368" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-0.5">
-                    <circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>
+            <div id="login-error-banner"
+                class="hidden mb-4 flex items-start gap-2.5 rounded-lg border border-danger/30 bg-danger/10 px-3.5 py-2.5">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#E57368" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-0.5">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
                 </svg>
                 <p id="login-error-text" class="text-[13px] text-danger leading-snug"></p>
             </div>
@@ -263,9 +318,13 @@
             <form id="login-form" onsubmit="handleLoginSubmit(event)" class="space-y-4">
                 <div>
                     <label class="field-label text-xs font-medium text-white/60">Tên đăng nhập</label>
-                    <div class="login-input-wrap mt-1.5 flex items-center gap-2 border border-white/15 bg-white/[0.04] rounded-lg px-3.5 py-2.5">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-white/35 shrink-0">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>
+                    <div
+                        class="login-input-wrap mt-1.5 flex items-center gap-2 border border-white/15 bg-white/[0.04] rounded-lg px-3.5 py-2.5">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                            class="text-white/35 shrink-0">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
                         </svg>
                         <input id="login-username" required type="text" autocomplete="username"
                             class="w-full bg-transparent text-sm text-white placeholder-white/25 focus:outline-none"
@@ -274,17 +333,23 @@
                 </div>
                 <div>
                     <label class="field-label text-xs font-medium text-white/60">Mật khẩu</label>
-                    <div class="login-input-wrap mt-1.5 flex items-center gap-2 border border-white/15 bg-white/[0.04] rounded-lg px-3.5 py-2.5">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-white/35 shrink-0">
-                            <rect x="3" y="11" width="18" height="10" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    <div
+                        class="login-input-wrap mt-1.5 flex items-center gap-2 border border-white/15 bg-white/[0.04] rounded-lg px-3.5 py-2.5">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                            class="text-white/35 shrink-0">
+                            <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                         </svg>
                         <input id="login-password" required type="password" autocomplete="current-password"
                             class="w-full bg-transparent text-sm text-white placeholder-white/25 focus:outline-none"
                             placeholder="••••••••">
                         <button type="button" onclick="toggleLoginPassword()" id="login-password-toggle"
                             class="icon-btn text-white/35 hover:text-white/70 shrink-0">
-                            <svg id="login-eye-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path><circle cx="12" cy="12" r="3"></circle>
+                            <svg id="login-eye-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
                             </svg>
                         </button>
                     </div>
@@ -292,7 +357,12 @@
 
                 <button type="submit" id="login-submit-btn"
                     class="btn-primary w-full bg-moss hover:bg-moss-600 text-white text-sm font-medium px-4 py-3 rounded-lg flex items-center justify-center gap-2 mt-2">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><path d="M10 17l5-5-5-5"></path><path d="M15 12H3"></path></svg>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                        <path d="M10 17l5-5-5-5"></path>
+                        <path d="M15 12H3"></path>
+                    </svg>
                     Đăng nhập
                 </button>
             </form>
@@ -305,189 +375,224 @@
 
     <!-- ============ DASHBOARD ROOT (visible only after login) ============ -->
     <div id="dashboard-root" class="hidden">
-    <div class="flex h-screen overflow-hidden">
+        <div class="flex h-screen overflow-hidden">
 
-        <!-- ============ SIDEBAR ============ -->
-        <aside class="w-64 shrink-0 bg-forest text-white flex flex-col">
-            <div class="px-6 py-6 border-b border-white/10">
-                <div class="flex items-center gap-3">
-                    <div
-                        class="w-10 h-10 rounded-xl bg-gradient-to-br from-moss to-forest-100 ring-1 ring-white/10 flex items-center justify-center shrink-0 shadow-sm">
-                        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#F3E3D3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 9h13a3 3 0 0 1 3 3v1a3 3 0 0 1-3 3H4z"></path>
-                            <path d="M4 9v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-1"></path>
-                            <path d="M8 3c-.6.8-.6 1.5 0 2.3S8.6 7.1 8 8"></path>
-                            <path d="M12 3c-.6.8-.6 1.5 0 2.3s.6 1.8 0 2.7"></path>
-                        </svg>
-                    </div>
-                    <div>
-                        <p class="font-display font-semibold text-[15px] leading-none tracking-tight">Libérica</p>
-                        <p class="text-[11px] text-white/45 mt-1">Bảng quản trị nội dung</p>
-                    </div>
-                </div>
-            </div>
-
-            <nav class="flex-1 px-3 py-5 space-y-1">
-                <p class="px-3 text-[10px] uppercase tracking-wider text-white/35 font-semibold mb-2">Nội dung</p>
-                <button data-tab="products" onclick="switchTab('products')"
-                    class="nav-btn tab-active w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors">
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="shrink-0">
-                        <path d="M21 8l-9-5-9 5 9 5 9-5z"></path>
-                        <path d="M3 8v8l9 5 9-5V8"></path>
-                        <path d="M12 13v8"></path>
-                    </svg>
-                    <span>Sản phẩm</span>
-                </button>
-                <button data-tab="blogs" onclick="switchTab('blogs')"
-                    class="nav-btn tab-inactive w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors">
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="shrink-0">
-                        <path d="M14 3v5a1 1 0 0 0 1 1h5"></path>
-                        <path d="M6 3h8l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path>
-                        <path d="M8 13h8M8 17h5"></path>
-                    </svg>
-                    <span>Bài viết</span>
-                </button>
-            </nav>
-
-            <div class="px-4 py-4 border-t border-white/10 space-y-3">
-                <div class="flex items-center justify-between gap-2">
-                    <div class="flex items-center gap-2.5 min-w-0">
-                        <div class="w-8 h-8 rounded-full bg-moss-100/10 border border-white/10 flex items-center justify-center shrink-0 text-white/70">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>
+            <!-- ============ SIDEBAR ============ -->
+            <aside class="w-64 shrink-0 bg-forest text-white flex flex-col">
+                <div class="px-6 py-6 border-b border-white/10">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-gradient-to-br from-moss to-forest-100 ring-1 ring-white/10 flex items-center justify-center shrink-0 shadow-sm">
+                            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#F3E3D3"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 9h13a3 3 0 0 1 3 3v1a3 3 0 0 1-3 3H4z"></path>
+                                <path d="M4 9v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-1"></path>
+                                <path d="M8 3c-.6.8-.6 1.5 0 2.3S8.6 7.1 8 8"></path>
+                                <path d="M12 3c-.6.8-.6 1.5 0 2.3s.6 1.8 0 2.7"></path>
                             </svg>
                         </div>
-                        <div class="min-w-0">
-                            <p id="admin-fullname" class="text-[12px] font-medium text-white truncate">—</p>
-                            <p class="text-[10px] text-white/35">Quản trị viên</p>
+                        <div>
+                            <p class="font-display font-semibold text-[15px] leading-none tracking-tight">Libérica</p>
+                            <p class="text-[11px] text-white/45 mt-1">Bảng quản trị nội dung</p>
                         </div>
                     </div>
-                    <button onclick="handleLogout()" title="Đăng xuất"
-                        class="icon-btn w-8 h-8 flex items-center justify-center rounded-lg text-white/40 hover:text-white hover:bg-white/10 shrink-0">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><path d="M16 17l5-5-5-5"></path><path d="M21 12H9"></path>
-                        </svg>
-                    </button>
-                </div>
-                <p class="text-[10px] text-white/25 leading-relaxed pt-2 border-t border-white/5">
-                    Copyright © 2026 DAKTRI Cooperative
-                </p>
-            </div>
-        </aside>
-
-        <!-- ============ MAIN ============ -->
-        <main class="flex-1 flex flex-col overflow-hidden">
-
-            <!-- ---------- PRODUCTS VIEW ---------- -->
-            <section id="view-products" class="flex-1 flex flex-col overflow-hidden">
-                <header class="px-8 py-6 border-b border-line bg-white/70 backdrop-blur-sm flex items-center justify-between shrink-0">
-                    <div>
-                        <p class="text-[11px] uppercase tracking-wider text-moss-600 font-semibold mb-1">Nội dung</p>
-                        <h1 class="font-display text-xl font-semibold tracking-tight">Sản phẩm</h1>
-                        <p class="text-sm text-ink/50 mt-0.5">Quản lý danh mục cà phê đang bán</p>
-                    </div>
-                    <button onclick="openProductModal()"
-                        class="btn-primary bg-moss hover:bg-moss-600 text-white text-sm font-medium px-4 py-2.5 rounded-lg flex items-center gap-2">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
-                        Thêm sản phẩm
-                    </button>
-                </header>
-
-                <div class="px-8 py-4 flex items-center gap-3 shrink-0">
-                    <div class="relative w-80">
-                        <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 text-ink/35" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="11" cy="11" r="7"></circle><path d="M21 21l-3.8-3.8"></path>
-                        </svg>
-                        <input id="product-search" oninput="onProductSearch()" type="text"
-                            placeholder="Tìm theo tên, danh mục, tag..."
-                            class="w-full pl-10 pr-4 py-2.5 border border-line rounded-lg text-sm bg-white shadow-card">
-                    </div>
-                    <span id="product-count" class="text-sm text-ink/40"></span>
                 </div>
 
-                <div class="flex-1 overflow-auto px-8 pb-4">
-                    <div class="bg-white border border-line rounded-xl overflow-hidden shadow-card">
-                        <table class="w-full text-sm">
-                            <thead>
-                                <tr class="text-left text-ink/45 text-[11px] uppercase tracking-wide border-b border-line bg-paper/60">
-                                    <th class="px-5 py-3.5 font-semibold">Ảnh</th>
-                                    <th class="px-5 py-3.5 font-semibold">Tên / Slug</th>
-                                    <th class="px-5 py-3.5 font-semibold">Danh mục</th>
-                                    <th class="px-5 py-3.5 font-semibold">Sơ chế</th>
-                                    <th class="px-5 py-3.5 font-semibold">Giá</th>
-                                    <th class="px-5 py-3.5 font-semibold">Khối lượng</th>
-                                    <th class="px-5 py-3.5 font-semibold">Tags</th>
-                                    <th class="px-5 py-3.5 font-semibold text-right">Thao tác</th>
-                                </tr>
-                            </thead>
-                            <tbody id="products-tbody"></tbody>
-                        </table>
-                        <div id="products-empty" class="hidden py-16 text-center text-ink/40 text-sm">
-                            <svg class="mx-auto mb-3 text-ink/20" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M21 8l-9-5-9 5 9 5 9-5z"></path><path d="M3 8v8l9 5 9-5V8"></path>
+                <nav class="flex-1 px-3 py-5 space-y-1">
+                    <p class="px-3 text-[10px] uppercase tracking-wider text-white/35 font-semibold mb-2">Nội dung</p>
+                    <button data-tab="products" onclick="switchTab('products')"
+                        class="nav-btn tab-active w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="shrink-0">
+                            <path d="M21 8l-9-5-9 5 9 5 9-5z"></path>
+                            <path d="M3 8v8l9 5 9-5V8"></path>
+                            <path d="M12 13v8"></path>
+                        </svg>
+                        <span>Sản phẩm</span>
+                    </button>
+                    <button data-tab="blogs" onclick="switchTab('blogs')"
+                        class="nav-btn tab-inactive w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="shrink-0">
+                            <path d="M14 3v5a1 1 0 0 0 1 1h5"></path>
+                            <path d="M6 3h8l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path>
+                            <path d="M8 13h8M8 17h5"></path>
+                        </svg>
+                        <span>Bài viết</span>
+                    </button>
+                </nav>
+
+                <div class="px-4 py-4 border-t border-white/10 space-y-3">
+                    <div class="flex items-center justify-between gap-2">
+                        <div class="flex items-center gap-2.5 min-w-0">
+                            <div
+                                class="w-8 h-8 rounded-full bg-moss-100/10 border border-white/10 flex items-center justify-center shrink-0 text-white/70">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                            </div>
+                            <div class="min-w-0">
+                                <p id="admin-fullname" class="text-[12px] font-medium text-white truncate">—</p>
+                                <p class="text-[10px] text-white/35">Quản trị viên</p>
+                            </div>
+                        </div>
+                        <button onclick="handleLogout()" title="Đăng xuất"
+                            class="icon-btn w-8 h-8 flex items-center justify-center rounded-lg text-white/40 hover:text-white hover:bg-white/10 shrink-0">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <path d="M16 17l5-5-5-5"></path>
+                                <path d="M21 12H9"></path>
                             </svg>
-                            Chưa có sản phẩm nào. Nhấn "Thêm sản phẩm" để bắt đầu.
+                        </button>
+                    </div>
+                    <p class="text-[10px] text-white/25 leading-relaxed pt-2 border-t border-white/5">
+                        Copyright © 2026 DAKTRI Cooperative
+                    </p>
+                </div>
+            </aside>
+
+            <!-- ============ MAIN ============ -->
+            <main class="flex-1 flex flex-col overflow-hidden">
+
+                <!-- ---------- PRODUCTS VIEW ---------- -->
+                <section id="view-products" class="flex-1 flex flex-col overflow-hidden">
+                    <header
+                        class="px-8 py-6 border-b border-line bg-white/70 backdrop-blur-sm flex items-center justify-between shrink-0">
+                        <div>
+                            <p class="text-[11px] uppercase tracking-wider text-moss-600 font-semibold mb-1">Nội dung
+                            </p>
+                            <h1 class="font-display text-xl font-semibold tracking-tight">Sản phẩm</h1>
+                            <p class="text-sm text-ink/50 mt-0.5">Quản lý danh mục cà phê đang bán</p>
                         </div>
-                    </div>
-                    <div id="products-pagination" class="flex items-center justify-between py-4 text-sm text-ink/60">
-                    </div>
-                </div>
-            </section>
-
-            <!-- ---------- BLOGS VIEW ---------- -->
-            <section id="view-blogs" class="hidden flex-1 flex-col overflow-hidden">
-                <header class="px-8 py-6 border-b border-line bg-white/70 backdrop-blur-sm flex items-center justify-between shrink-0">
-                    <div>
-                        <p class="text-[11px] uppercase tracking-wider text-moss-600 font-semibold mb-1">Nội dung</p>
-                        <h1 class="font-display text-xl font-semibold tracking-tight">Bài viết</h1>
-                        <p class="text-sm text-ink/50 mt-0.5">Quản lý blog và nội dung khối (blocks)</p>
-                    </div>
-                    <button onclick="openBlogModal()"
-                        class="btn-primary bg-moss hover:bg-moss-600 text-white text-sm font-medium px-4 py-2.5 rounded-lg flex items-center gap-2">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
-                        Thêm bài viết
-                    </button>
-                </header>
-
-                <div class="px-8 py-4 flex items-center gap-3 shrink-0">
-                    <div class="relative w-80">
-                        <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 text-ink/35" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="11" cy="11" r="7"></circle><path d="M21 21l-3.8-3.8"></path>
-                        </svg>
-                        <input id="blog-search" oninput="onBlogSearch()" type="text"
-                            placeholder="Tìm theo tiêu đề, tác giả..."
-                            class="w-full pl-10 pr-4 py-2.5 border border-line rounded-lg text-sm bg-white shadow-card">
-                    </div>
-                    <span id="blog-count" class="text-sm text-ink/40"></span>
-                </div>
-
-                <div class="flex-1 overflow-auto px-8 pb-4">
-                    <div class="bg-white border border-line rounded-xl overflow-hidden shadow-card">
-                        <table class="w-full text-sm">
-                            <thead>
-                                <tr class="text-left text-ink/45 text-[11px] uppercase tracking-wide border-b border-line bg-paper/60">
-                                    <th class="px-5 py-3.5 font-semibold">Ảnh bìa</th>
-                                    <th class="px-5 py-3.5 font-semibold">Tiêu đề / Slug</th>
-                                    <th class="px-5 py-3.5 font-semibold">Tác giả</th>
-                                    <th class="px-5 py-3.5 font-semibold">Trạng thái</th>
-                                    <th class="px-5 py-3.5 font-semibold text-right">Thao tác</th>
-                                </tr>
-                            </thead>
-                            <tbody id="blogs-tbody"></tbody>
-                        </table>
-                        <div id="blogs-empty" class="hidden py-16 text-center text-ink/40 text-sm">
-                            <svg class="mx-auto mb-3 text-ink/20" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M14 3v5a1 1 0 0 0 1 1h5"></path><path d="M6 3h8l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path>
+                        <button onclick="openProductModal()"
+                            class="btn-primary bg-moss hover:bg-moss-600 text-white text-sm font-medium px-4 py-2.5 rounded-lg flex items-center gap-2">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.2" stroke-linecap="round">
+                                <path d="M12 5v14M5 12h14"></path>
                             </svg>
-                            Chưa có bài viết nào. Nhấn "Thêm bài viết" để bắt đầu.
+                            Thêm sản phẩm
+                        </button>
+                    </header>
+
+                    <div class="px-8 py-4 flex items-center gap-3 shrink-0">
+                        <div class="relative w-80">
+                            <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 text-ink/35" width="16" height="16"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="7"></circle>
+                                <path d="M21 21l-3.8-3.8"></path>
+                            </svg>
+                            <input id="product-search" oninput="onProductSearch()" type="text"
+                                placeholder="Tìm theo tên, danh mục, tag..."
+                                class="w-full pl-10 pr-4 py-2.5 border border-line rounded-lg text-sm bg-white shadow-card">
+                        </div>
+                        <span id="product-count" class="text-sm text-ink/40"></span>
+                    </div>
+
+                    <div class="flex-1 overflow-auto px-8 pb-4">
+                        <div class="bg-white border border-line rounded-xl overflow-hidden shadow-card">
+                            <table class="w-full text-sm">
+                                <thead>
+                                    <tr
+                                        class="text-left text-ink/45 text-[11px] uppercase tracking-wide border-b border-line bg-paper/60">
+                                        <th class="px-5 py-3.5 font-semibold">Ảnh</th>
+                                        <th class="px-5 py-3.5 font-semibold">Tên / Slug</th>
+                                        <th class="px-5 py-3.5 font-semibold">Danh mục</th>
+                                        <th class="px-5 py-3.5 font-semibold">Sơ chế</th>
+                                        <th class="px-5 py-3.5 font-semibold">Giá</th>
+                                        <th class="px-5 py-3.5 font-semibold">Khối lượng</th>
+                                        <th class="px-5 py-3.5 font-semibold">Tags</th>
+                                        <th class="px-5 py-3.5 font-semibold text-right">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="products-tbody"></tbody>
+                            </table>
+                            <div id="products-empty" class="hidden py-16 text-center text-ink/40 text-sm">
+                                <svg class="mx-auto mb-3 text-ink/20" width="40" height="40" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M21 8l-9-5-9 5 9 5 9-5z"></path>
+                                    <path d="M3 8v8l9 5 9-5V8"></path>
+                                </svg>
+                                Chưa có sản phẩm nào. Nhấn "Thêm sản phẩm" để bắt đầu.
+                            </div>
+                        </div>
+                        <div id="products-pagination"
+                            class="flex items-center justify-between py-4 text-sm text-ink/60">
                         </div>
                     </div>
-                    <div id="blogs-pagination" class="flex items-center justify-between py-4 text-sm text-ink/60"></div>
-                </div>
-            </section>
+                </section>
 
-        </main>
-    </div>
+                <!-- ---------- BLOGS VIEW ---------- -->
+                <section id="view-blogs" class="hidden flex-1 flex-col overflow-hidden">
+                    <header
+                        class="px-8 py-6 border-b border-line bg-white/70 backdrop-blur-sm flex items-center justify-between shrink-0">
+                        <div>
+                            <p class="text-[11px] uppercase tracking-wider text-moss-600 font-semibold mb-1">Nội dung
+                            </p>
+                            <h1 class="font-display text-xl font-semibold tracking-tight">Bài viết</h1>
+                            <p class="text-sm text-ink/50 mt-0.5">Quản lý blog và nội dung khối (blocks)</p>
+                        </div>
+                        <button onclick="openBlogModal()"
+                            class="btn-primary bg-moss hover:bg-moss-600 text-white text-sm font-medium px-4 py-2.5 rounded-lg flex items-center gap-2">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.2" stroke-linecap="round">
+                                <path d="M12 5v14M5 12h14"></path>
+                            </svg>
+                            Thêm bài viết
+                        </button>
+                    </header>
+
+                    <div class="px-8 py-4 flex items-center gap-3 shrink-0">
+                        <div class="relative w-80">
+                            <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 text-ink/35" width="16" height="16"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="7"></circle>
+                                <path d="M21 21l-3.8-3.8"></path>
+                            </svg>
+                            <input id="blog-search" oninput="onBlogSearch()" type="text"
+                                placeholder="Tìm theo tiêu đề, tác giả..."
+                                class="w-full pl-10 pr-4 py-2.5 border border-line rounded-lg text-sm bg-white shadow-card">
+                        </div>
+                        <span id="blog-count" class="text-sm text-ink/40"></span>
+                    </div>
+
+                    <div class="flex-1 overflow-auto px-8 pb-4">
+                        <div class="bg-white border border-line rounded-xl overflow-hidden shadow-card">
+                            <table class="w-full text-sm">
+                                <thead>
+                                    <tr
+                                        class="text-left text-ink/45 text-[11px] uppercase tracking-wide border-b border-line bg-paper/60">
+                                        <th class="px-5 py-3.5 font-semibold">Ảnh bìa</th>
+                                        <th class="px-5 py-3.5 font-semibold">Tiêu đề / Slug</th>
+                                        <th class="px-5 py-3.5 font-semibold">Tác giả</th>
+                                        <th class="px-5 py-3.5 font-semibold">Trạng thái</th>
+                                        <th class="px-5 py-3.5 font-semibold text-right">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="blogs-tbody"></tbody>
+                            </table>
+                            <div id="blogs-empty" class="hidden py-16 text-center text-ink/40 text-sm">
+                                <svg class="mx-auto mb-3 text-ink/20" width="40" height="40" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M14 3v5a1 1 0 0 0 1 1h5"></path>
+                                    <path d="M6 3h8l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path>
+                                </svg>
+                                Chưa có bài viết nào. Nhấn "Thêm bài viết" để bắt đầu.
+                            </div>
+                        </div>
+                        <div id="blogs-pagination" class="flex items-center justify-between py-4 text-sm text-ink/60">
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
     </div>
     <!-- /#dashboard-root -->
 
@@ -501,15 +606,20 @@
             <div class="px-6 py-5 border-b border-line flex items-center justify-between">
                 <div class="flex items-center gap-3">
                     <div class="w-9 h-9 rounded-lg bg-moss-100 text-moss-600 flex items-center justify-center shrink-0">
-                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 8l-9-5-9 5 9 5 9-5z"></path><path d="M3 8v8l9 5 9-5V8"></path>
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 8l-9-5-9 5 9 5 9-5z"></path>
+                            <path d="M3 8v8l9 5 9-5V8"></path>
                         </svg>
                     </div>
                     <h2 id="product-modal-title" class="font-display text-lg font-semibold">Thêm sản phẩm</h2>
                 </div>
                 <button onclick="closeModal('product-modal')"
                     class="icon-btn w-8 h-8 flex items-center justify-center rounded-lg text-ink/40 hover:text-ink hover:bg-paper">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round">
+                        <path d="M18 6L6 18M6 6l12 12"></path>
+                    </svg>
                 </button>
             </div>
             <form id="product-form" onsubmit="handleProductSubmit(event)" class="px-6 py-5 overflow-y-auto space-y-4">
@@ -541,7 +651,8 @@
                     <div>
                         <label class="field-label text-xs font-medium text-ink/60">Giá (VNĐ) *</label>
                         <input id="product-price" required type="number" min="0" step="1000"
-                            class="mt-1.5 w-full px-3.5 py-2.5 border border-line rounded-lg text-sm" placeholder="150000">
+                            class="mt-1.5 w-full px-3.5 py-2.5 border border-line rounded-lg text-sm"
+                            placeholder="150000">
                     </div>
                     <div>
                         <label class="field-label text-xs font-medium text-ink/60">Khối lượng (g)</label>
@@ -585,9 +696,14 @@
                             Chưa có ảnh
                         </div>
                         <div class="flex-1">
-                            <label for="product-image-file" class="dropzone cursor-pointer flex items-center gap-2 border border-dashed border-line rounded-lg px-3.5 py-2.5 text-xs text-ink/50">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-moss-600 shrink-0">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M17 8l-5-5-5 5"></path><path d="M12 3v12"></path>
+                            <label for="product-image-file"
+                                class="dropzone cursor-pointer flex items-center gap-2 border border-dashed border-line rounded-lg px-3.5 py-2.5 text-xs text-ink/50">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                                    class="text-moss-600 shrink-0">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <path d="M17 8l-5-5-5 5"></path>
+                                    <path d="M12 3v12"></path>
                                 </svg>
                                 <span>Chọn ảnh sản phẩm để tải lên</span>
                             </label>
@@ -605,7 +721,11 @@
                     class="px-4 py-2.5 text-sm font-medium rounded-lg border border-line hover:bg-white transition-colors">Hủy</button>
                 <button type="submit" form="product-form" id="product-submit-btn"
                     class="btn-primary px-4 py-2.5 text-sm rounded-lg bg-moss hover:bg-moss-600 text-white font-medium flex items-center gap-2">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><path d="M17 21v-8H7v8M7 3v5h8"></path></svg>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                        <path d="M17 21v-8H7v8M7 3v5h8"></path>
+                    </svg>
                     Lưu sản phẩm
                 </button>
             </div>
@@ -618,16 +738,22 @@
             class="modal-panel bg-white w-full max-w-2xl rounded-2xl shadow-pop max-h-[90vh] overflow-hidden flex flex-col">
             <div class="px-6 py-5 border-b border-line flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-lg bg-caramel-100 text-caramel-600 flex items-center justify-center shrink-0">
-                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M14 3v5a1 1 0 0 0 1 1h5"></path><path d="M6 3h8l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path>
+                    <div
+                        class="w-9 h-9 rounded-lg bg-caramel-100 text-caramel-600 flex items-center justify-center shrink-0">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 3v5a1 1 0 0 0 1 1h5"></path>
+                            <path d="M6 3h8l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path>
                         </svg>
                     </div>
                     <h2 id="blog-modal-title" class="font-display text-lg font-semibold">Thêm bài viết</h2>
                 </div>
                 <button onclick="closeModal('blog-modal')"
                     class="icon-btn w-8 h-8 flex items-center justify-center rounded-lg text-ink/40 hover:text-ink hover:bg-paper">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round">
+                        <path d="M18 6L6 18M6 6l12 12"></path>
+                    </svg>
                 </button>
             </div>
             <form id="blog-form" onsubmit="handleBlogSubmit(event)" class="px-6 py-5 overflow-y-auto space-y-4">
@@ -680,9 +806,14 @@
                             Chưa có ảnh
                         </div>
                         <div class="flex-1">
-                            <label for="blog-image-file" class="dropzone cursor-pointer flex items-center gap-2 border border-dashed border-line rounded-lg px-3.5 py-2.5 text-xs text-ink/50">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-caramel-600 shrink-0">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M17 8l-5-5-5 5"></path><path d="M12 3v12"></path>
+                            <label for="blog-image-file"
+                                class="dropzone cursor-pointer flex items-center gap-2 border border-dashed border-line rounded-lg px-3.5 py-2.5 text-xs text-ink/50">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                                    class="text-caramel-600 shrink-0">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <path d="M17 8l-5-5-5 5"></path>
+                                    <path d="M12 3v12"></path>
                                 </svg>
                                 <span>Chọn ảnh bìa để tải lên</span>
                             </label>
@@ -700,7 +831,11 @@
                     class="px-4 py-2.5 text-sm font-medium rounded-lg border border-line hover:bg-white transition-colors">Hủy</button>
                 <button type="submit" form="blog-form" id="blog-submit-btn"
                     class="btn-primary px-4 py-2.5 text-sm rounded-lg bg-moss hover:bg-moss-600 text-white font-medium flex items-center gap-2">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><path d="M17 21v-8H7v8M7 3v5h8"></path></svg>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                        <path d="M17 21v-8H7v8M7 3v5h8"></path>
+                    </svg>
                     Lưu bài viết
                 </button>
             </div>
@@ -714,9 +849,12 @@
             <div class="px-6 py-5 border-b border-line flex items-center justify-between">
                 <div class="flex items-center gap-3">
                     <div class="w-9 h-9 rounded-lg bg-forest text-white flex items-center justify-center shrink-0">
-                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect>
-                            <rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                            <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                            <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+                            <rect x="14" y="14" width="7" height="7" rx="1"></rect>
                         </svg>
                     </div>
                     <div>
@@ -726,22 +864,29 @@
                 </div>
                 <button onclick="closeModal('blocks-modal')"
                     class="icon-btn w-8 h-8 flex items-center justify-center rounded-lg text-ink/40 hover:text-ink hover:bg-paper">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round">
+                        <path d="M18 6L6 18M6 6l12 12"></path>
+                    </svg>
                 </button>
             </div>
 
             <div class="flex-1 overflow-y-auto px-6 py-5">
                 <div id="blocks-list" class="space-y-3 mb-6"></div>
                 <div id="blocks-empty" class="hidden text-center py-10 text-ink/40 text-sm">
-                    <svg class="mx-auto mb-3 text-ink/20" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect>
-                        <rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                    <svg class="mx-auto mb-3 text-ink/20" width="34" height="34" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                        <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                        <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+                        <rect x="14" y="14" width="7" height="7" rx="1"></rect>
                     </svg>
                     Chưa có khối nội dung nào.
                 </div>
 
                 <div class="border border-line rounded-xl p-4 bg-paper/50">
-                    <p id="block-form-title" class="text-xs font-semibold text-ink/55 uppercase tracking-wide mb-3">Thêm khối nội dung mới</p>
+                    <p id="block-form-title" class="text-xs font-semibold text-ink/55 uppercase tracking-wide mb-3">Thêm
+                        khối nội dung mới</p>
                     <div class="flex gap-3 mb-3">
                         <select id="block-type" onchange="renderBlockTypeFields()"
                             class="px-3.5 py-2.5 border border-line rounded-lg text-sm bg-white shadow-card">
@@ -759,7 +904,10 @@
                         </button>
                         <button onclick="handleBlockSubmit()" id="block-submit-btn"
                             class="btn-primary px-4 py-2.5 text-sm rounded-lg bg-moss hover:bg-moss-600 text-white font-medium flex items-center gap-2">
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.2" stroke-linecap="round">
+                                <path d="M12 5v14M5 12h14"></path>
+                            </svg>
                             Thêm khối
                         </button>
                     </div>
@@ -1543,76 +1691,76 @@
             }
         }
 
-    function renderBlocksList() {
-    const list = document.getElementById('blocks-list');
-    const empty = document.getElementById('blocks-empty');
-    
-    if (state.blocks.length === 0) {
-        list.innerHTML = '';
-        empty.classList.remove('hidden');
-        return;
-    }
-    empty.classList.add('hidden');
+        function renderBlocksList() {
+            const list = document.getElementById('blocks-list');
+            const empty = document.getElementById('blocks-empty');
 
-    const typeLabels = { 
-        text: '📄 Văn bản', 
-        list: '📋 Danh sách', 
-        image: '🖼️ Hình ảnh', 
-        pullquote: '💬 Trích dẫn',
-        heading: '🔤 Tiêu đề'
-    };
-    const typeColors = {
-        text: 'bg-moss-100 text-moss-600',
-        list: 'bg-caramel-100 text-caramel-600',
-        image: 'bg-forest text-white',
-        pullquote: 'bg-moss-100 text-moss-600',
-        heading: 'bg-caramel-100 text-caramel-600'
-    };
-    const trashIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z"></path></svg>`;
-    const editIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>`;
-
-    list.innerHTML = state.blocks.map((blk, idx) => {
-        let preview = '';
-        let content = blk.content;
-
-        // Parse JSON nếu cần
-        if (typeof content === 'string') {
-            try {
-                content = JSON.parse(content);
-            } catch (e) {
-                content = { value: content }; // fallback
+            if (state.blocks.length === 0) {
+                list.innerHTML = '';
+                empty.classList.remove('hidden');
+                return;
             }
-        }
+            empty.classList.add('hidden');
 
-        // Xử lý preview theo type
-        if (blk.type === 'text' || blk.type === 'pullquote' || blk.type === 'heading') {
-            const text = content.value || content.quote || content.content || JSON.stringify(content);
-            if (blk.type === 'pullquote') {
-                preview = `<p class="text-sm text-ink/70 italic border-l-2 border-caramel-500 pl-3 line-clamp-2">"${escapeHtml(text)}"</p>`;
-            } else {
-                preview = `<p class="text-sm text-ink/70 line-clamp-2">${escapeHtml(text)}</p>`;
-            }
-        } 
-        else if (blk.type === 'list') {
-            const items = Array.isArray(content.items || content) ? (content.items || content) : [];
-            preview = `<ul class="text-sm text-ink/70 list-disc pl-4 space-y-0.5">${items.slice(0, 3).map(i => 
-                `<li>${escapeHtml(typeof i === 'string' ? i : JSON.stringify(i))}</li>`
-            ).join('')}</ul>`;
-        } 
-        else if (blk.type === 'image') {
-            const img = content || {};
-            preview = `<div class="flex items-center gap-3">
+            const typeLabels = {
+                text: '📄 Văn bản',
+                list: '📋 Danh sách',
+                image: '🖼️ Hình ảnh',
+                pullquote: '💬 Trích dẫn',
+                heading: '🔤 Tiêu đề'
+            };
+            const typeColors = {
+                text: 'bg-moss-100 text-moss-600',
+                list: 'bg-caramel-100 text-caramel-600',
+                image: 'bg-forest text-white',
+                pullquote: 'bg-moss-100 text-moss-600',
+                heading: 'bg-caramel-100 text-caramel-600'
+            };
+            const trashIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z"></path></svg>`;
+            const editIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>`;
+
+            list.innerHTML = state.blocks.map((blk, idx) => {
+                let preview = '';
+                let content = blk.content;
+
+                // Parse JSON nếu cần
+                if (typeof content === 'string') {
+                    try {
+                        content = JSON.parse(content);
+                    } catch (e) {
+                        content = { value: content }; // fallback
+                    }
+                }
+
+                // Xử lý preview theo type
+                if (blk.type === 'text' || blk.type === 'pullquote' || blk.type === 'heading') {
+                    const text = content.value || content.quote || content.content || JSON.stringify(content);
+                    if (blk.type === 'pullquote') {
+                        preview = `<p class="text-sm text-ink/70 italic border-l-2 border-caramel-500 pl-3 line-clamp-2">"${escapeHtml(text)}"</p>`;
+                    } else {
+                        preview = `<p class="text-sm text-ink/70 line-clamp-2">${escapeHtml(text)}</p>`;
+                    }
+                }
+                else if (blk.type === 'list') {
+                    const items = Array.isArray(content.items || content) ? (content.items || content) : [];
+                    preview = `<ul class="text-sm text-ink/70 list-disc pl-4 space-y-0.5">${items.slice(0, 3).map(i =>
+                        `<li>${escapeHtml(typeof i === 'string' ? i : JSON.stringify(i))}</li>`
+                    ).join('')}</ul>`;
+                }
+                else if (blk.type === 'image') {
+                    const img = content || {};
+                    preview = `<div class="flex items-center gap-3">
                 <div class="w-14 h-10 rounded bg-paper border border-line overflow-hidden shrink-0">
                     ${img.url ? `<img src="${escapeHtml(img.url)}" class="w-full h-full object-cover">` : ''}
                 </div>
                 <p class="text-xs text-ink/50">${escapeHtml(img.caption || 'Không có chú thích')}</p>
             </div>`;
-        } 
-        else {
-            preview = `<p class="text-sm text-ink/70 line-clamp-2">${escapeHtml(JSON.stringify(content))}</p>`;
-        }
+                }
+                else {
+                    preview = `<p class="text-sm text-ink/70 line-clamp-2">${escapeHtml(JSON.stringify(content))}</p>`;
+                }
 
-        return `
+                return `
     <div class="border border-line rounded-xl p-4 flex items-start justify-between gap-4 bg-white hover:border-moss-400/50 transition-colors">
       <div class="flex-1 min-w-0">
         <div class="flex items-center gap-2 mb-2">
@@ -1626,8 +1774,8 @@
         <button onclick="deleteBlock(${blk.id})" title="Xóa khối" class="icon-btn inline-flex items-center justify-center w-8 h-8 rounded-lg text-danger hover:bg-danger/10">${trashIcon}</button>
       </div>
     </div>`;
-    }).join('');
-}
+            }).join('');
+        }
         function renderBlockTypeFields() {
             const type = document.getElementById('block-type').value;
             const container = document.getElementById('block-fields');
