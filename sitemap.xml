@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Trang chính -->
+  <url>
+    <loc>https://daktri.vn/</loc>
+    <lastmod>2026-07-15T12:34:41.890Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Trang blog list -->
+  <url>
+    <loc>https://daktri.vn/blog/</loc>
+    <lastmod>2026-07-15T12:34:41.890Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Trang about -->
+  <url>
+    <loc>https://daktri.vn/about.html</loc>
+    <lastmod>2026-07-15T12:34:41.890Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Trang tuyên ngôn -->
+  <url>
+    <loc>https://daktri.vn/tuyen-ngon.html</loc>
+    <lastmod>2026-07-15T12:34:41.890Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- QR Liberica -->
+  <url>
+    <loc>https://daktri.vn/qr/liberica/</loc>
+    <lastmod>2026-07-15T12:34:41.890Z</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://daktri.vn/blog/tuoi-nho-giot-vuon-ca-phe-mua-kho</loc>
+    <lastmod>2026-07-06T12:53:00.000Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+      
+  <url>
+    <loc>https://daktri.vn/blog/phan-bon-huu-co-tu-u-tai-nha</loc>
+    <lastmod>2026-07-06T12:49:22.000Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+      
+  <url>
+    <loc>https://daktri.vn/blog/tu-goc-ca-phe-bang-vo-trau</loc>
+    <lastmod>2026-07-06T12:47:18.000Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+      
+  <url>
+    <loc>https://daktri.vn/blog/nam-re-cong-sinh</loc>
+    <lastmod>2026-07-06T12:45:15.000Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+      
+</urlset>
