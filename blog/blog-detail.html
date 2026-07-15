@@ -1,467 +1,774 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Đang tải bài viết... | Daktri</title>
-<meta name="description"
-content="Từ vùng đất gió Lào, Daktri Khe Sanh chia sẻ cách làm phân hữu cơ tự ủ để giữ đất khỏe, nuôi cây bền vững và không đánh mất những gì thuộc về tự nhiên." />
-<meta name="author" content="Daktri Khe Sanh" />
-<meta name="robots" content="index, follow" />
-<link rel="canonical" href="https://daktri.vn/blog/ca-phe-liberica" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<!-- Favicon - Cách chuẩn hiện đại -->
-<link rel="icon" href="https://i.ibb.co/Y4pKSXXW/daktri-logo.png" type="image/png">
-<link rel="shortcut icon" href="https://i.ibb.co/Y4pKSXXW/daktri-logo.png" type="image/png">
-<!-- Khuyến nghị thêm các kích thước khác nhau -->
-<link rel="apple-touch-icon" href="https://i.ibb.co/Y4pKSXXW/daktri-logo.png">
-<link rel="icon" sizes="192x192" href="https://i.ibb.co/Y4pKSXXW/daktri-logo.png">
-<link rel="icon" sizes="32x32" href="https://i.ibb.co/Y4pKSXXW/daktri-logo.png">
-<link rel="icon" sizes="16x16" href="https://i.ibb.co/Y4pKSXXW/daktri-logo.png">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --moss: #2e6b3f; --moss2: #245530; --honey: #f5a623;
-    --cream: #faf7f0; --dark: #1a2e1e; --text: #2c2c2c;
-    --muted: #666; --border: #e0dbd0;
-  }
-  body { font-family: system-ui, -apple-system, sans-serif; background: var(--cream); color: var(--text); line-height: 1.75; font-size: 16px; }
-  .wrap { max-width: 740px; margin: 0 auto; padding: 0 20px; }
-  .hero { background: var(--moss); background-size: cover; background-position: center; padding: 52px 40px 44px; position: relative; overflow: hidden; }
-  .hero::before { content: ""; position: absolute; top: -60px; right: -60px; width: 240px; height: 240px; border-radius: 50%; background: rgba(255,255,255,.06); }
-  .hero::after { content: ""; position: absolute; bottom: -30px; left: 80px; width: 140px; height: 140px; border-radius: 50%; background: rgba(245,166,35,.14); }
-  .hero--has-image::before,
-  .hero--has-image::after { display: none; }
-  .hero__overlay {
-    display: none;
-    position: absolute; inset: 0;
-    background: linear-gradient(180deg, rgba(26,46,30,.55), rgba(26,46,30,.85));
-  }
-  .hero--has-image .hero__overlay { display: block; }
-  .hero__badge { display: inline-flex; align-items: center; gap: 6px; background: var(--honey); color: var(--dark); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 18px; position: relative; z-index: 1; }
-  .hero__tagline { color: rgba(255,255,255,.72); font-style: italic; font-size: 15px; margin-bottom: 10px; position: relative; z-index: 1; }
-  .hero__title { font-family: 'Fraunces', Georgia, serif; font-size: clamp(24px, 4vw, 36px); font-weight: 700; color: #fff; line-height: 1.25; max-width: 600px; position: relative; z-index: 1; }
-  .hero__meta { margin-top: 28px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; font-size: 13px; color: rgba(255,255,255,.6); position: relative; z-index: 1; }
-  .hero__hotline { color: var(--honey); font-weight: 700; font-size: 15px; }
-  .post-meta { border-bottom: 1px solid var(--border); padding: 14px 0; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--muted); }
-  .post-meta__slug { font-family: monospace; color: var(--moss); }
-  .post-meta__tag { background: rgba(46,107,63,.1); color: var(--moss); font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
-  .intro { border-left: 4px solid var(--moss); padding: 18px 24px; margin: 32px 0; background: rgba(46,107,63,.04); border-radius: 0 8px 8px 0; }
-  .intro p { font-family: 'Fraunces', Georgia, serif; font-size: 17px; line-height: 1.8; color: #333; font-style: italic; }
-  .section { margin-bottom: 36px; }
-  .section__heading { font-family: 'Fraunces', Georgia, serif; font-size: 21px; font-weight: 700; color: var(--dark); border-left: 4px solid var(--honey); padding-left: 14px; margin-bottom: 14px; line-height: 1.3; }
-  .section p { font-size: 15.5px; line-height: 1.85; margin-bottom: 12px; }
-  .section ul, .section ol { padding-left: 22px; }
-  .section li { font-size: 15.5px; line-height: 1.85; margin-bottom: 8px; }
-  .section li strong { color: var(--moss); }
-  .pullquote {
-    border-left: 4px solid var(--honey);
-    padding: 18px 24px;
-    margin: 32px 0;
-    background: rgba(245,166,35,.07);
-    border-radius: 0 8px 8px 0;
-  }
-  .pullquote p {
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: 17px;
-    line-height: 1.8;
-    color: #333;
-    font-style: italic;
-    margin: 0;
-  }
-  .pullquote p::before { content: "\201C"; }
-  .pullquote p::after { content: "\201D"; }
-  .block-image {
-    margin: 28px 0;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 2px 16px rgba(0,0,0,.08);
-    background: #fff;
-  }
-  .block-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  .block-image figcaption {
-    padding: 10px 16px;
-    font-size: 12.5px;
-    color: var(--muted);
-    text-align: center;
-    background: #fff;
-    border-top: 1px solid var(--border);
-  }
-  .tip-box { background: var(--moss); border-radius: 14px; padding: 22px 28px; margin: 36px 0 32px; display: flex; gap: 16px; align-items: flex-start; }
-  .tip-box__icon { font-size: 28px; flex-shrink: 0; margin-top: 2px; }
-  .tip-box__label { color: var(--honey); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; margin-bottom: 6px; }
-  .tip-box__text { color: #fff; font-size: 14.5px; line-height: 1.75; }
-  .conclusion { font-style: italic; font-size: 15.5px; line-height: 1.85; color: #444; margin-bottom: 40px; border-left: 3px solid var(--border); padding-left: 18px; }
-  .cta { background: #fff; border-top: 3px solid var(--moss); border-radius: 0 0 16px 16px; padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-  .cta__label { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
-  .cta__phone { font-size: 28px; font-weight: 700; color: var(--moss); }
-  .cta__btn { display: inline-block; background: var(--moss); color: #fff; font-size: 14px; font-weight: 600; padding: 13px 28px; border-radius: 10px; text-decoration: none; }
-  .article { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 24px rgba(0,0,0,.07); margin: 32px 0 48px; }
-  .article__body { padding: 0 40px 40px; }
-  @media (max-width: 600px) {
-    .hero { padding: 36px 22px 32px; }
-    .article__body { padding: 0 18px 28px; }
-    .cta { padding: 22px 18px; flex-direction: column; }
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đang tải bài viết... | Daktri</title>
+  <meta name="description"
+    content="Từ vùng đất gió Lào, Daktri Khe Sanh chia sẻ cách làm phân hữu cơ tự ủ để giữ đất khỏe, nuôi cây bền vững và không đánh mất những gì thuộc về tự nhiên." />
+  <meta name="author" content="Daktri Khe Sanh" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://daktri.vn/blog/ca-phe-liberica" />
+  <!-- Tối ưu hiển thị khi share link lên Facebook Page & Zalo -->
+  <meta property="og:type" content="website" /> <!-- Dùng 'website' hoặc 'profile' cho trang giới thiệu thương hiệu -->
+  <meta property="og:title" content="Liberica Khe Sanh — HTX Daktri | Giữ đất · Giữ giống · Giữ cho mai sau" />
+  <meta property="og:description"
+    content="Daktri Khe Sanh – hợp tác xã gìn giữ cà phê Liberica cổ thụ tại Quảng Trị. Bắt đầu từ vùng đất gió Lào, chúng tôi giữ đất, giữ giống cho mai sau." />
+  <meta property="og:url" content="https://daktri.vn/blog/ca-phe-liberica" />
+  <meta property="og:image" content="https://libericakhesanh.net/assets/images/brands/daktri-logo.png" />
+  <!-- Lưu ý: Thay bằng link ảnh thực tế chụp vườn cà phê cổ hoặc logo HTX để làm ảnh đại diện khi share link -->
+  <meta property="og:site_name" content="HTX Daktri Khe Sanh" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Favicon - Cách chuẩn hiện đại -->
+  <link rel="icon" href="https://i.ibb.co/Y4pKSXXW/daktri-logo.png" type="image/png">
+  <link rel="shortcut icon" href="https://i.ibb.co/Y4pKSXXW/daktri-logo.png" type="image/png">
+  <!-- Khuyến nghị thêm các kích thước khác nhau -->
+  <link rel="apple-touch-icon" href="https://i.ibb.co/Y4pKSXXW/daktri-logo.png">
+  <link rel="icon" sizes="192x192" href="https://i.ibb.co/Y4pKSXXW/daktri-logo.png">
+  <link rel="icon" sizes="32x32" href="https://i.ibb.co/Y4pKSXXW/daktri-logo.png">
+  <link rel="icon" sizes="16x16" href="https://i.ibb.co/Y4pKSXXW/daktri-logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  .blog-loading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 64px 20px;
-    color: var(--muted);
-    font-size: 14px;
-  }
-  .blog-spinner {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    border: 2.5px solid rgba(46,107,63,.2);
-    border-top-color: var(--moss);
-    animation: blog-spin .7s linear infinite;
-    display: inline-block;
-    flex-shrink: 0;
-  }
-  @keyframes blog-spin { to { transform: rotate(360deg); } }
+    :root {
+      --moss: #2e6b3f;
+      --moss2: #245530;
+      --honey: #f5a623;
+      --cream: #faf7f0;
+      --dark: #1a2e1e;
+      --text: #2c2c2c;
+      --muted: #666;
+      --border: #e0dbd0;
+    }
 
-  .blog-error {
-    text-align: center;
-    padding: 40px 20px;
-    color: #b3261e;
-    font-size: 14px;
-    background: rgba(179,38,30,.06);
-    border: 1px solid rgba(179,38,30,.15);
-    border-radius: 10px;
-    margin: 24px 0;
-  }
-  .blog-error__retry {
-    display: inline-block;
-    margin-top: 12px;
-    background: #b3261e;
-    color: #fff;
-    font-size: 13px;
-    font-weight: 600;
-    padding: 8px 18px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-  }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.75;
+      font-size: 16px;
+    }
 
-  #blog-blocks .section:first-child { margin-top: 32px; }
+    .wrap {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-  /* skeleton hiển thị khi đang tải, thay cho hero rỗng */
-  .skeleton-line {
-    background: rgba(255,255,255,.25);
-    border-radius: 6px;
-    height: 16px;
-    margin-bottom: 10px;
-    animation: skeleton-pulse 1.2s ease-in-out infinite;
-  }
-  @keyframes skeleton-pulse { 0%,100% { opacity: 1; } 50% { opacity: .5; } }
-</style>
+    .hero {
+      background: var(--moss);
+      background-size: cover;
+      background-position: center;
+      padding: 52px 40px 44px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .06);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      bottom: -30px;
+      left: 80px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: rgba(245, 166, 35, .14);
+    }
+
+    .hero--has-image::before,
+    .hero--has-image::after {
+      display: none;
+    }
+
+    .hero__overlay {
+      display: none;
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(26, 46, 30, .55), rgba(26, 46, 30, .85));
+    }
+
+    .hero--has-image .hero__overlay {
+      display: block;
+    }
+
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--honey);
+      color: var(--dark);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero__tagline {
+      color: rgba(255, 255, 255, .72);
+      font-style: italic;
+      font-size: 15px;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero__title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.25;
+      max-width: 600px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero__meta {
+      margin-top: 28px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      color: rgba(255, 255, 255, .6);
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero__hotline {
+      color: var(--honey);
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .post-meta {
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .post-meta__slug {
+      font-family: monospace;
+      color: var(--moss);
+    }
+
+    .post-meta__tag {
+      background: rgba(46, 107, 63, .1);
+      color: var(--moss);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .intro {
+      border-left: 4px solid var(--moss);
+      padding: 18px 24px;
+      margin: 32px 0;
+      background: rgba(46, 107, 63, .04);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .intro p {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 17px;
+      line-height: 1.8;
+      color: #333;
+      font-style: italic;
+    }
+
+    .section {
+      margin-bottom: 36px;
+    }
+
+    .section__heading {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--dark);
+      border-left: 4px solid var(--honey);
+      padding-left: 14px;
+      margin-bottom: 14px;
+      line-height: 1.3;
+    }
+
+    .section p {
+      font-size: 15.5px;
+      line-height: 1.85;
+      margin-bottom: 12px;
+    }
+
+    .section ul,
+    .section ol {
+      padding-left: 22px;
+    }
+
+    .section li {
+      font-size: 15.5px;
+      line-height: 1.85;
+      margin-bottom: 8px;
+    }
+
+    .section li strong {
+      color: var(--moss);
+    }
+
+    .pullquote {
+      border-left: 4px solid var(--honey);
+      padding: 18px 24px;
+      margin: 32px 0;
+      background: rgba(245, 166, 35, .07);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .pullquote p {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 17px;
+      line-height: 1.8;
+      color: #333;
+      font-style: italic;
+      margin: 0;
+    }
+
+    .pullquote p::before {
+      content: "\201C";
+    }
+
+    .pullquote p::after {
+      content: "\201D";
+    }
+
+    .block-image {
+      margin: 28px 0;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0, 0, 0, .08);
+      background: #fff;
+    }
+
+    .block-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .block-image figcaption {
+      padding: 10px 16px;
+      font-size: 12.5px;
+      color: var(--muted);
+      text-align: center;
+      background: #fff;
+      border-top: 1px solid var(--border);
+    }
+
+    .tip-box {
+      background: var(--moss);
+      border-radius: 14px;
+      padding: 22px 28px;
+      margin: 36px 0 32px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .tip-box__icon {
+      font-size: 28px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .tip-box__label {
+      color: var(--honey);
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      margin-bottom: 6px;
+    }
+
+    .tip-box__text {
+      color: #fff;
+      font-size: 14.5px;
+      line-height: 1.75;
+    }
+
+    .conclusion {
+      font-style: italic;
+      font-size: 15.5px;
+      line-height: 1.85;
+      color: #444;
+      margin-bottom: 40px;
+      border-left: 3px solid var(--border);
+      padding-left: 18px;
+    }
+
+    .cta {
+      background: #fff;
+      border-top: 3px solid var(--moss);
+      border-radius: 0 0 16px 16px;
+      padding: 28px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .cta__label {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .cta__phone {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--moss);
+    }
+
+    .cta__btn {
+      display: inline-block;
+      background: var(--moss);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 13px 28px;
+      border-radius: 10px;
+      text-decoration: none;
+    }
+
+    .article {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 24px rgba(0, 0, 0, .07);
+      margin: 32px 0 48px;
+    }
+
+    .article__body {
+      padding: 0 40px 40px;
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        padding: 36px 22px 32px;
+      }
+
+      .article__body {
+        padding: 0 18px 28px;
+      }
+
+      .cta {
+        padding: 22px 18px;
+        flex-direction: column;
+      }
+    }
+
+    .blog-loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 64px 20px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .blog-spinner {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2.5px solid rgba(46, 107, 63, .2);
+      border-top-color: var(--moss);
+      animation: blog-spin .7s linear infinite;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    @keyframes blog-spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .blog-error {
+      text-align: center;
+      padding: 40px 20px;
+      color: #b3261e;
+      font-size: 14px;
+      background: rgba(179, 38, 30, .06);
+      border: 1px solid rgba(179, 38, 30, .15);
+      border-radius: 10px;
+      margin: 24px 0;
+    }
+
+    .blog-error__retry {
+      display: inline-block;
+      margin-top: 12px;
+      background: #b3261e;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+    }
+
+    #blog-blocks .section:first-child {
+      margin-top: 32px;
+    }
+
+    /* skeleton hiển thị khi đang tải, thay cho hero rỗng */
+    .skeleton-line {
+      background: rgba(255, 255, 255, .25);
+      border-radius: 6px;
+      height: 16px;
+      margin-bottom: 10px;
+      animation: skeleton-pulse 1.2s ease-in-out infinite;
+    }
+
+    @keyframes skeleton-pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: .5;
+      }
+    }
+  </style>
 </head>
+
 <body data-blog-id="">
-<main class="wrap">
-  <article class="article">
+  <main class="wrap">
+    <article class="article">
 
-    <header class="hero" id="hero">
-      <div class="hero__overlay" id="hero-overlay"></div>
-      <div class="hero__badge">🌿 Daktri × Vinaxanh</div>
-      <p id="hero-tagline" class="hero__tagline"></p>
-      <h1 class="hero__title" id="hero-title">
-        <span class="skeleton-line" style="width:90%"></span>
-        <span class="skeleton-line" style="width:60%"></span>
-      </h1>
-      <div class="hero__meta">
-        <span>📞 <span class="hero__hotline">0941 336 669</span></span>
-        <span>•</span>
-        <span>Daktri.vn — Nông nghiệp hữu cơ</span>
-      </div>
-    </header>
-
-    <div class="article__body">
-
-      <div class="post-meta">
-        <span class="post-meta__slug" id="post-meta-slug">/blog/...</span>
-        <span id="post-meta-date"></span>
-        <span id="post-meta-author"></span>
-        <span class="post-meta__tag">Phân bón hữu cơ</span>
-        <span class="post-meta__tag">Cải tạo đất</span>
-      </div>
-
-      <div id="blog-content-root">
-        <div id="blog-loading" class="blog-loading">
-          <span class="blog-spinner"></span>
-          <span>Đang tải nội dung bài viết...</span>
+      <header class="hero" id="hero">
+        <div class="hero__overlay" id="hero-overlay"></div>
+        <div class="hero__badge">🌿 Daktri × Vinaxanh</div>
+        <p id="hero-tagline" class="hero__tagline"></p>
+        <h1 class="hero__title" id="hero-title">
+          <span class="skeleton-line" style="width:90%"></span>
+          <span class="skeleton-line" style="width:60%"></span>
+        </h1>
+        <div class="hero__meta">
+          <span>📞 <span class="hero__hotline">0941 336 669</span></span>
+          <span>•</span>
+          <span>Daktri.vn — Nông nghiệp hữu cơ</span>
         </div>
-        <div id="blog-blocks" style="display:none;"></div>
-        <div id="blog-error" class="blog-error" style="display:none;"></div>
-      </div>
-      <!-- ============ /NỘI DUNG BÀI VIẾT ============ -->
+      </header>
 
-      <footer class="cta">
-        <div>
-          <p class="cta__label">Liên Hệ Để Được Tư Vấn Thêm</p>
-          <p class="cta__phone">0941 336 669</p>
+      <div class="article__body">
+
+        <div class="post-meta">
+          <span class="post-meta__slug" id="post-meta-slug">/blog/...</span>
+          <span id="post-meta-date"></span>
+          <span id="post-meta-author"></span>
+          <span class="post-meta__tag">Phân bón hữu cơ</span>
+          <span class="post-meta__tag">Cải tạo đất</span>
         </div>
-        <a href="tel:0941336669" class="cta__btn">Đặt hàng ngay →</a>
-      </footer>
 
-    </div>
-  </article>
-</main>
-<script>
-(function () {
-  /* =========================================================================
-     CONFIG
-     ========================================================================= */
-  const API_BASE = 'https://libericakhesanh.net/api/index.php';
-  const SITE_BASE = 'https://libericakhesanh.net';
+        <div id="blog-content-root">
+          <div id="blog-loading" class="blog-loading">
+            <span class="blog-spinner"></span>
+            <span>Đang tải nội dung bài viết...</span>
+          </div>
+          <div id="blog-blocks" style="display:none;"></div>
+          <div id="blog-error" class="blog-error" style="display:none;"></div>
+        </div>
+        <!-- ============ /NỘI DUNG BÀI VIẾT ============ -->
 
-  function getBlogSlug() {
-  // 1. Ưu tiên lấy từ URL đẹp: /blog/slug
-  const pathParts = window.location.pathname.split('/').filter(Boolean);
+        <footer class="cta">
+          <div>
+            <p class="cta__label">Liên Hệ Để Được Tư Vấn Thêm</p>
+            <p class="cta__phone">0941 336 669</p>
+          </div>
+          <a href="tel:0941336669" class="cta__btn">Đặt hàng ngay →</a>
+        </footer>
 
-  if (pathParts.length > 0) {
-    let lastPart = pathParts[pathParts.length - 1];
+      </div>
+    </article>
+  </main>
+  <script>
+    (function () {
+      /* =========================================================================
+         CONFIG
+         ========================================================================= */
+      const API_BASE = 'https://libericakhesanh.net/api/index.php';
+      const SITE_BASE = 'https://libericakhesanh.net';
 
-    // loại bỏ .html nếu có
-    lastPart = lastPart.replace(/\.html?$/, '');
+      function getBlogSlug() {
+        // 1. Ưu tiên lấy từ URL đẹp: /blog/slug
+        const pathParts = window.location.pathname.split('/').filter(Boolean);
 
-    // tránh lấy nhầm "blog"
-    if (lastPart && lastPart !== 'blog') {
-      return lastPart;
-    }
-  }
+        if (pathParts.length > 0) {
+          let lastPart = pathParts[pathParts.length - 1];
 
-  // 2. Fallback: query ?slug=
-  const params = new URLSearchParams(window.location.search);
-  const slugQuery = params.get('slug');
-  if (slugQuery) return slugQuery;
+          // loại bỏ .html nếu có
+          lastPart = lastPart.replace(/\.html?$/, '');
 
-  // 3. Fallback cuối (nếu bạn có dùng data attribute)
-  const bodySlug = document.body.getAttribute('data-blog-slug');
-  if (bodySlug) return bodySlug;
-
-  return '';
-}
-
-  function escapeHtml(str) {
-    if (str === null || str === undefined) return '';
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
-  }
-
-  function parseContent(raw) {
-    if (typeof raw === 'string') {
-      try {
-        return JSON.parse(raw);
-      } catch (e) {
-        return raw;
-      }
-    }
-    return raw;
-  }
-
-  function formatDate(raw) {
-    if (!raw) return '';
-    const iso = String(raw).includes('T') ? raw : String(raw).replace(' ', 'T');
-    const d = new Date(iso);
-    if (isNaN(d.getTime())) return String(raw);
-    const dd = String(d.getDate()).padStart(2, '0');
-    const mm = String(d.getMonth() + 1).padStart(2, '0');
-    const yyyy = d.getFullYear();
-    return `${dd}/${mm}/${yyyy}`;
-  }
-
-  function extractDetail(resp) {
-    if (resp && typeof resp === 'object' && resp.data && typeof resp.data === 'object' && !Array.isArray(resp.data)) {
-      return resp.data;
-    }
-    return resp;
-  }
-
-  /* =========================================================================
-     RENDER BLOCK
-     ========================================================================= */
-  function renderBlock(block) {
-    const type = block.type;
-    const content = parseContent(block.content);
-
-    switch (type) {
-      case 'heading': {
-        const text = (content && (content.value || content.text)) || (typeof content === 'string' ? content : '');
-        if (!text) return '';
-        return `<div class="section"><h2 class="section__heading">${escapeHtml(text)}</h2></div>`;
-      }
-      case 'text': {
-        const text = (content && (content.value || content.text || content.content)) || (typeof content === 'string' ? content : '');
-        if (!text) return '';
-        return `<div class="section"><p>${escapeHtml(text)}</p></div>`;
-      }
-      case 'pullquote': {
-        const text = (content && (content.quote || content.value)) || (typeof content === 'string' ? content : '');
-        if (!text) return '';
-        return `<blockquote class="pullquote"><p>${escapeHtml(text)}</p></blockquote>`;
-      }
-      case 'list': {
-        const items = Array.isArray(content) ? content : (content && Array.isArray(content.items) ? content.items : []);
-        if (!items.length) return '';
-        const lis = items.map(i => `<li>${escapeHtml(typeof i === 'string' ? i : JSON.stringify(i))}</li>`).join('');
-        return `<div class="section"><ul>${lis}</ul></div>`;
-      }
-      case 'image': {
-        let url = (content && content.url) || '';
-        if (!url) return '';
-
-        if (url.startsWith('/')) {
-          url = SITE_BASE + url;
+          // tránh lấy nhầm "blog"
+          if (lastPart && lastPart !== 'blog') {
+            return lastPart;
+          }
         }
 
-        const caption = (content && content.caption) || '';
-        
-        return `
+        // 2. Fallback: query ?slug=
+        const params = new URLSearchParams(window.location.search);
+        const slugQuery = params.get('slug');
+        if (slugQuery) return slugQuery;
+
+        // 3. Fallback cuối (nếu bạn có dùng data attribute)
+        const bodySlug = document.body.getAttribute('data-blog-slug');
+        if (bodySlug) return bodySlug;
+
+        return '';
+      }
+
+      function escapeHtml(str) {
+        if (str === null || str === undefined) return '';
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      function parseContent(raw) {
+        if (typeof raw === 'string') {
+          try {
+            return JSON.parse(raw);
+          } catch (e) {
+            return raw;
+          }
+        }
+        return raw;
+      }
+
+      function formatDate(raw) {
+        if (!raw) return '';
+        const iso = String(raw).includes('T') ? raw : String(raw).replace(' ', 'T');
+        const d = new Date(iso);
+        if (isNaN(d.getTime())) return String(raw);
+        const dd = String(d.getDate()).padStart(2, '0');
+        const mm = String(d.getMonth() + 1).padStart(2, '0');
+        const yyyy = d.getFullYear();
+        return `${dd}/${mm}/${yyyy}`;
+      }
+
+      function extractDetail(resp) {
+        if (resp && typeof resp === 'object' && resp.data && typeof resp.data === 'object' && !Array.isArray(resp.data)) {
+          return resp.data;
+        }
+        return resp;
+      }
+
+      /* =========================================================================
+         RENDER BLOCK
+         ========================================================================= */
+      function renderBlock(block) {
+        const type = block.type;
+        const content = parseContent(block.content);
+
+        switch (type) {
+          case 'heading': {
+            const text = (content && (content.value || content.text)) || (typeof content === 'string' ? content : '');
+            if (!text) return '';
+            return `<div class="section"><h2 class="section__heading">${escapeHtml(text)}</h2></div>`;
+          }
+          case 'text': {
+            const text = (content && (content.value || content.text || content.content)) || (typeof content === 'string' ? content : '');
+            if (!text) return '';
+            return `<div class="section"><p>${escapeHtml(text)}</p></div>`;
+          }
+          case 'pullquote': {
+            const text = (content && (content.quote || content.value)) || (typeof content === 'string' ? content : '');
+            if (!text) return '';
+            return `<blockquote class="pullquote"><p>${escapeHtml(text)}</p></blockquote>`;
+          }
+          case 'list': {
+            const items = Array.isArray(content) ? content : (content && Array.isArray(content.items) ? content.items : []);
+            if (!items.length) return '';
+            const lis = items.map(i => `<li>${escapeHtml(typeof i === 'string' ? i : JSON.stringify(i))}</li>`).join('');
+            return `<div class="section"><ul>${lis}</ul></div>`;
+          }
+          case 'image': {
+            let url = (content && content.url) || '';
+            if (!url) return '';
+
+            if (url.startsWith('/')) {
+              url = SITE_BASE + url;
+            }
+
+            const caption = (content && content.caption) || '';
+
+            return `
           <figure class="block-image">
             <img src="${escapeHtml(url)}" alt="${escapeHtml(caption)}" loading="lazy">
             ${caption ? `<figcaption>${escapeHtml(caption)}</figcaption>` : ''}
           </figure>`;
-      }
-      default:
-        return '';
-    }
-  }
-
-  /* =========================================================================
-     APPLY META + TAGLINE
-     ========================================================================= */
-  function applyBlogMeta(data) {
-    // Title
-    if (data.title) {
-      document.title = data.title + ' | Daktri';
-      const titleEl = document.querySelector('#hero-title');
-      if (titleEl) titleEl.textContent = data.title;
-    }
-
-    // Tagline (Phần mới bổ sung)
-    const taglineEl = document.getElementById('hero-tagline');
-    if (taglineEl) {
-      let taglineText = '';
-
-      // Ưu tiên 1: Dùng excerpt (phù hợp nhất)
-      if (data.excerpt && data.excerpt.trim() !== '') {
-        taglineText = data.excerpt;
-      } 
-      // Ưu tiên 2: Dùng tagline nếu có trường này trong database
-      else if (data.tagline && data.tagline.trim() !== '') {
-        taglineText = data.tagline;
-      } 
-      // Ưu tiên 3: Fallback chung cho tất cả bài viết
-      else {
-        taglineText = "Rác nhà vườn thành vàng cho đất";   // Bạn có thể thay câu này
-        // Hoặc dùng câu chung khác: "Kiến thức hữu cơ - Làm vườn bền vững"
+          }
+          default:
+            return '';
+        }
       }
 
-      taglineEl.textContent = taglineText;
-    }
+      /* =========================================================================
+         APPLY META + TAGLINE
+         ========================================================================= */
+      function applyBlogMeta(data) {
+        // Title
+        if (data.title) {
+          document.title = data.title + ' | Daktri';
+          const titleEl = document.querySelector('#hero-title');
+          if (titleEl) titleEl.textContent = data.title;
+        }
 
-    // Meta khác
-    const slugEl = document.getElementById('post-meta-slug');
-    if (slugEl) slugEl.textContent = data.slug ? '/blog/' + data.slug : '';
+        // Tagline (Phần mới bổ sung)
+        const taglineEl = document.getElementById('hero-tagline');
+        if (taglineEl) {
+          let taglineText = '';
 
-    const dateEl = document.getElementById('post-meta-date');
-    if (dateEl) dateEl.textContent = formatDate(data.created_at);
+          // Ưu tiên 1: Dùng excerpt (phù hợp nhất)
+          if (data.excerpt && data.excerpt.trim() !== '') {
+            taglineText = data.excerpt;
+          }
+          // Ưu tiên 2: Dùng tagline nếu có trường này trong database
+          else if (data.tagline && data.tagline.trim() !== '') {
+            taglineText = data.tagline;
+          }
+          // Ưu tiên 3: Fallback chung cho tất cả bài viết
+          else {
+            taglineText = "Rác nhà vườn thành vàng cho đất";   // Bạn có thể thay câu này
+            // Hoặc dùng câu chung khác: "Kiến thức hữu cơ - Làm vườn bền vững"
+          }
 
-    const authorEl = document.getElementById('post-meta-author');
-    if (authorEl) {
-      authorEl.textContent = data.author ? `Tác giả: ${data.author}` : '';
-    }
+          taglineEl.textContent = taglineText;
+        }
 
-    // Cover Image
-    const heroEl = document.getElementById('hero');
-    if (heroEl && data.cover_image) {
-      let coverUrl = data.cover_image;
-      if (coverUrl.startsWith('/')) coverUrl = SITE_BASE + coverUrl;
-      heroEl.style.backgroundImage = `url('${coverUrl}')`;
-      heroEl.classList.add('hero--has-image');
-    }
-  }
+        // Meta khác
+        const slugEl = document.getElementById('post-meta-slug');
+        if (slugEl) slugEl.textContent = data.slug ? '/blog/' + data.slug : '';
 
-  /* =========================================================================
-     LOAD DETAIL
-     ========================================================================= */
-  async function loadBlogDetail() {
-    const loadingEl = document.getElementById('blog-loading');
-    const blocksEl = document.getElementById('blog-blocks');
-    const errorEl = document.getElementById('blog-error');
-   
-    const slug = getBlogSlug();
-    errorEl.style.display = 'none';
-    loadingEl.style.display = 'flex';
-    blocksEl.style.display = 'none';
+        const dateEl = document.getElementById('post-meta-date');
+        if (dateEl) dateEl.textContent = formatDate(data.created_at);
 
-    if (!slug) {
-      loadingEl.style.display = 'none';
-      errorEl.innerHTML = 'Không tìm thấy slug bài viết.';
-      errorEl.style.display = 'block';
-      return;
-    }
+        const authorEl = document.getElementById('post-meta-author');
+        if (authorEl) {
+          authorEl.textContent = data.author ? `Tác giả: ${data.author}` : '';
+        }
 
-    try {
-      const url = `${API_BASE}?table=blogs&action=detail&slug=${encodeURIComponent(slug)}`;
-      const res = await fetch(url);
-      let resp = await res.json();
-     
-      if (!res.ok || resp?.status === 'error') {
-        throw new Error(resp?.msg || 'Không tải được bài viết.');
+        // Cover Image
+        const heroEl = document.getElementById('hero');
+        if (heroEl && data.cover_image) {
+          let coverUrl = data.cover_image;
+          if (coverUrl.startsWith('/')) coverUrl = SITE_BASE + coverUrl;
+          heroEl.style.backgroundImage = `url('${coverUrl}')`;
+          heroEl.classList.add('hero--has-image');
+        }
       }
 
-      const data = extractDetail(resp);
-      if (!data || typeof data !== 'object') {
-        throw new Error('Không có dữ liệu bài viết.');
+      /* =========================================================================
+         LOAD DETAIL
+         ========================================================================= */
+      async function loadBlogDetail() {
+        const loadingEl = document.getElementById('blog-loading');
+        const blocksEl = document.getElementById('blog-blocks');
+        const errorEl = document.getElementById('blog-error');
+
+        const slug = getBlogSlug();
+        errorEl.style.display = 'none';
+        loadingEl.style.display = 'flex';
+        blocksEl.style.display = 'none';
+
+        if (!slug) {
+          loadingEl.style.display = 'none';
+          errorEl.innerHTML = 'Không tìm thấy slug bài viết.';
+          errorEl.style.display = 'block';
+          return;
+        }
+
+        try {
+          const url = `${API_BASE}?table=blogs&action=detail&slug=${encodeURIComponent(slug)}`;
+          const res = await fetch(url);
+          let resp = await res.json();
+
+          if (!res.ok || resp?.status === 'error') {
+            throw new Error(resp?.msg || 'Không tải được bài viết.');
+          }
+
+          const data = extractDetail(resp);
+          if (!data || typeof data !== 'object') {
+            throw new Error('Không có dữ liệu bài viết.');
+          }
+
+          applyBlogMeta(data);
+
+          const blocks = Array.isArray(data.blocks)
+            ? data.blocks.slice().sort((a, b) => (a.position || 0) - (b.position || 0))
+            : [];
+
+          if (blocks.length === 0) {
+            loadingEl.style.display = 'none';
+            errorEl.textContent = 'Bài viết này chưa có nội dung.';
+            errorEl.style.display = 'block';
+            return;
+          }
+
+          const html = blocks.map(renderBlock).join('');
+          blocksEl.innerHTML = html;
+          loadingEl.style.display = 'none';
+          blocksEl.style.display = 'block';
+
+        } catch (err) {
+          loadingEl.style.display = 'none';
+          errorEl.innerHTML = `<div>Không tải được bài viết: ${err.message}</div>`;
+          const retryBtn = document.createElement('button');
+          retryBtn.className = 'blog-error__retry';
+          retryBtn.textContent = 'Thử lại';
+          retryBtn.addEventListener('click', loadBlogDetail);
+          errorEl.appendChild(retryBtn);
+          errorEl.style.display = 'block';
+        }
       }
 
-      applyBlogMeta(data);
-
-      const blocks = Array.isArray(data.blocks) 
-        ? data.blocks.slice().sort((a, b) => (a.position || 0) - (b.position || 0)) 
-        : [];
-
-      if (blocks.length === 0) {
-        loadingEl.style.display = 'none';
-        errorEl.textContent = 'Bài viết này chưa có nội dung.';
-        errorEl.style.display = 'block';
-        return;
-      }
-
-      const html = blocks.map(renderBlock).join('');
-      blocksEl.innerHTML = html;
-      loadingEl.style.display = 'none';
-      blocksEl.style.display = 'block';
-
-    } catch (err) {
-      loadingEl.style.display = 'none';
-      errorEl.innerHTML = `<div>Không tải được bài viết: ${err.message}</div>`;
-      const retryBtn = document.createElement('button');
-      retryBtn.className = 'blog-error__retry';
-      retryBtn.textContent = 'Thử lại';
-      retryBtn.addEventListener('click', loadBlogDetail);
-      errorEl.appendChild(retryBtn);
-      errorEl.style.display = 'block';
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded', loadBlogDetail);
-})();
-</script>
+      document.addEventListener('DOMContentLoaded', loadBlogDetail);
+    })();
+  </script>
 </body>
+
 </html>
