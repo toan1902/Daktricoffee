@@ -1858,14 +1858,62 @@
       text-transform: uppercase !important;
     }
 
+    /* ============ NAV MOBILE FIX (HYBRID) ============ */
     @media (max-width: 768px) {
+
+      /* NAV tổng */
+      .nav {
+        padding: 0.6rem 1rem;
+      }
+
+      /* Logo nhỏ lại */
+      .nav-logo {
+        width: 34px;
+        height: 34px;
+      }
+
+      .nav-name {
+        font-size: 0.9rem;
+      }
+
+      /* ===== HIỂN THỊ 1 SỐ MENU QUAN TRỌNG ===== */
+      .nav-links {
+        display: flex;
+        gap: 0.8rem;
+        margin-left: 0.5rem;
+      }
+
+      /* Ẩn toàn bộ trước */
+      .nav-links li {
+        display: none;
+      }
+
+      /* Hiện 1-2 cái quan trọng */
+      .nav-links li:nth-child(6),
+      /* Sản phẩm */
+      .nav-links li:nth-child(7) {
+        /* Quy trình (có thể đổi) */
+        display: block;
+      }
+
+      .nav-links a {
+        font-size: 0.68rem;
+        letter-spacing: 0.04em;
+        white-space: nowrap;
+      }
+
+      /* ===== CTA ĐẶT HÀNG (GIỮ LẠI) ===== */
+      .nav-cta {
+        display: inline-block;
+        padding: 0.45rem 0.9rem;
+        font-size: 0.65rem;
+      }
+
+      /* ===== HAMBURGER ===== */
       .nav-hamburger {
         display: flex;
       }
 
-      .nav-cta {
-        display: none;
-      }
     }
 
     .footer-social {
@@ -1897,298 +1945,306 @@
       transform: translateY(-4px);
       box-shadow: 0 8px 15px rgba(212, 201, 168, 0.3);
     }
-/* =========================
+
+    /* =========================
    TESTIMONIAL - MATCHED WITH HTML
 ========================= */
 
-.testimonial {
-  padding: 128px 24px 120px;
-  position: relative;
-  background: linear-gradient(180deg, var(--ivory) 0%, var(--cream) 100%);
-}
+    .testimonial {
+      padding: 128px 24px 120px;
+      position: relative;
+      background: linear-gradient(180deg, var(--ivory) 0%, var(--cream) 100%);
+    }
 
-.testimonial::before {
-  content: "";
-  position: absolute; 
-  inset: 0;
-  background-image: radial-gradient(circle at 1px 1px, rgba(107,67,38,0.035) 1px, transparent 0);
-  background-size: 22px 22px;
-  pointer-events: none;
-}
+    .testimonial::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 1px 1px, rgba(107, 67, 38, 0.035) 1px, transparent 0);
+      background-size: 22px 22px;
+      pointer-events: none;
+    }
 
-.testimonial__container { 
-  max-width: 1180px; 
-  margin: 0 auto; 
-  position: relative; 
-}
+    .testimonial__container {
+      max-width: 1180px;
+      margin: 0 auto;
+      position: relative;
+    }
 
-/* ---------- Header ---------- */
-.testimonial__header { 
-  max-width: 560px; 
-  margin: 0 0 80px; 
-}
+    /* ---------- Header ---------- */
+    .testimonial__header {
+      max-width: 560px;
+      margin: 0 0 80px;
+    }
 
-.testimonial__label {
-  display: flex; 
-  align-items: center; 
-  gap: 12px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12.5px; 
-  font-weight: 600; 
-  letter-spacing: 0.18em;
-  text-transform: uppercase; 
-  color: var(--moss); 
-  margin-bottom: 22px;
-}
+    .testimonial__label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--moss);
+      margin-bottom: 22px;
+    }
 
-.testimonial__label::before {
-  content: ""; 
-  width: 28px; 
-  height: 1px; 
-  background: var(--moss); 
-  display: inline-block;
-}
+    .testimonial__label::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: var(--moss);
+      display: inline-block;
+    }
 
-.testimonial__title {
-  font-family: 'Fraunces', serif;
-  font-weight: 300;
-  font-size: clamp(30px, 3.4vw, 40px);
-  line-height: 1.15;
-  color: var(--ink); 
-  margin: 0 0 18px; 
-  letter-spacing: -0.025em;
-}
+    .testimonial__title {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: clamp(30px, 3.4vw, 40px);
+      line-height: 1.15;
+      color: var(--ink);
+      margin: 0 0 18px;
+      letter-spacing: -0.025em;
+    }
 
-.testimonial__subtitle {
-  font-size: 1.02rem;
-  line-height: 1.7;
-  color: var(--ink-soft);
-  margin: 0; 
-  max-width: 48ch;
-}
+    .testimonial__subtitle {
+      font-size: 1.02rem;
+      line-height: 1.7;
+      color: var(--ink-soft);
+      margin: 0;
+      max-width: 48ch;
+    }
 
-/* ---------- Showcase ---------- */
-.testimonial__showcase {
-  display: grid; 
-  grid-template-columns: 1.15fr 1fr; 
-  gap: 0;
-  align-items: stretch;
-  border-radius: 4px;
-  box-shadow: 0 1px 2px rgba(44,36,24,0.04), 
-              0 12px 40px -20px rgba(44,36,24,0.10);
-  overflow: hidden;
-}
+    /* ---------- Showcase ---------- */
+    .testimonial__showcase {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 0;
+      align-items: stretch;
+      border-radius: 4px;
+      box-shadow: 0 1px 2px rgba(44, 36, 24, 0.04),
+        0 12px 40px -20px rgba(44, 36, 24, 0.10);
+      overflow: hidden;
+    }
 
-@media (max-width: 960px) {
-  .testimonial__showcase { 
-    grid-template-columns: 1fr; 
-    box-shadow: none; 
-  }
-}
+    @media (max-width: 960px) {
+      .testimonial__showcase {
+        grid-template-columns: 1fr;
+        box-shadow: none;
+      }
+    }
 
-/* ---------- Featured ---------- */
-.testimonial__featured {
-  position: relative;
-  padding: 68px 72px 56px 68px;
-  background: linear-gradient(160deg, #fbf3e8 0%, #f6ead9 100%);
-}
+    /* ---------- Featured ---------- */
+    .testimonial__featured {
+      position: relative;
+      padding: 68px 72px 56px 68px;
+      background: linear-gradient(160deg, #fbf3e8 0%, #f6ead9 100%);
+    }
 
-.testimonial__featured::after {
-  content: "";
-  position: absolute; 
-  top: 56px; bottom: 56px; right: 0;
-  width: 1px;
-  background: linear-gradient(180deg, transparent, rgba(44,36,24,0.18), transparent);
-}
+    .testimonial__featured::after {
+      content: "";
+      position: absolute;
+      top: 56px;
+      bottom: 56px;
+      right: 0;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(44, 36, 24, 0.18), transparent);
+    }
 
-@media (max-width: 960px) {
-  .testimonial__featured { 
-    padding: 48px 32px 44px; 
-  }
-  .testimonial__featured::after { display: none; }
-}
+    @media (max-width: 960px) {
+      .testimonial__featured {
+        padding: 48px 32px 44px;
+      }
 
-.testimonial__quote-mark {
-  font-family: 'Fraunces', serif; 
-  font-size: 84px; 
-  line-height: 1;
-  color: var(--moss); 
-  opacity: 0.28; 
-  display: block; 
-  margin-bottom: 8px; 
-  user-select: none;
-}
+      .testimonial__featured::after {
+        display: none;
+      }
+    }
 
-/* Rating Row */
-.testimonial__rating-row {
-  display: flex; 
-  align-items: center; 
-  gap: 10px; 
-  margin-bottom: 28px; 
-  flex-wrap: wrap;
-  font-size: 13px;
-}
+    .testimonial__quote-mark {
+      font-family: 'Fraunces', serif;
+      font-size: 84px;
+      line-height: 1;
+      color: var(--moss);
+      opacity: 0.28;
+      display: block;
+      margin-bottom: 8px;
+      user-select: none;
+    }
 
-.testimonial__rating {
-  font-size: 15px;
-  letter-spacing: 2px;
-  color: var(--gold);
-}
+    /* Rating Row */
+    .testimonial__rating-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+      font-size: 13px;
+    }
 
-.testimonial__verified,
-.testimonial__source,
-.testimonial__timestamp {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11.5px;
-  color: var(--ink-muted);
-}
+    .testimonial__rating {
+      font-size: 15px;
+      letter-spacing: 2px;
+      color: var(--gold);
+    }
 
-.testimonial__dot {
-  width: 3px; 
-  height: 3px; 
-  background: var(--ink-muted); 
-  border-radius: 50%;
-  opacity: 0.5;
-}
+    .testimonial__verified,
+    .testimonial__source,
+    .testimonial__timestamp {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: var(--ink-muted);
+    }
 
-/* Featured Quote */
-.testimonial__featured-blockquote p {
-  font-size: 22.5px;
-  line-height: 1.65;
-  color: var(--ink);
-  margin: 0;
-  letter-spacing: -0.01em;
-}
+    .testimonial__dot {
+      width: 3px;
+      height: 3px;
+      background: var(--ink-muted);
+      border-radius: 50%;
+      opacity: 0.5;
+    }
 
-/* Featured Author */
-.testimonial__featured-author {
-  display: flex; 
-  align-items: center; 
-  gap: 16px;
-  margin-top: 5px;
-}
+    /* Featured Quote */
+    .testimonial__featured-blockquote p {
+      font-size: 22.5px;
+      line-height: 1.65;
+      color: var(--ink);
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
 
-.testimonial__avatar {
-  border-radius: 50%; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center;
-  flex-shrink: 0;
-  font-family: 'Fraunces', serif;
-  color: #fffaf2; 
-  font-weight: 600;
-  box-shadow: 0 0 0 3px rgba(255,255,255,0.65);
-}
+    /* Featured Author */
+    .testimonial__featured-author {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 5px;
+    }
 
-.testimonial__avatar--featured { 
-  width: 52px; 
-  height: 52px; 
-  font-size: 17px; 
-}
+    .testimonial__avatar {
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-family: 'Fraunces', serif;
+      color: #fffaf2;
+      font-weight: 600;
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.65);
+    }
 
-.testimonial__avatar--sm { 
-  width: 36px; 
-  height: 36px; 
-  font-size: 13px; 
-}
+    .testimonial__avatar--featured {
+      width: 52px;
+      height: 52px;
+      font-size: 17px;
+    }
 
-.testimonial__rule {
-  width: 1px; 
-  height: 42px;
-  background: linear-gradient(180deg, transparent, rgba(44,36,24,0.25), transparent);
-  align-self: center;
-}
+    .testimonial__avatar--sm {
+      width: 36px;
+      height: 36px;
+      font-size: 13px;
+    }
 
-.testimonial__author-info {
-  display: flex; 
-  flex-direction: column; 
-  gap: 2px;
-}
+    .testimonial__rule {
+      width: 1px;
+      height: 42px;
+      background: linear-gradient(180deg, transparent, rgba(44, 36, 24, 0.25), transparent);
+      align-self: center;
+    }
 
-.testimonial__name {
-  font-family: 'Be Vietnam Pro', sans-serif;
-  font-weight: 600; 
-  font-size: 14.5px; 
-  color: var(--ink);
-}
+    .testimonial__author-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
 
-.testimonial__meta {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11.2px; 
-  line-height: 1.4;
-  color: var(--ink-muted);
-}
+    .testimonial__name {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-weight: 600;
+      font-size: 14.5px;
+      color: var(--ink);
+    }
 
-/* ---------- Secondary ---------- */
-.testimonial__secondary {
-  padding: 8px 56px 8px 56px;
-  display: flex; 
-  flex-direction: column;
-  background: #fffdfa;
-}
+    .testimonial__meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.2px;
+      line-height: 1.4;
+      color: var(--ink-muted);
+    }
 
-@media (max-width: 960px) { 
-  .testimonial__secondary { 
-    padding: 8px 32px; 
-  } 
-}
+    /* ---------- Secondary ---------- */
+    .testimonial__secondary {
+      padding: 8px 56px 8px 56px;
+      display: flex;
+      flex-direction: column;
+      background: #fffdfa;
+    }
 
-.testimonial__secondary-item {
-  padding: 30px 4px 30px 0;
-  transition: all 0.25s ease;
-}
+    @media (max-width: 960px) {
+      .testimonial__secondary {
+        padding: 8px 32px;
+      }
+    }
 
-.testimonial__secondary-item + .testimonial__secondary-item {
-  border-top: 1px solid rgba(44,36,24,0.12);
-}
+    .testimonial__secondary-item {
+      padding: 30px 4px 30px 0;
+      transition: all 0.25s ease;
+    }
 
-.testimonial__secondary-item:hover {
-  background: rgba(44,36,24,0.025);
-  padding-left: 12px;
-}
+    .testimonial__secondary-item+.testimonial__secondary-item {
+      border-top: 1px solid rgba(44, 36, 24, 0.12);
+    }
 
-.testimonial__content p {
-  font-size: 15px;
-  line-height: 1.68;
-  color: var(--ink-soft);
-  margin: 0 0 18px;
-}
+    .testimonial__secondary-item:hover {
+      background: rgba(44, 36, 24, 0.025);
+      padding-left: 12px;
+    }
 
-/* Author Secondary */
-.testimonial__author {
-  display: flex; 
-  align-items: center; 
-  gap: 12px;
-}
+    .testimonial__content p {
+      font-size: 15px;
+      line-height: 1.68;
+      color: var(--ink-soft);
+      margin: 0 0 18px;
+    }
 
-.testimonial__secondary-item .testimonial__name {
-  font-size: 13.8px;
-}
+    /* Author Secondary */
+    .testimonial__author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-.testimonial__secondary-item .testimonial__meta {
-  font-size: 11px;
-}
+    .testimonial__secondary-item .testimonial__name {
+      font-size: 13.8px;
+    }
 
-/* More Link */
-.testimonial__more {
-  display: inline-flex; 
-  align-items: center; 
-  gap: 6px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12.5px; 
-  font-weight: 600; 
-  color: var(--moss);
-  text-decoration: none; 
-  margin-top: 12px;
-  padding-top: 20px; 
-  border-top: 1px solid rgba(44,36,24,0.14);
-  transition: all 0.2s ease;
-}
+    .testimonial__secondary-item .testimonial__meta {
+      font-size: 11px;
+    }
 
-.testimonial__more:hover { 
-  gap: 10px; 
-  color: var(--moss-deep); 
-}/* =========================================================
+    /* More Link */
+    .testimonial__more {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--moss);
+      text-decoration: none;
+      margin-top: 12px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(44, 36, 24, 0.14);
+      transition: all 0.2s ease;
+    }
+
+    .testimonial__more:hover {
+      gap: 10px;
+      color: var(--moss-deep);
+    }
+
+    /* =========================================================
    ABOUT PAGE — CSS cho phần <main class="about-main">
    Chỉ style nội dung chính, không đụng header/navbar/footer.
    Dùng var(--ten-bien, fallback): nếu site đã có sẵn biến màu/
@@ -2197,91 +2253,91 @@
    Layout: 1 cột, không card/grid, không hiệu ứng nặng.
    ========================================================= */
 
-.about-main {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 3rem 1.5rem 5rem;
-  color: var(--ink, #2c2418);
-  font-family: var(--font-body, 'Be Vietnam Pro', Arial, sans-serif);
-  font-size: 1rem;
-  line-height: 1.75;
-}
+    .about-main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+      color: var(--ink, #2c2418);
+      font-family: var(--font-body, 'Be Vietnam Pro', Arial, sans-serif);
+      font-size: 1rem;
+      line-height: 1.75;
+    }
 
-/* ---------- Tiêu đề chính ---------- */
-.about-hero {
-  margin-bottom: 2rem;
-}
+    /* ---------- Tiêu đề chính ---------- */
+    .about-hero {
+      margin-bottom: 2rem;
+    }
 
-.about-eyebrow {
-  font-family: var(--font-mono, 'JetBrains Mono', monospace);
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--moss, #2e6b3f);
-  margin-bottom: 0.75rem;
-}
+    .about-eyebrow {
+      font-family: var(--font-mono, 'JetBrains Mono', monospace);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--moss, #2e6b3f);
+      margin-bottom: 0.75rem;
+    }
 
-.about-title {
-  font-family: var(--font-display, 'Fraunces', Georgia, serif);
-  font-weight: 600;
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
-  line-height: 1.2;
-  color: var(--ink, #2c2418);
-  margin-bottom: 0.75rem;
-}
+    .about-title {
+      font-family: var(--font-display, 'Fraunces', Georgia, serif);
+      font-weight: 600;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      line-height: 1.2;
+      color: var(--ink, #2c2418);
+      margin-bottom: 0.75rem;
+    }
 
-.about-hero-desc {
-  font-size: 1.05rem;
-  color: var(--ink-soft, #5c4d3a);
-  max-width: 620px;
-}
+    .about-hero-desc {
+      font-size: 1.05rem;
+      color: var(--ink-soft, #5c4d3a);
+      max-width: 620px;
+    }
 
-/* ---------- Ảnh đại diện ---------- */
-.about-image {
-  margin: 0 0 2.5rem;
-}
+    /* ---------- Ảnh đại diện ---------- */
+    .about-image {
+      margin: 0 0 2.5rem;
+    }
 
-.about-image img {
-  width: 100%;
-  height: auto;
-  border-radius: 4px;
-  display: block;
-}
+    .about-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      display: block;
+    }
 
-.about-image figcaption {
-  margin-top: 0.6rem;
-  font-size: 0.85rem;
-  color: var(--ink-muted, #8a7960);
-}
+    .about-image figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--ink-muted, #8a7960);
+    }
 
-/* ---------- Từng section nội dung ---------- */
-.about-section {
-  padding: 2rem 0;
-  border-top: 1px solid var(--line, #e5e0d5);
-}
+    /* ---------- Từng section nội dung ---------- */
+    .about-section {
+      padding: 2rem 0;
+      border-top: 1px solid var(--line, #e5e0d5);
+    }
 
-.about-section:first-of-type {
-  border-top: 1px solid var(--line, #e5e0d5);
-}
+    .about-section:first-of-type {
+      border-top: 1px solid var(--line, #e5e0d5);
+    }
 
-.about-h2 {
-  font-family: var(--font-display, 'Fraunces', Georgia, serif);
-  font-weight: 600;
-  font-size: 1.4rem;
-  color: var(--ink, #2c2418);
-  margin-bottom: 1rem;
-}
+    .about-h2 {
+      font-family: var(--font-display, 'Fraunces', Georgia, serif);
+      font-weight: 600;
+      font-size: 1.4rem;
+      color: var(--ink, #2c2418);
+      margin-bottom: 1rem;
+    }
 
-.about-section p {
-  margin-bottom: 1rem;
-  max-width: 680px;
-}
+    .about-section p {
+      margin-bottom: 1rem;
+      max-width: 680px;
+    }
 
-.about-section p:last-child {
-  margin-bottom: 0;
-}
+    .about-section p:last-child {
+      margin-bottom: 0;
+    }
 
-/* =========================================================
+    /* =========================================================
    ABOUT PAGE — CSS cho phần <main class="about-main">
    Chỉ style nội dung chính, không đụng header/navbar/footer.
    Dùng var(--ten-bien, fallback): nếu site đã có sẵn biến màu/
@@ -2290,191 +2346,194 @@
    Layout: 1 cột, không card/grid, không hiệu ứng nặng.
    ========================================================= */
 
-.about-main {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 3rem 1.5rem 5rem;
-  color: var(--ink, #2c2418);
-  font-family: var(--font-body, 'Be Vietnam Pro', Arial, sans-serif);
-  font-size: 1rem;
-  line-height: 1.75;
-  counter-reset: about-section;
-}
+    .about-main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+      color: var(--ink, #2c2418);
+      font-family: var(--font-body, 'Be Vietnam Pro', Arial, sans-serif);
+      font-size: 1rem;
+      line-height: 1.75;
+      counter-reset: about-section;
+    }
 
-/* ---------- Tiêu đề chính ---------- */
-.about-hero {
-  margin-bottom: 2rem;
-}
+    /* ---------- Tiêu đề chính ---------- */
+    .about-hero {
+      margin-bottom: 2rem;
+    }
 
-.about-eyebrow {
-  font-family: var(--font-mono, 'JetBrains Mono', monospace);
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--moss, #2e6b3f);
-  margin-bottom: 0.75rem;
-}
+    .about-eyebrow {
+      font-family: var(--font-mono, 'JetBrains Mono', monospace);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--moss, #2e6b3f);
+      margin-bottom: 0.75rem;
+    }
 
-.about-title {
-  font-family: var(--font-display, 'Fraunces', Georgia, serif);
-  font-weight: 600;
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
-  line-height: 1.2;
-  color: var(--ink, #2c2418);
-  margin-bottom: 0.75rem;
-}
+    .about-title {
+      font-family: var(--font-display, 'Fraunces', Georgia, serif);
+      font-weight: 600;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      line-height: 1.2;
+      color: var(--ink, #2c2418);
+      margin-bottom: 0.75rem;
+    }
 
-.about-hero-desc {
-  font-size: 1.05rem;
-  color: var(--ink-soft, #5c4d3a);
-  max-width: 620px;
-}
+    .about-hero-desc {
+      font-size: 1.05rem;
+      color: var(--ink-soft, #5c4d3a);
+      max-width: 620px;
+    }
 
-/* ---------- Ảnh đại diện ---------- */
-.about-image {
-  margin: 0 0 2.5rem;
-}
+    /* ---------- Ảnh đại diện ---------- */
+    .about-image {
+      margin: 0 0 2.5rem;
+    }
 
-.about-image img {
-  width: 100%;
-  height: auto;
-  border-radius: 4px;
-  display: block;
-}
+    .about-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      display: block;
+    }
 
-.about-image figcaption {
-  margin-top: 0.6rem;
-  font-size: 0.85rem;
-  color: var(--ink-muted, #8a7960);
-}
+    .about-image figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--ink-muted, #8a7960);
+    }
 
-/* ---------- Từng section nội dung ---------- */
-.about-section {
-  padding: 2.25rem 0;
-  border-top: 1px solid var(--line, #e5e0d5);
-  counter-increment: about-section;
-}
+    /* ---------- Từng section nội dung ---------- */
+    .about-section {
+      padding: 2.25rem 0;
+      border-top: 1px solid var(--line, #e5e0d5);
+      counter-increment: about-section;
+    }
 
-.about-section:first-of-type {
-  border-top: 1px solid var(--line, #e5e0d5);
-}
+    .about-section:first-of-type {
+      border-top: 1px solid var(--line, #e5e0d5);
+    }
 
-.about-h2 {
-  display: flex;
-  align-items: baseline;
-  gap: 0.65rem;
-  font-family: var(--font-display, 'Fraunces', Georgia, serif);
-  font-weight: 600;
-  font-size: 1.4rem;
-  color: var(--ink, #2c2418);
-  margin-bottom: 1rem;
-}
+    .about-h2 {
+      display: flex;
+      align-items: baseline;
+      gap: 0.65rem;
+      font-family: var(--font-display, 'Fraunces', Georgia, serif);
+      font-weight: 600;
+      font-size: 1.4rem;
+      color: var(--ink, #2c2418);
+      margin-bottom: 1rem;
+    }
 
-.about-h2::before {
-  content: "0" counter(about-section);
-  font-family: var(--font-mono, 'JetBrains Mono', monospace);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  color: var(--moss, #2e6b3f);
-}
+    .about-h2::before {
+      content: "0" counter(about-section);
+      font-family: var(--font-mono, 'JetBrains Mono', monospace);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--moss, #2e6b3f);
+    }
 
-.about-section p {
-  margin-bottom: 1rem;
-  max-width: 680px;
-}
+    .about-section p {
+      margin-bottom: 1rem;
+      max-width: 680px;
+    }
 
-.about-section p:last-child {
-  margin-bottom: 0;
-}
+    .about-section p:last-child {
+      margin-bottom: 0;
+    }
 
-/* ---------- Khối "Về chúng tôi" — nổi bật hơn các mục còn lại ---------- */
-.about-section--intro {
-  border-top: none;
-  padding: 1.75rem 1.75rem;
-  margin-bottom: 0.5rem;
-  background: var(--surface, #faf6ee);
-  border: 1px solid var(--line, #e5e0d5);
-  border-left: 3px solid var(--moss, #2e6b3f);
-  border-radius: 6px;
-}
+    /* ---------- Khối "Về chúng tôi" — nổi bật hơn các mục còn lại ---------- */
+    .about-section--intro {
+      border-top: none;
+      padding: 1.75rem 1.75rem;
+      margin-bottom: 0.5rem;
+      background: var(--surface, #faf6ee);
+      border: 1px solid var(--line, #e5e0d5);
+      border-left: 3px solid var(--moss, #2e6b3f);
+      border-radius: 6px;
+    }
 
-.about-section--intro + .about-section {
-  border-top: 1px solid var(--line, #e5e0d5);
-}
+    .about-section--intro+.about-section {
+      border-top: 1px solid var(--line, #e5e0d5);
+    }
 
-.about-lead {
-  font-size: 1.1rem;
-  color: var(--ink-soft, #5c4d3a);
-  line-height: 1.65;
-}
+    .about-lead {
+      font-size: 1.1rem;
+      color: var(--ink-soft, #5c4d3a);
+      line-height: 1.65;
+    }
 
-/* ---------- Danh sách dữ kiện (vùng đất) — dạng lưới stat, không phải văn bản xuôi ---------- */
-.about-facts {
-  list-style: none;
-  margin: 2rem 0 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: var(--line, #e5e0d5);
-  border: 1px solid var(--line, #e5e0d5);
-  border-radius: 6px;
-  overflow: hidden;
-}
+    /* ---------- Danh sách dữ kiện (vùng đất) — dạng lưới stat, không phải văn bản xuôi ---------- */
+    .about-facts {
+      list-style: none;
+      margin: 2rem 0 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--line, #e5e0d5);
+      border: 1px solid var(--line, #e5e0d5);
+      border-radius: 6px;
+      overflow: hidden;
+    }
 
-.about-facts li {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  padding: 1.1rem 1rem;
-  background: var(--surface, #fdfcf8);
-  text-align: left;
-}
+    .about-facts li {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      padding: 1.1rem 1rem;
+      background: var(--surface, #fdfcf8);
+      text-align: left;
+    }
 
-.about-facts li span {
-  order: -1;
-  color: var(--ink-muted, #8a7960);
-  font-family: var(--font-mono, 'JetBrains Mono', monospace);
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
+    .about-facts li span {
+      order: -1;
+      color: var(--ink-muted, #8a7960);
+      font-family: var(--font-mono, 'JetBrains Mono', monospace);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
 
-.about-facts li strong {
-  font-family: var(--font-display, 'Fraunces', Georgia, serif);
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: var(--ink, #2c2418);
-  line-height: 1.2;
-}
+    .about-facts li strong {
+      font-family: var(--font-display, 'Fraunces', Georgia, serif);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--ink, #2c2418);
+      line-height: 1.2;
+    }
 
-/* ---------- Responsive ---------- */
-@media (max-width: 700px) {
-  .about-facts {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
+    /* ---------- Responsive ---------- */
+    @media (max-width: 700px) {
+      .about-facts {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
 
-@media (max-width: 600px) {
-  .about-main {
-    padding: 2rem 1.25rem 3.5rem;
-  }
-  .about-section--intro {
-    padding: 1.35rem 1.15rem;
-  }
-  .about-lead {
-    font-size: 1.02rem;
-  }
-}
+    @media (max-width: 600px) {
+      .about-main {
+        padding: 2rem 1.25rem 3.5rem;
+      }
 
-@media (max-width: 420px) {
-  .about-facts {
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-  }
-  .about-facts li {
-    padding: 0.9rem 0.85rem;
-  }
-}
+      .about-section--intro {
+        padding: 1.35rem 1.15rem;
+      }
+
+      .about-lead {
+        font-size: 1.02rem;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .about-facts {
+        grid-template-columns: 1fr 1fr;
+        gap: 1px;
+      }
+
+      .about-facts li {
+        padding: 0.9rem 0.85rem;
+      }
+    }
