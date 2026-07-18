@@ -1857,12 +1857,14 @@
       text-transform: uppercase !important;
     }
 
-   /* ============ NAV MOBILE - NÚT ĐẶT HÀNG XUỐNG DÒNG ============ */
+   /* ============ NAV MOBILE - CẢI TIẾN HIỂN THỊ ============ */
 @media (max-width: 768px) {
   .nav {
     padding: 0.6rem 0.9rem;
     gap: 8px;
     align-items: center;
+    flex-wrap: nowrap;
+    overflow: hidden;
   }
 
   .nav-logo {
@@ -1875,40 +1877,53 @@
     font-size: 0.83rem;
   }
 
-  /* Menu */
+  /* Menu items */
   .nav-links {
     display: flex;
     gap: 6px;
     margin-left: auto;
     margin-right: 6px;
+    align-items: center;
   }
 
   .nav-links li {
     display: none;
   }
 
-  /* Hiện cả 2 item */
+  /* Chỉ hiện 2 item: Blog + Về chúng tôi */
   .nav-links li:nth-child(6),
   .nav-links li:nth-child(7) {
     display: block;
   }
 
   .nav-links a {
-    font-size: 0.64rem;
-    padding: 4px 7px;
-    white-space: nowrap;
+    font-size: 0.62rem;
+    padding: 5px 6px;           /* Tăng padding dọc một chút cho đẹp hơn */
+    line-height: 1.15;
+    white-space: normal;        /* Cho phép xuống dòng */
+    text-align: center;         /* Căn giữa chữ khi xuống dòng */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 60px;
+    max-width: 82px;
+    flex-shrink: 1;
+    height: fit-content;
   }
 
-  /* NÚT ĐẶT HÀNG - CHO PHÉP XUỐNG DÒNG */
+  /* NÚT ĐẶT HÀNG */
   .nav-cta {
     padding: 0.38rem 0.75rem;
     font-size: 0.64rem;
     line-height: 1.1;
     text-align: center;
-    white-space: normal;     /* Cho phép xuống dòng */
-    min-width: 68px;         /* Giới hạn chiều rộng */
+    white-space: normal;
+    min-width: 68px;
     height: fit-content;
-    flex-shrink: 1;          /* Cho phép co lại */
+    flex-shrink: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   /* Hamburger */
@@ -1921,13 +1936,23 @@
     flex-shrink: 0;
     margin-left: 4px;
   }
-
-  .nav {
-    flex-wrap: nowrap;
-    overflow: hidden;
-  }
 }
 
+/* ========== MÀN HÌNH RẤT NHỎ (dưới ~360px) ========== */
+@media (max-width: 360px) {
+  .nav-links a {
+    font-size: 0.59rem;
+    padding: 4px 5px;
+    min-width: 55px;
+    max-width: 76px;
+  }
+
+  .nav-cta {
+    font-size: 0.61rem;
+    padding: 0.35rem 0.7rem;
+    min-width: 62px;
+  }
+}
     .footer-social {
       margin-top: 12px;
     }
