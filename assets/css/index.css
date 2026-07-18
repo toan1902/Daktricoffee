@@ -1857,102 +1857,122 @@
       text-transform: uppercase !important;
     }
 
-   /* ============ NAV MOBILE - CẢI TIẾN HIỂN THỊ ============ */
-@media (max-width: 768px) {
-  .nav {
-    padding: 0.6rem 0.9rem;
-    gap: 8px;
-    align-items: center;
-    flex-wrap: nowrap;
-    overflow: hidden;
-  }
+    /* ============ NAV MOBILE - THU HẸP KHOẢNG CÁCH ============ */
+    @media (max-width: 768px) {
+      .nav {
+        padding: 0.55rem 0.8rem;
+        /* Giảm padding ngang */
+        gap: 5px;
+        /* Giảm khoảng cách tổng thể */
+        align-items: center;
+        flex-wrap: nowrap;
+        overflow: hidden;
+      }
 
-  .nav-logo {
-    width: 30px;
-    height: 30px;
-    flex-shrink: 0;
-  }
+      .nav-logo {
+        width: 28px;
+        height: 28px;
+        flex-shrink: 0;
+      }
 
-  .nav-name {
-    font-size: 0.83rem;
-  }
+      .nav-name {
+        font-size: 0.82rem;
+      }
 
-  /* Menu items */
-  .nav-links {
-    display: flex;
-    gap: 6px;
-    margin-left: auto;
-    margin-right: 6px;
-    align-items: center;
-  }
+      /* Menu items */
+      .nav-links {
+        display: flex;
+        gap: 4px;
+        /* Giảm mạnh gap giữa các item */
+        margin-left: auto;
+        margin-right: 4px;
+        align-items: center;
+      }
 
-  .nav-links li {
-    display: none;
-  }
+      .nav-links li {
+        display: none;
+      }
 
-  /* Chỉ hiện 2 item: Blog + Về chúng tôi */
-  .nav-links li:nth-child(6),
-  .nav-links li:nth-child(7) {
-    display: block;
-  }
+      .nav-links li:nth-child(6),
+      .nav-links li:nth-child(7) {
+        display: block;
+      }
 
-  .nav-links a {
-    font-size: 0.62rem;
-    padding: 5px 6px;           /* Tăng padding dọc một chút cho đẹp hơn */
-    line-height: 1.15;
-    white-space: normal;        /* Cho phép xuống dòng */
-    text-align: center;         /* Căn giữa chữ khi xuống dòng */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 60px;
-    max-width: 82px;
-    flex-shrink: 1;
-    height: fit-content;
-  }
+      .nav-links a {
+        font-size: 0.61rem;
+        padding: 4px 5px;
+        /* Giảm padding */
+        line-height: 1.12;
+        white-space: normal;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 58px;
+        max-width: 78px;
+        flex-shrink: 1;
+        height: fit-content;
+      }
 
-  /* NÚT ĐẶT HÀNG */
-  .nav-cta {
-    padding: 0.38rem 0.75rem;
-    font-size: 0.64rem;
-    line-height: 1.1;
-    text-align: center;
-    white-space: normal;
-    min-width: 68px;
-    height: fit-content;
-    flex-shrink: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+      /* NÚT ĐẶT HÀNG */
+      .nav-cta {
+        padding: 0.35rem 0.7rem;
+        font-size: 0.63rem;
+        line-height: 1.1;
+        text-align: center;
+        white-space: normal;
+        min-width: 65px;
+        height: fit-content;
+        flex-shrink: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-  /* Hamburger */
-  .nav-hamburger {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    flex-shrink: 0;
-    margin-left: 4px;
-  }
-}
+      /* Hamburger */
+      .nav-hamburger {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        flex-shrink: 0;
+        margin-left: 2px;
+        /* Giảm margin */
+      }
+    }
 
-/* ========== MÀN HÌNH RẤT NHỎ (dưới ~360px) ========== */
-@media (max-width: 360px) {
-  .nav-links a {
-    font-size: 0.59rem;
-    padding: 4px 5px;
-    min-width: 55px;
-    max-width: 76px;
-  }
+    /* ========== MÀN HÌNH RẤT NHỎ (dưới ~360px) ========== */
+    @media (max-width: 360px) {
+      .nav {
+        padding: 0.5rem 0.7rem;
+        gap: 3px;
+      }
 
-  .nav-cta {
-    font-size: 0.61rem;
-    padding: 0.35rem 0.7rem;
-    min-width: 62px;
-  }
-}
+      .nav-links {
+        gap: 3px;
+      }
+
+      .nav-links a {
+        font-size: 0.58rem;
+        padding: 3.5px 4px;
+        min-width: 54px;
+        max-width: 72px;
+      }
+
+      .nav-cta {
+        font-size: 0.6rem;
+        padding: 0.32rem 0.65rem;
+        min-width: 60px;
+      }
+
+      .nav-hamburger {
+        width: 32px;
+        height: 32px;
+        margin-left: 1px;
+      }
+    }
+
     .footer-social {
       margin-top: 12px;
     }
