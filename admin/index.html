@@ -535,14 +535,29 @@
                             <h1 class="font-display text-xl font-semibold tracking-tight">Bài viết</h1>
                             <p class="text-sm text-ink/50 mt-0.5">Quản lý blog và nội dung khối (blocks)</p>
                         </div>
-                        <button onclick="openBlogModal()"
-                            class="btn-primary bg-moss hover:bg-moss-600 text-white text-sm font-medium px-4 py-2.5 rounded-lg flex items-center gap-2">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2.2" stroke-linecap="round">
-                                <path d="M12 5v14M5 12h14"></path>
-                            </svg>
-                            Thêm bài viết
-                        </button>
+                        <div class="flex items-center gap-2">
+                            <input type="file" id="blog-import-file" accept="application/json,.json" class="hidden"
+                                onchange="handleBlogImportFile(this)">
+                            <button onclick="document.getElementById('blog-import-file').click()"
+                                id="blog-import-btn"
+                                class="bg-white border border-line hover:bg-paper text-ink/80 text-sm font-medium px-4 py-2.5 rounded-lg flex items-center gap-2">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <path d="M17 8l-5-5-5 5"></path>
+                                    <path d="M12 3v12"></path>
+                                </svg>
+                                Nhập từ file (.json)
+                            </button>
+                            <button onclick="openBlogModal()"
+                                class="btn-primary bg-moss hover:bg-moss-600 text-white text-sm font-medium px-4 py-2.5 rounded-lg flex items-center gap-2">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.2" stroke-linecap="round">
+                                    <path d="M12 5v14M5 12h14"></path>
+                                </svg>
+                                Thêm bài viết
+                            </button>
+                        </div>
                     </header>
 
                     <div class="px-8 py-4 flex items-center gap-3 shrink-0">
@@ -1659,6 +1674,127 @@
                     showToast(err.message, 'error');
                 }
             });
+        }
+
+        /* =========================================================================
+           IMPORT BLOG FROM JSON FILE
+           Định dạng file .json mong đợi:
+           {
+             "title": "...", "slug": "...", "excerpt": "...",
+             "author": "...", "status": "published" | "draft",
+             "cover_image": "https://..." hoặc "data:image/jpeg;base64,....",
+             "blocks": [
+               { "type": "text", "content": "..." },
+               { "type": "pullquote", "content": "..." },
+               { "type": "list", "content": ["mục 1", "mục 2"] },
+               { "type": "image", "content": { "url": "data:image/...;base64,...", "caption": "..." } }
+             ]
+           }
+           Ảnh có thể là URL sẵn có hoặc chuỗi base64 (data:...) — nếu là base64,
+           hệ thống sẽ tự động tải lên server qua uploadImage() trước khi lưu.
+           ========================================================================= */
+
+        function dataURItoFile(dataURI, filename) {
+            const parts = dataURI.split(',');
+            const mimeMatch = parts[0].match(/:(.*?);/);
+            const mime = mimeMatch ? mimeMatch[1] : 'image/jpeg';
+            const binary = atob(parts[1]);
+            const array = new Uint8Array(binary.length);
+            for (let i = 0; i < binary.length; i++) array[i] = binary.charCodeAt(i);
+            return new File([array], filename, { type: mime });
+        }
+
+        async function resolveImportImageUrl(value, indexLabel) {
+            if (!value) return '';
+            if (value.startsWith('data:')) {
+                const file = dataURItoFile(value, `import-${indexLabel}-${Date.now()}.jpg`);
+                return await uploadImage(file, 'blogs');
+            }
+            return value; // đã là URL sẵn có, dùng trực tiếp
+        }
+
+        async function handleBlogImportFile(inputEl) {
+            const file = inputEl.files[0];
+            if (!file) return;
+            inputEl.value = ''; // cho phép chọn lại cùng file lần sau
+
+            let data;
+            try {
+                const text = await file.text();
+                data = JSON.parse(text);
+            } catch (e) {
+                showToast('File JSON không hợp lệ: ' + e.message, 'error');
+                return;
+            }
+
+            if (!data.title || !data.slug) {
+                showToast('File JSON thiếu "title" hoặc "slug".', 'error');
+                return;
+            }
+
+            const btn = document.getElementById('blog-import-btn');
+            const originalHtml = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner" style="border-color: rgba(79,111,82,0.25); border-top-color: #4F6F52;"></span> Đang nhập...';
+
+            try {
+                // 1) Ảnh bìa (nếu là base64 thì upload trước)
+                let coverUrl = '';
+                if (data.cover_image) {
+                    showToast('Đang tải ảnh bìa...', 'success');
+                    coverUrl = await resolveImportImageUrl(data.cover_image, 'cover');
+                }
+
+                // 2) Tạo bài viết
+                const fd = new FormData();
+                fd.append('title', data.title.trim());
+                fd.append('slug', data.slug.trim());
+                fd.append('excerpt', (data.excerpt || '').trim());
+                fd.append('cover_image', coverUrl);
+                fd.append('author', (data.author || '').trim());
+                fd.append('status', data.status === 'published' ? 'published' : 'draft');
+
+                const resp = await fetchAPI({ table: 'blogs', action: 'create' }, { method: 'POST', body: fd });
+                const newId = resp?.id || extractItem(resp)?.id;
+                if (!newId) throw new Error('Không lấy được ID bài viết vừa tạo.');
+
+                // 3) Tạo lần lượt các khối nội dung theo đúng thứ tự trong file
+                const blocks = Array.isArray(data.blocks) ? data.blocks : [];
+                for (let i = 0; i < blocks.length; i++) {
+                    const blk = blocks[i];
+                    let content = '';
+
+                    if (blk.type === 'text' || blk.type === 'pullquote' || blk.type === 'heading') {
+                        content = String(blk.content || '').trim();
+                        if (!content) continue;
+                    } else if (blk.type === 'list') {
+                        const items = Array.isArray(blk.content) ? blk.content : [];
+                        if (items.length === 0) continue;
+                        content = JSON.stringify(items);
+                    } else if (blk.type === 'image') {
+                        const imgUrl = await resolveImportImageUrl(blk.content?.url, `block-${i + 1}`);
+                        if (!imgUrl) continue;
+                        content = JSON.stringify({ url: imgUrl, caption: blk.content?.caption || '' });
+                    } else {
+                        continue; // bỏ qua loại khối không xác định
+                    }
+
+                    const bfd = new FormData();
+                    bfd.append('blog_id', Number(newId));
+                    bfd.append('type', blk.type);
+                    bfd.append('position', i + 1);
+                    bfd.append('content', content);
+                    await fetchAPI({ table: 'blog_blocks', action: 'create' }, { method: 'POST', body: bfd });
+                }
+
+                showToast(`Đã nhập bài viết "${data.title}" cùng ${blocks.length} khối nội dung.`, 'success');
+                await loadBlogs();
+            } catch (err) {
+                showToast('Nhập thất bại: ' + err.message, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalHtml;
+            }
         }
 
         /* =========================================================================
