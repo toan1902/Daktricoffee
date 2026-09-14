@@ -971,11 +971,15 @@
             });
 
             const res = await fetch(url.toString(), fetchOptions);
+            let raw = '';
             let data;
             try {
-                data = await res.json();
+                raw = await res.clone().text();
+                data = JSON.parse(raw);
             } catch (e) {
-                throw new Error('Phản hồi từ máy chủ không hợp lệ (không phải JSON).');
+                const snippet = raw ? raw.slice(0, 200).replace(/\s+/g, ' ').trim() : '(rỗng)';
+                console.error('fetchAPI non-JSON response:', res.status, raw);
+                throw new Error(`Phản hồi từ máy chủ không hợp lệ (không phải JSON). [HTTP ${res.status}] ${snippet}`);
             }
             if (!res.ok || data?.status === 'error') {
                 throw new Error(data?.message || 'Đã có lỗi xảy ra từ API.');
@@ -1014,7 +1018,16 @@
             const fd = new FormData();
             fd.append('image', file);
             const res = await fetch(url.toString(), { method: 'POST', body: fd });
-            const data = await res.json();
+            let raw = '';
+            let data;
+            try {
+                raw = await res.clone().text();
+                data = JSON.parse(raw);
+            } catch (e) {
+                const snippet = raw ? raw.slice(0, 200).replace(/\s+/g, ' ').trim() : '(rỗng)';
+                console.error('uploadImage non-JSON response:', res.status, raw);
+                throw new Error(`Tải ảnh lên thất bại — phản hồi không hợp lệ. [HTTP ${res.status}] ${snippet}`);
+            }
             if (data.status !== 'success' || !data.url) {
                 throw new Error(data.message || 'Tải ảnh lên thất bại.');
             }
