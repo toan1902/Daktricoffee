@@ -1717,11 +1717,33 @@
             return new File([array], filename, { type: mime });
         }
 
+        // Thử lại tối đa `retries` lần nếu lỗi có vẻ tạm thời (HTTP 5xx hoặc phản hồi rỗng/lỗi mạng).
+        // Dùng cho các bước gọi server trong luồng "Nhập từ file JSON" vì server nguồn hay bị timeout/500 thoáng qua.
+        async function withRetry(fn, { retries = 2, delayMs = 1200, label = '' } = {}) {
+            let lastErr;
+            for (let attempt = 0; attempt <= retries; attempt++) {
+                try {
+                    return await fn();
+                } catch (err) {
+                    lastErr = err;
+                    const msg = String(err?.message || '');
+                    const looksTransient = /HTTP 5\d\d|network|fetch|Failed to fetch/i.test(msg);
+                    if (attempt < retries && looksTransient) {
+                        console.warn(`[withRetry] ${label} lỗi tạm thời (lần ${attempt + 1}), thử lại sau ${delayMs}ms:`, msg);
+                        await new Promise(r => setTimeout(r, delayMs));
+                        continue;
+                    }
+                    throw err;
+                }
+            }
+            throw lastErr;
+        }
+
         async function resolveImportImageUrl(value, indexLabel) {
             if (!value) return '';
             if (value.startsWith('data:')) {
                 const file = dataURItoFile(value, `import-${indexLabel}-${Date.now()}.jpg`);
-                return await uploadImage(file, 'blogs');
+                return await withRetry(() => uploadImage(file, 'blogs'), { label: `upload ảnh ${indexLabel}` });
             }
             return value; // đã là URL sẵn có, dùng trực tiếp
         }
@@ -1751,29 +1773,50 @@
             btn.innerHTML = '<span class="spinner" style="border-color: rgba(79,111,82,0.25); border-top-color: #4F6F52;"></span> Đang nhập...';
 
             try {
-                // 1) Ảnh bìa (nếu là base64 thì upload trước)
-                let coverUrl = '';
-                if (data.cover_image) {
-                    showToast('Đang tải ảnh bìa...', 'success');
-                    coverUrl = await resolveImportImageUrl(data.cover_image, 'cover');
+                // 0) Kiểm tra slug đã tồn tại chưa (tránh tạo bài trùng khi bấm nhập lại sau lỗi)
+                await loadBlogs(1); // đảm bảo state.blogs đang là dữ liệu mới nhất
+                const existing = state.blogs.find(b => b.slug === data.slug.trim());
+
+                let newId;
+                let existingBlockCount = 0;
+
+                if (existing) {
+                    newId = existing.id;
+                    showToast(`Bài viết "${data.title}" đã tồn tại (slug trùng) — sẽ thêm các khối còn thiếu vào bài này, không tạo bài mới.`, 'success');
+                    const blocksResp = await fetchAPI({ table: 'blog_blocks', action: 'list', blog_id: newId });
+                    existingBlockCount = extractList(blocksResp).length;
+                } else {
+                    // 1) Ảnh bìa (nếu là base64 thì upload trước)
+                    let coverUrl = '';
+                    if (data.cover_image) {
+                        showToast('Đang tải ảnh bìa...', 'success');
+                        coverUrl = await resolveImportImageUrl(data.cover_image, 'cover');
+                    }
+
+                    // 2) Tạo bài viết
+                    const fd = new FormData();
+                    fd.append('title', data.title.trim());
+                    fd.append('slug', data.slug.trim());
+                    fd.append('excerpt', (data.excerpt || '').trim());
+                    fd.append('cover_image', coverUrl);
+                    fd.append('author', (data.author || '').trim());
+                    fd.append('status', data.status === 'published' ? 'published' : 'draft');
+
+                    const resp = await withRetry(
+                        () => fetchAPI({ table: 'blogs', action: 'create' }, { method: 'POST', body: fd }),
+                        { label: 'tạo bài viết' }
+                    );
+                    newId = resp?.id || extractItem(resp)?.id;
+                    if (!newId) throw new Error('Không lấy được ID bài viết vừa tạo.');
                 }
 
-                // 2) Tạo bài viết
-                const fd = new FormData();
-                fd.append('title', data.title.trim());
-                fd.append('slug', data.slug.trim());
-                fd.append('excerpt', (data.excerpt || '').trim());
-                fd.append('cover_image', coverUrl);
-                fd.append('author', (data.author || '').trim());
-                fd.append('status', data.status === 'published' ? 'published' : 'draft');
-
-                const resp = await fetchAPI({ table: 'blogs', action: 'create' }, { method: 'POST', body: fd });
-                const newId = resp?.id || extractItem(resp)?.id;
-                if (!newId) throw new Error('Không lấy được ID bài viết vừa tạo.');
-
-                // 3) Tạo lần lượt các khối nội dung theo đúng thứ tự trong file
+                // 3) Tạo các khối nội dung còn thiếu theo đúng thứ tự trong file
+                // (nếu bài đã có sẵn N khối từ lần chạy trước, bỏ qua N khối đầu để không bị lặp)
                 const blocks = Array.isArray(data.blocks) ? data.blocks : [];
+                let createdCount = 0;
                 for (let i = 0; i < blocks.length; i++) {
+                    if (i < existingBlockCount) continue; // khối này đã có từ lần nhập trước
+
                     const blk = blocks[i];
                     let content = '';
 
@@ -1797,10 +1840,14 @@
                     bfd.append('type', blk.type);
                     bfd.append('position', i + 1);
                     bfd.append('content', content);
-                    await fetchAPI({ table: 'blog_blocks', action: 'create' }, { method: 'POST', body: bfd });
+                    await withRetry(
+                        () => fetchAPI({ table: 'blog_blocks', action: 'create' }, { method: 'POST', body: bfd }),
+                        { label: `tạo khối #${i + 1}` }
+                    );
+                    createdCount++;
                 }
 
-                showToast(`Đã nhập bài viết "${data.title}" cùng ${blocks.length} khối nội dung.`, 'success');
+                showToast(`Đã nhập bài viết "${data.title}" — thêm mới ${createdCount} khối nội dung.`, 'success');
                 await loadBlogs();
             } catch (err) {
                 showToast('Nhập thất bại: ' + err.message, 'error');
