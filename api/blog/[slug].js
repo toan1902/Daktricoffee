@@ -1,11 +1,6 @@
-const { apiGet, renderPost, renderPostFallback, renderArchivedPost } = require('../_lib/blog');
-
-function extractDetail(resp) {
-  if (resp && typeof resp === 'object' && resp.data && typeof resp.data === 'object' && !Array.isArray(resp.data)) {
-    return resp.data;
-  }
-  return resp;
-}
+// /blog/:slug — bài viết render sẵn từ kho dữ liệu riêng của daktri.vn
+const { renderPost, renderPostFallback, renderArchivedPost } = require('../_lib/blog');
+const store = require('../_lib/store');
 
 module.exports = async (req, res) => {
   const slug = String((req.query && req.query.slug) || '').replace(/\.html?$/, '');
@@ -16,39 +11,28 @@ module.exports = async (req, res) => {
     return res.end(renderPostFallback(slug, { notFound: true }));
   }
 
-  try {
-    const { ok, json } = await apiGet(`table=blogs&action=detail&slug=${encodeURIComponent(slug)}`);
-    const data = ok ? extractDetail(json) : null;
-
-    if (!data || typeof data !== 'object' || !data.title) {
-      const archived = renderArchivedPost(slug);
-      if (archived) {
-        res.statusCode = 200;
-        res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=86400');
-        return res.end(archived);
-      }
-      res.statusCode = 404;
-      res.setHeader('Cache-Control', 'public, s-maxage=60');
-      return res.end(renderPostFallback(slug, { notFound: true }));
-    }
-
-    if (!data.slug) data.slug = slug;
-    res.statusCode = 200;
-    // CDN giữ 5 phút, bài mới sửa trong admin hiện ra sau tối đa ~5 phút
-    res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=86400');
-    return res.end(renderPost(data));
-  } catch (err) {
-    console.error('blog ssr error', slug, err && err.message, err && err.cause && (err.cause.code || err.cause.message));
-    // API lỗi: dùng bản lưu sẵn trong repo nếu có
-    const archived = renderArchivedPost(slug);
-    if (archived) {
+  // 1) Bài đăng qua admin daktri.vn
+  const post = await store.publicBlogBySlug(slug);
+  if (post && post.title) {
+    try {
+      const html = renderPost(post);
       res.statusCode = 200;
       res.setHeader('Cache-Control', 'public, s-maxage=120, stale-while-revalidate=86400');
-      return res.end(archived);
+      return res.end(html);
+    } catch (err) {
+      console.error('render post error', slug, err && err.message);
     }
-    // không có bản lưu: trả template để trình duyệt tự tải, không cache
-    res.statusCode = 200;
-    res.setHeader('Cache-Control', 'no-store');
-    return res.end(renderPostFallback(slug, { notFound: false }));
   }
+
+  // 2) Bài lưu sẵn trong repo
+  const archived = renderArchivedPost(slug);
+  if (archived) {
+    res.statusCode = 200;
+    res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=86400');
+    return res.end(archived);
+  }
+
+  res.statusCode = 404;
+  res.setHeader('Cache-Control', 'public, s-maxage=60');
+  return res.end(renderPostFallback(slug, { notFound: true }));
 };

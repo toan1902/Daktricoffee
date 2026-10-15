@@ -1,5 +1,6 @@
 // Sitemap tự động: luôn có đủ bài mới đăng từ admin, không cần sửa tay
-const { DOMAIN, apiGet, toDate, readArchiveIndex } = require('./_lib/blog');
+const { DOMAIN, toDate, readArchiveIndex } = require('./_lib/blog');
+const store = require('./_lib/store');
 
 const STATIC_PAGES = [
   { loc: '/', changefreq: 'weekly', priority: '1.0' },
@@ -13,15 +14,8 @@ const STATIC_PAGES = [
 const xmlEsc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 module.exports = async (req, res) => {
-  let blogs = [];
-  let ok = false;
-  try {
-    const r = await apiGet('table=blogs&action=list&page=1&limit=1000');
-    ok = r.ok;
-    blogs = (r.ok && r.json && r.json.data) || [];
-  } catch (err) {
-    console.error('sitemap api error', err && err.message);
-  }
+  let blogs = (await store.publicBlogs()).slice();
+  const ok = true;
 
   // gộp bài lưu sẵn (khi API lỗi vẫn đủ bài trong sitemap)
   const seen = new Set(blogs.map(b => b.slug));

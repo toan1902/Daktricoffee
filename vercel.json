@@ -5,12 +5,20 @@
     "api/**/*.js": {
       "includeFiles": "{templates/**,data/**}",
       "maxDuration": 15
+    },
+    "api/**/*.mjs": {
+      "includeFiles": "data/**",
+      "maxDuration": 30
     }
   },
   "rewrites": [
     {
       "source": "/",
       "destination": "/api/home"
+    },
+    {
+      "source": "/media/:path*",
+      "destination": "/api/media?p=:path*"
     },
     {
       "source": "/sitemap.xml",

@@ -4,8 +4,6 @@ const fs = require('fs');
 const path = require('path');
 
 const DOMAIN = 'https://daktri.vn';
-const API_BASE = 'https://libericakhesanh.net/api/index.php';
-const SITE_BASE = 'https://libericakhesanh.net';
 const DEFAULT_IMAGE = 'https://daktri.vn/assets/images/brand/daktri-logo.png';
 const DEFAULT_DESC = 'Kiến thức nông nghiệp tử tế từ HTX Daktri Khe Sanh — cà phê Liberica, đất khỏe, canh tác hữu cơ.';
 
@@ -17,21 +15,6 @@ function readTemplate(name) {
   return templateCache[name];
 }
 
-async function apiGet(query, timeoutMs = 8000) {
-  const ctrl = new AbortController();
-  const t = setTimeout(() => ctrl.abort(), timeoutMs);
-  try {
-    const res = await fetch(`${API_BASE}?${query}`, {
-      signal: ctrl.signal,
-      headers: { Accept: 'application/json', 'User-Agent': 'daktri.vn-ssr' },
-    });
-    const json = await res.json();
-    if (!res.ok || (json && json.status === 'error')) return { ok: false, json };
-    return { ok: true, json };
-  } finally {
-    clearTimeout(t);
-  }
-}
 
 function esc(str) {
   if (str === null || str === undefined) return '';
@@ -51,7 +34,7 @@ function parseContent(raw) {
 
 function absUrl(u) {
   if (!u) return '';
-  return u.startsWith('/') ? SITE_BASE + u : u;
+  return u.startsWith('/') ? DOMAIN + u : u;
 }
 
 function toDate(raw) {
@@ -357,4 +340,4 @@ function archivedListResult() {
   return { data, pagination: { current_page: 1, total_pages: 1 } };
 }
 
-module.exports = { DOMAIN, apiGet, readTemplate, renderPost, renderPostFallback, renderList, toDate, renderArchivedPost, archivedListResult, readArchiveIndex };
+module.exports = { DOMAIN, readTemplate, renderPost, renderPostFallback, renderList, toDate, renderArchivedPost, archivedListResult, readArchiveIndex };

@@ -1,0 +1,9 @@
+{
+  "name": "daktri-vn",
+  "private": true,
+  "description": "Website HTX Daktri Khe Sanh — daktri.vn",
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "@vercel/blob": "^2.0.0"
+  }
+}

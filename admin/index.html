@@ -934,9 +934,24 @@
         /* =========================================================================
            CONFIG
            ========================================================================= */
-        const API_BASE = 'https://libericakhesanh.net/api/index.php';
-        const AUTH_API = 'https://libericakhesanh.net/api/auth.php';
-        const ADMIN_STORAGE_KEY = 'lib_admin';
+        // Kho dữ liệu riêng của daktri.vn (không còn phụ thuộc libericakhesanh.net)
+        const API_BASE = '/api/cms';
+        const AUTH_API = '/api/cms-auth';
+        const ADMIN_STORAGE_KEY = 'daktri_admin';
+
+        function getAuthToken() {
+            try { return (JSON.parse(localStorage.getItem(ADMIN_STORAGE_KEY) || '{}') || {}).token || ''; } catch (e) { return ''; }
+        }
+        function authHeaders(extra = {}) {
+            const t = getAuthToken();
+            return t ? { ...extra, Authorization: 'Bearer ' + t } : extra;
+        }
+        function handleSessionExpired(res) {
+            if (res.status === 401) {
+                localStorage.removeItem(ADMIN_STORAGE_KEY);
+                setTimeout(() => location.reload(), 1500);
+            }
+        }
 
         let state = {
             products: [],
@@ -965,12 +980,13 @@
            CORE: fetchAPI
            ========================================================================= */
         async function fetchAPI(params = {}, fetchOptions = {}) {
-            const url = new URL(API_BASE);
+            const url = new URL(API_BASE, location.origin);
             Object.entries(params).forEach(([k, v]) => {
                 if (v !== undefined && v !== null && v !== '') url.searchParams.append(k, v);
             });
 
-            const res = await fetch(url.toString(), fetchOptions);
+            const res = await fetch(url.toString(), { ...fetchOptions, headers: authHeaders(fetchOptions.headers || {}) });
+            handleSessionExpired(res);
             let raw = '';
             let data;
             try {
@@ -982,7 +998,7 @@
                 throw new Error(`Phản hồi từ máy chủ không hợp lệ (không phải JSON). [HTTP ${res.status}] ${snippet}`);
             }
             if (!res.ok || data?.status === 'error') {
-                throw new Error(data?.message || 'Đã có lỗi xảy ra từ API.');
+                throw new Error(data?.message || data?.msg || 'Đã có lỗi xảy ra từ API.');
             }
             return data;
         }
@@ -1012,12 +1028,13 @@
         }
 
         async function uploadImage(file, type) {
-            const url = new URL(API_BASE);
+            const url = new URL(API_BASE, location.origin);
             url.searchParams.append('action', 'upload');
             url.searchParams.append('type', type); // 'products' | 'blogs'
             const fd = new FormData();
             fd.append('image', file);
-            const res = await fetch(url.toString(), { method: 'POST', body: fd });
+            const res = await fetch(url.toString(), { method: 'POST', body: fd, headers: authHeaders() });
+            handleSessionExpired(res);
             let raw = '';
             let data;
             try {
@@ -1029,7 +1046,7 @@
                 throw new Error(`Tải ảnh lên thất bại — phản hồi không hợp lệ. [HTTP ${res.status}] ${snippet}`);
             }
             if (data.status !== 'success' || !data.url) {
-                throw new Error(data.message || 'Tải ảnh lên thất bại.');
+                throw new Error(data.message || data.msg || 'Tải ảnh lên thất bại.');
             }
             return data.url;
         }
@@ -1196,6 +1213,7 @@
             if (saved) {
                 try {
                     const admin = JSON.parse(saved);
+                    if (!admin || !admin.token) throw new Error('no token');
                     showDashboard(admin);
                 } catch (e) {
                     localStorage.removeItem(ADMIN_STORAGE_KEY);
@@ -1308,7 +1326,7 @@
                 if (!res.ok || data?.status !== 'success') {
                     throw new Error(data?.msg || data?.message || 'Sai tên đăng nhập hoặc mật khẩu.');
                 }
-                localStorage.setItem(ADMIN_STORAGE_KEY, JSON.stringify(data.admin || {}));
+                localStorage.setItem(ADMIN_STORAGE_KEY, JSON.stringify({ ...(data.admin || {}), token: data.token }));
                 showToast(data.msg || 'Đăng nhập thành công', 'success');
                 document.getElementById('login-form').reset();
                 showDashboard(data.admin || {});

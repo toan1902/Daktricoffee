@@ -381,7 +381,7 @@
         </div>
         <div class="step">
           <div class="step-img">
-            <img src="https://libericakhesanh.net/assets/images/cammon/ca-phe-bot.jpg"
+            <img src="/assets/images/home/quy-trinh-rang.webp" loading="lazy" decoding="async"
               alt="Xay hạt cà phê Liberica thành bột sau khi rang" />
           </div>
           <div class="step-body">
@@ -394,7 +394,7 @@
 
         <div class="step">
           <div class="step-img">
-            <img src="https://libericakhesanh.net/assets/images/cammon/baobiliberica.jpg"
+            <img src="/assets/images/products/liberica-daktri-khe-sanh.webp" loading="lazy" decoding="async"
               alt="Đóng gói cà phê Liberica sau khi rang" />
           </div>
           <div class="step-body">
@@ -724,7 +724,7 @@
   <script src="/assets/js/nav-mobile.js"></script>
   <script>
     // ======================= RENDER PRODUCTS =======================
-    const API_BASE = 'https://libericakhesanh.net/api/index.php';
+    const API_BASE = '/api/cms';
 
     async function loadProducts() {
       const grid = document.getElementById('product-grid');
@@ -754,7 +754,7 @@
                 <article class="product-card">
                     <div class="product-image">
                         ${product.image_url ? `
-                            <img src="${product.image_url.startsWith('/') ? 'https://libericakhesanh.net' : ''}${product.image_url}"
+                            <img src="${product.image_url}"
                                  alt="${escapeHtml(product.name)}" loading="lazy"/>
                         ` : '<div class="no-image">Không có ảnh</div>'}
                         

@@ -1,9 +1,9 @@
 // Trang chủ: render sẵn danh sách sản phẩm để Google đọc được tên, giá, mô tả
-const { apiGet, readTemplate } = require('./_lib/blog');
+const { readTemplate } = require('./_lib/blog');
+const store = require('./_lib/store');
 
 const fs = require('fs');
 const path = require('path');
-const SITE_BASE = 'https://libericakhesanh.net';
 
 // Sản phẩm lưu sẵn trong repo, dùng khi API libericakhesanh.net lỗi
 function localProducts() {
@@ -40,9 +40,7 @@ function formatWeight(weight) {
 }
 
 function img(u) {
-  if (!u) return '';
-  if (u.startsWith('/assets/')) return u; // ảnh lưu trên daktri.vn
-  return (u.startsWith('/') ? SITE_BASE : '') + u;
+  return u || '';
 }
 
 function card(p) {
@@ -78,7 +76,7 @@ function productLd(products) {
         '@type': 'Product',
         name: p.name,
         description: p.description || undefined,
-        image: p.image_url ? (p.image_url.startsWith('/assets/') ? 'https://daktri.vn' + p.image_url : img(p.image_url)) : undefined,
+        image: p.image_url ? (p.image_url.startsWith('/') ? 'https://daktri.vn' + p.image_url : p.image_url) : undefined,
         brand: { '@type': 'Brand', name: 'Daktri' },
         url: 'https://daktri.vn/#products',
       };
@@ -101,16 +99,9 @@ function productLd(products) {
 module.exports = async (req, res) => {
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   let html = readTemplate('home.html');
-  let products = null;
-  let fromApi = false;
-  try {
-    const { ok, json } = await apiGet('table=products&action=list&limit=12');
-    products = ok && json && json.status === 'success' && Array.isArray(json.data) && json.data.length ? json.data : null;
-    fromApi = !!products;
-  } catch (err) {
-    console.error('home ssr error', err && err.message, err && err.cause && (err.cause.code || err.cause.message));
-  }
-  if (!products) products = localProducts();
+  let products = await store.publicProducts();
+  const fromStore = !!(products && products.length);
+  if (!fromStore) products = localProducts();
   try {
 
     if (products.length) {
@@ -120,7 +111,7 @@ module.exports = async (req, res) => {
         .replace('</head>', `  <script type="application/ld+json">${JSON.stringify(productLd(products)).replace(/</g, '\\u003c')}</script>\n</head>`);
     }
     res.statusCode = 200;
-    res.setHeader('Cache-Control', fromApi ? 'public, s-maxage=300, stale-while-revalidate=86400' : 'public, s-maxage=120, stale-while-revalidate=86400');
+    res.setHeader('Cache-Control', fromStore ? 'public, s-maxage=300, stale-while-revalidate=86400' : 'public, s-maxage=120, stale-while-revalidate=86400');
   } catch (err) {
     console.error('home render error', err && err.message);
     res.statusCode = 200;
