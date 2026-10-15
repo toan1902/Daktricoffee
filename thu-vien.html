@@ -44,21 +44,19 @@
       .tv-title{font-family:'Fraunces',Georgia,serif;font-size:clamp(2rem,5vw,3.2rem);line-height:1.1;color:#1a2e1e;margin-bottom:1rem}
       .tv-title em{font-style:italic;color:#2e6b3f}
       .tv-desc{color:#555;line-height:1.75}
-      .tv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+      .tv-grid{display:grid;align-items:start;grid-template-columns:repeat(3,1fr);gap:14px}
       .tv-item{margin:0;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 14px rgba(0,0,0,.06);display:flex;flex-direction:column}
       .tv-item a{display:block;overflow:hidden;aspect-ratio:4/3}
-      .tv-wide{grid-column:span 2}
-      .tv-wide a{aspect-ratio:16/9}
-      .tv-tall{grid-row:span 2}
-      .tv-tall a{aspect-ratio:auto;flex:1}
-      .tv-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+      .tv-full{grid-column:1/-1}
+      .tv-full a{aspect-ratio:21/9}
+                  .tv-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
       .tv-item a:hover img{transform:scale(1.04)}
       .tv-item figcaption{padding:10px 14px 12px;font-size:.85rem;color:#555;line-height:1.5}
       .tv-note{text-align:center;color:#777;font-size:.85rem;margin-top:2rem}
       .tv-cta{text-align:center;margin-top:1.5rem}
       .tv-cta a{display:inline-block;background:#2e6b3f;color:#fff;padding:12px 26px;border-radius:999px;text-decoration:none;font-weight:600}
       @media (max-width:900px){.tv-grid{grid-template-columns:repeat(2,1fr)}}
-      @media (max-width:600px){.tv-grid{grid-template-columns:1fr}.tv-wide{grid-column:auto}.tv-tall{grid-row:auto}.tv-tall a{aspect-ratio:4/3}.tv-main{padding-top:6rem}}
+      @media (max-width:600px){.tv-grid{grid-template-columns:1fr}.tv-full a{aspect-ratio:4/3}.tv-main{padding-top:6rem}}
       .tv-lb{position:fixed;inset:0;background:rgba(10,20,12,.92);display:none;align-items:center;justify-content:center;z-index:9999;flex-direction:column;padding:16px}
       .tv-lb.open{display:flex}
       .tv-lb img{max-width:100%;max-height:82vh;border-radius:8px}
@@ -87,8 +85,8 @@
             <li><a href="/#origin">Vùng nguyên liệu</a></li>
             <li><a href="/#beliefs">Tuyên ngôn</a></li>
             <li><a href="/blog">Blog</a></li>
-            <li><a href="/thu-vien">Thư viện</a></li>
             <li><a href="/about.html">Về Chúng Tôi</a></li>
+            <li><a href="/thu-vien">Thư viện</a></li>
 
         </ul>
         <div class="nav-right">
@@ -118,7 +116,7 @@
         <p class="tv-desc">Những hình ảnh chụp tại vườn của HTX Daktri vào tháng 7/2026: đồi đất đỏ, tán Liberica, rừng xen vườn và những người đang ngày ngày giữ vườn.</p>
       </header>
       <div class="tv-grid">
-      <figure class="tv-item tv-wide">
+      <figure class="tv-item tv-full">
         <a href="/assets/images/thu-vien/doi-khe-sanh-toan-canh.webp" data-idx="0">
           <img src="/assets/images/thu-vien/doi-khe-sanh-toan-canh-800.webp"
                srcset="/assets/images/thu-vien/doi-khe-sanh-toan-canh-800.webp 800w, /assets/images/thu-vien/doi-khe-sanh-toan-canh.webp 1600w"
@@ -145,7 +143,7 @@
         </a>
         <figcaption>Lá Liberica to, dày — dễ nhận ra giữa các giống cà phê</figcaption>
       </figure>
-      <figure class="tv-item tv-tall">
+      <figure class="tv-item ">
         <a href="/assets/images/thu-vien/nguoi-giu-vuon.webp" data-idx="3">
           <img src="/assets/images/thu-vien/nguoi-giu-vuon-800.webp"
                srcset="/assets/images/thu-vien/nguoi-giu-vuon-800.webp 800w, /assets/images/thu-vien/nguoi-giu-vuon.webp 1600w"
@@ -154,7 +152,7 @@
         </a>
         <figcaption>Người giữ vườn bên cây Liberica</figcaption>
       </figure>
-      <figure class="tv-item tv-wide">
+      <figure class="tv-item ">
         <a href="/assets/images/thu-vien/tan-cay-liberica.webp" data-idx="4">
           <img src="/assets/images/thu-vien/tan-cay-liberica-800.webp"
                srcset="/assets/images/thu-vien/tan-cay-liberica-800.webp 800w, /assets/images/thu-vien/tan-cay-liberica.webp 1600w"
@@ -190,15 +188,6 @@
         </a>
         <figcaption>Một gốc Liberica trên đất đỏ đồi Khe Sanh</figcaption>
       </figure>
-      <figure class="tv-item tv-wide">
-        <a href="/assets/images/thu-vien/vuon-tren-suon-doi.webp" data-idx="8">
-          <img src="/assets/images/thu-vien/vuon-tren-suon-doi-800.webp"
-               srcset="/assets/images/thu-vien/vuon-tren-suon-doi-800.webp 800w, /assets/images/thu-vien/vuon-tren-suon-doi.webp 1600w"
-               sizes="(max-width: 700px) 100vw, 50vw" width="800" height="600"
-               alt="Vườn trải theo sườn đồi, dưới bầu trời Trường Sơn" loading="lazy" decoding="async">
-        </a>
-        <figcaption>Vườn trải theo sườn đồi, dưới bầu trời Trường Sơn</figcaption>
-      </figure>
       <figure class="tv-item ">
         <a href="/assets/images/thu-vien/nha-san-ben-vuon.webp" data-idx="9">
           <img src="/assets/images/thu-vien/nha-san-ben-vuon-800.webp"
@@ -216,6 +205,15 @@
                alt="Gặp gỡ, pha cà phê cùng bà con và đối tác tại Khe Sanh" loading="lazy" decoding="async">
         </a>
         <figcaption>Gặp gỡ, pha cà phê cùng bà con và đối tác tại Khe Sanh</figcaption>
+      </figure>
+      <figure class="tv-item tv-full">
+        <a href="/assets/images/thu-vien/vuon-tren-suon-doi.webp" data-idx="8">
+          <img src="/assets/images/thu-vien/vuon-tren-suon-doi-800.webp"
+               srcset="/assets/images/thu-vien/vuon-tren-suon-doi-800.webp 800w, /assets/images/thu-vien/vuon-tren-suon-doi.webp 1600w"
+               sizes="(max-width: 700px) 100vw, 50vw" width="800" height="600"
+               alt="Vườn trải theo sườn đồi, dưới bầu trời Trường Sơn" loading="lazy" decoding="async">
+        </a>
+        <figcaption>Vườn trải theo sườn đồi, dưới bầu trời Trường Sơn</figcaption>
       </figure>
       </div>
       <p class="tv-note">Ảnh: HTX Daktri Khe Sanh. Vui lòng ghi nguồn daktri.vn khi sử dụng lại.</p>
