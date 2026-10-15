@@ -283,8 +283,11 @@ const ARCHIVE_BAR = `
   <span style="display:flex;gap:16px;flex-wrap:wrap"><a href="/blog" style="color:#f5a623;text-decoration:none">← Tất cả bài viết</a><a href="/#products" style="color:#faf7f0;text-decoration:none">Sản phẩm</a><a href="tel:0941336669" style="color:#faf7f0;text-decoration:none">📞 0941 336 669</a></span>
 </div>`;
 
-function renderArchivedPost(slug) {
-  const meta = readArchiveIndex().find(p => p.slug === slug);
+function renderArchivedPost(slug, override) {
+  const base = readArchiveIndex().find(p => p.slug === slug);
+  const meta = base && override
+    ? { ...base, title: override.title || base.title, excerpt: override.excerpt || base.excerpt, image: override.cover_image || base.image }
+    : base;
   if (!meta) return null;
   let html;
   try {
@@ -293,7 +296,7 @@ function renderArchivedPost(slug) {
     return null;
   }
   const url = `${DOMAIN}/blog/${encodeURIComponent(slug)}`;
-  const image = meta.image ? DOMAIN + meta.image : DOMAIN + '/assets/images/og-daktri.jpg';
+  const image = meta.image ? (meta.image.startsWith('/') ? DOMAIN + meta.image : meta.image) : DOMAIN + '/assets/images/og-daktri.jpg';
   const published = toDate(meta.created_at);
   const ld = {
     '@context': 'https://schema.org',

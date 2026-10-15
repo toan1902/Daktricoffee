@@ -152,6 +152,13 @@ export async function POST(request) {
       if (table === 'products' && 'slug' in fields) fields.slug = slugify(fields.slug || fields.name);
       if (table === 'blog_blocks' && 'type' in fields && !BLOCK_TYPES.has(fields.type)) throw new Error('Loại khối không hợp lệ.');
 
+      // sửa khối của bài cũ -> trang công khai chuyển sang hiển thị theo khối
+      if (table === 'blog_blocks') {
+        const target = action === 'create' ? fields.blog_id : (list.find(x => x.id === id) || {}).blog_id;
+        const blog = (db.blogs || []).find(b => b.id === target);
+        if (blog && blog.layout === 'legacy') blog.layout = 'blocks';
+      }
+
       if (action === 'create') {
         if (table === 'blogs') {
           if (!fields.slug) fields.slug = slugify(fields.title);

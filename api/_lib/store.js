@@ -39,6 +39,57 @@ function seedDb() {
   };
 }
 
+// Đưa các bài lưu sẵn (data/blog-archive) vào kho một lần, để admin thấy và sửa được.
+// Bài nhập vào có layout 'legacy': trang công khai vẫn hiện giao diện gốc cho tới khi
+// bạn sửa nội dung khối trong admin (khi đó chuyển sang layout 'blocks').
+function importLegacy(db) {
+  if (db.legacy_imported) return db;
+  let index = [];
+  try {
+    index = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data', 'blog-archive', 'index.json'), 'utf8'));
+  } catch (e) {
+    return db;
+  }
+  db.blogs = db.blogs || [];
+  db.blog_blocks = db.blog_blocks || [];
+  db.seq = db.seq || {};
+  const sorted = index.slice().sort((a, b) => String(a.created_at).localeCompare(String(b.created_at)));
+  for (const it of sorted) {
+    if (db.blogs.some(b => b.slug === it.slug)) continue;
+    let blocks = [];
+    try {
+      blocks = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data', 'blog-archive', `${it.slug}.blocks.json`), 'utf8'));
+    } catch (e) { /* bài không có khối */ }
+    const id = (db.seq.blogs = Math.max(db.seq.blogs || 0, ...db.blogs.map(b => b.id || 0)) + 1);
+    db.blogs.push({
+      id,
+      title: it.title,
+      slug: it.slug,
+      excerpt: it.excerpt || '',
+      cover_image: it.image || '',
+      author: 'HTX Daktri Khe Sanh',
+      status: 'published',
+      layout: 'legacy',
+      created_at: it.created_at,
+      updated_at: it.created_at,
+    });
+    blocks.forEach((b, i) => {
+      const bid = (db.seq.blog_blocks = Math.max(db.seq.blog_blocks || 0, ...db.blog_blocks.map(x => x.id || 0)) + 1);
+      db.blog_blocks.push({
+        id: bid,
+        blog_id: id,
+        type: b.type,
+        position: i + 1,
+        content: typeof b.content === 'string' ? b.content : JSON.stringify(b.content),
+        created_at: it.created_at,
+        updated_at: it.created_at,
+      });
+    });
+  }
+  db.legacy_imported = true;
+  return db;
+}
+
 async function streamToString(stream) {
   const chunks = [];
   for await (const c of stream) chunks.push(Buffer.from(c));
@@ -50,8 +101,8 @@ async function streamToString(stream) {
 async function readDb({ fresh = false } = {}) {
   if (!blobEnabled()) return { db: null, etag: null };
   const res = await blob().get(DB_PATH, { access: 'private', useCache: !fresh });
-  if (!res || res.statusCode !== 200 || !res.stream) return { db: seedDb(), etag: null, seeded: true };
-  const db = JSON.parse(await streamToString(res.stream));
+  if (!res || res.statusCode !== 200 || !res.stream) return { db: importLegacy(seedDb()), etag: null, seeded: true };
+  const db = importLegacy(JSON.parse(await streamToString(res.stream)));
   return { db, etag: res.blob && res.blob.etag };
 }
 
@@ -114,6 +165,7 @@ function blocksOf(db, blogId) {
     .sort((a, b) => (a.position || 0) - (b.position || 0));
 }
 
+// Trả về null nếu chưa có kho (nơi gọi dùng bản lưu sẵn), ngược lại là danh sách bài đã xuất bản
 async function publicBlogs() {
   try {
     const { db } = await readDb();
@@ -121,19 +173,20 @@ async function publicBlogs() {
   } catch (e) {
     console.error('store blogs error', e && e.message);
   }
-  return [];
+  return null;
 }
 
+// Trả về: undefined = chưa có kho (dùng bản lưu sẵn); null = kho không có/ẩn bài này; object = bài
 async function publicBlogBySlug(slug) {
   try {
     const { db } = await readDb();
-    if (!db) return null;
+    if (!db) return undefined;
     const b = (db.blogs || []).find(x => x.slug === slug && x.status !== 'draft');
     if (!b) return null;
     return { ...b, blocks: blocksOf(db, b.id) };
   } catch (e) {
     console.error('store blog error', e && e.message);
-    return null;
+    return undefined;
   }
 }
 

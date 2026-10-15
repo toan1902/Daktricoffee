@@ -11,8 +11,16 @@ module.exports = async (req, res) => {
     return res.end(renderPostFallback(slug, { notFound: true }));
   }
 
-  // 1) Bài đăng qua admin daktri.vn
+  // 1) Bài trong kho daktri.vn
   const post = await store.publicBlogBySlug(slug);
+  if (post && post.layout === 'legacy') {
+    const archived = renderArchivedPost(slug, post);
+    if (archived) {
+      res.statusCode = 200;
+      res.setHeader('Cache-Control', 'public, s-maxage=120, stale-while-revalidate=86400');
+      return res.end(archived);
+    }
+  }
   if (post && post.title) {
     try {
       const html = renderPost(post);
@@ -24,8 +32,8 @@ module.exports = async (req, res) => {
     }
   }
 
-  // 2) Bài lưu sẵn trong repo
-  const archived = renderArchivedPost(slug);
+  // 2) Chưa có kho (post === undefined): dùng bài lưu sẵn trong repo
+  const archived = post === undefined ? renderArchivedPost(slug) : null;
   if (archived) {
     res.statusCode = 200;
     res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=86400');

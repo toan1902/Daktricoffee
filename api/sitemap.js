@@ -14,12 +14,13 @@ const STATIC_PAGES = [
 const xmlEsc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 module.exports = async (req, res) => {
-  let blogs = (await store.publicBlogs()).slice();
+  const fromStore = await store.publicBlogs();
+  let blogs = (fromStore || []).slice();
   const ok = true;
 
   // gộp bài lưu sẵn (khi API lỗi vẫn đủ bài trong sitemap)
   const seen = new Set(blogs.map(b => b.slug));
-  readArchiveIndex().forEach(b => { if (!seen.has(b.slug)) blogs.push(b); });
+  if (!fromStore) readArchiveIndex().forEach(b => { if (!seen.has(b.slug)) blogs.push(b); });
 
   const urls = STATIC_PAGES.map(p => `  <url>
     <loc>${DOMAIN}${p.loc === '/' ? '/' : p.loc}</loc>
