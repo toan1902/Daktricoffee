@@ -32,7 +32,7 @@ module.exports = async (req, res) => {
     res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=86400');
     return res.end(renderPost(data));
   } catch (err) {
-    console.error('blog ssr error', slug, err && err.message);
+    console.error('blog ssr error', slug, err && err.message, err && err.cause && (err.cause.code || err.cause.message));
     // API lỗi tạm thời: trả template để trình duyệt tự tải nội dung, không cache
     res.statusCode = 200;
     res.setHeader('Cache-Control', 'no-store');

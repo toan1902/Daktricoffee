@@ -103,7 +103,7 @@ module.exports = async (req, res) => {
     res.statusCode = 200;
     res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=86400');
   } catch (err) {
-    console.error('home ssr error', err && err.message);
+    console.error('home ssr error', err && err.message, err && err.cause && (err.cause.code || err.cause.message));
     res.statusCode = 200;
     res.setHeader('Cache-Control', 'public, s-maxage=30');
   }
