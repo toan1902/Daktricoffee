@@ -106,32 +106,38 @@ async function readDb({ fresh = false } = {}) {
   return { db, etag: res.blob && res.blob.etag };
 }
 
-async function saveDb(db, etag) {
-  const opts = {
+async function saveDb(db) {
+  const body = JSON.stringify(db);
+  // Ghi đè bản chính (một người quản trị nên không cần khoá ETag — khoá ETag gây lỗi "Precondition failed")
+  await blob().put(DB_PATH, body, {
     access: 'private',
     contentType: 'application/json; charset=utf-8',
     addRandomSuffix: false,
     allowOverwrite: true,
     cacheControlMaxAge: 60,
-  };
-  if (etag) opts.ifMatch = etag;
-  return blob().put(DB_PATH, JSON.stringify(db), opts);
+  });
+  // Bản sao lưu theo ngày (giờ VN) — lỡ sửa nhầm vẫn khôi phục được
+  const day = nowStr().slice(0, 10);
+  try {
+    await blob().put(`cms/backup/db-${day}.json`, body, {
+      access: 'private',
+      contentType: 'application/json; charset=utf-8',
+      addRandomSuffix: false,
+      allowOverwrite: true,
+      cacheControlMaxAge: 60,
+    });
+  } catch (e) {
+    console.error('backup error', e && e.message);
+  }
 }
 
-// Sửa DB an toàn: đọc mới nhất -> sửa -> ghi có kiểm tra ETag (thử lại nếu bị ghi đè đồng thời)
+// Sửa DB: đọc bản mới nhất -> sửa -> ghi
 async function mutateDb(fn) {
-  for (let attempt = 0; attempt < 3; attempt++) {
-    const { db, etag } = await readDb({ fresh: true });
-    if (!db) throw new Error('Chưa kết nối kho dữ liệu (Vercel Blob).');
-    const result = await fn(db);
-    try {
-      await saveDb(db, etag);
-      return result;
-    } catch (e) {
-      if (e && /precondition/i.test(e.name + e.message) && attempt < 2) continue;
-      throw e;
-    }
-  }
+  const { db } = await readDb({ fresh: true });
+  if (!db) throw new Error('Chưa kết nối kho dữ liệu (Vercel Blob).');
+  const result = await fn(db);
+  await saveDb(db);
+  return result;
 }
 
 async function putMedia(pathname, buffer, contentType) {
