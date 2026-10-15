@@ -8,7 +8,7 @@ const STATIC_PAGES = [
   { loc: '/about', changefreq: 'monthly', priority: '0.6' },
   { loc: '/thu-vien', changefreq: 'monthly', priority: '0.6' },
   { loc: '/tuyen-ngon', changefreq: 'monthly', priority: '0.6' },
-  { loc: '/qr/liberica', changefreq: 'yearly', priority: '0.4' },
+  { loc: '/truy-xuat', changefreq: 'weekly', priority: '0.5' },
 ];
 
 const xmlEsc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');

@@ -42,6 +42,24 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 
+  <style>
+    .of{max-width:640px;margin:2.2rem auto 0;text-align:left;background:#fff;border:1px solid #e6e0d4;border-radius:16px;padding:20px;box-shadow:0 10px 30px rgba(26,46,30,.06)}
+    .of-title{font-weight:600;color:#1a2e1e;margin:0 0 12px;font-size:.98rem}
+    .of label{display:block;font-size:.82rem;color:#666;margin:0 0 10px}
+    .of input,.of textarea,.of select{display:block;width:100%;margin-top:4px;padding:10px 12px;border:1px solid #d9d2c3;border-radius:10px;font:inherit;font-size:.95rem;background:#fff;color:#1a2e1e;box-sizing:border-box}
+    .of-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .of-row{display:grid;grid-template-columns:1fr 90px 34px;gap:8px;align-items:end;margin-bottom:8px}
+    .of-row button{height:42px;border:1px solid #e6e0d4;background:#faf7f0;border-radius:10px;cursor:pointer;color:#999}
+    .of-add{background:none;border:0;color:#2e6b3f;font-weight:600;cursor:pointer;padding:2px 0 12px;font-size:.88rem}
+    .of-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:4px}
+    .of-total{font-weight:700;color:#1a2e1e}
+    .of-submit{background:#2e6b3f;color:#fff;border:0;border-radius:999px;padding:12px 24px;font-weight:600;cursor:pointer;font-size:.95rem}
+    .of-submit[disabled]{opacity:.6;cursor:wait}
+    .of-msg{margin:10px 0 0;font-size:.92rem;min-height:1em}
+    .of-msg.ok{color:#2e6b3f}.of-msg.err{color:#b3261e}
+    .of-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+    @media (max-width:600px){.of-grid{grid-template-columns:1fr}.of{padding:16px}}
+  </style>
 </head>
 
 <body>
@@ -649,6 +667,25 @@
           Nhắn Zalo
         </a>
       </div>
+
+      <!-- FORM ĐẶT HÀNG -->
+      <form id="order-form" class="of" novalidate>
+        <p class="of-title">Hoặc để lại thông tin — HTX gọi lại xác nhận trong ngày</p>
+        <div id="of-items"></div>
+        <button type="button" class="of-add" id="of-add">+ Thêm sản phẩm</button>
+        <div class="of-grid">
+          <label>Họ tên *<input name="name" required maxlength="80" autocomplete="name"></label>
+          <label>Số điện thoại *<input name="phone" required inputmode="tel" maxlength="20" autocomplete="tel"></label>
+        </div>
+        <label>Địa chỉ nhận hàng<input name="address" maxlength="300" autocomplete="street-address"></label>
+        <label>Ghi chú<textarea name="note" rows="2" maxlength="800" placeholder="Xay pha phin / để nguyên hạt, thời gian nhận hàng…"></textarea></label>
+        <input name="website" tabindex="-1" autocomplete="off" class="of-hp" aria-hidden="true">
+        <div class="of-foot">
+          <span class="of-total" id="of-total"></span>
+          <button type="submit" class="of-submit" id="of-submit">Gửi đơn đặt hàng</button>
+        </div>
+        <p class="of-msg" id="of-msg" role="status"></p>
+      </form>
     </div>
   </section>
 
@@ -780,7 +817,7 @@
                                 ${Number(product.price).toLocaleString('vi-VN')}<small>đ</small>
                                 ${formatWeight(product.weight)}
                             </div>
-                            <a href="#order" class="product-buy">Đặt mua</a>
+                            <a href="#order" class="product-buy" data-product="${escapeHtml(product.name)}">Đặt mua</a>
                         </div>
                     </div>
                 </article>
@@ -850,6 +887,74 @@
       if (grid && grid.dataset.ssr === '1') return;
       loadProducts();
     });
+  </script>
+  <script>
+    // ======================= FORM ĐẶT HÀNG =======================
+    (function () {
+      const form = document.getElementById('order-form');
+      if (!form) return;
+      const box = document.getElementById('of-items');
+      const totalEl = document.getElementById('of-total');
+      const msg = document.getElementById('of-msg');
+      const list = Array.isArray(window.__PRODUCTS__) ? window.__PRODUCTS__ : [];
+      const fmt = n => Number(n || 0).toLocaleString('vi-VN') + 'đ';
+      const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+      function addRow(name) {
+        const row = document.createElement('div');
+        row.className = 'of-row';
+        row.innerHTML = `<label>Sản phẩm<select name="p">${list.map(p => `<option value="${esc(p.name)}">${esc(p.name)}${p.weight ? ' · ' + p.weight + 'g' : ''} — ${fmt(p.price)}</option>`).join('')}<option value="Khác (ghi chú)">Sản phẩm khác (ghi trong ghi chú)</option></select></label>
+          <label>Số lượng<input name="q" type="number" min="1" max="999" value="1"></label>
+          <button type="button" aria-label="Bỏ dòng">✕</button>`;
+        if (name) row.querySelector('select').value = name;
+        row.querySelector('button').onclick = () => { if (box.children.length > 1) { row.remove(); update(); } };
+        row.addEventListener('input', update);
+        box.appendChild(row);
+        update();
+      }
+      function items() {
+        return [...box.querySelectorAll('.of-row')].map(r => ({ name: r.querySelector('select').value, qty: parseInt(r.querySelector('input').value, 10) || 1 }));
+      }
+      function update() {
+        const t = items().reduce((s, i) => { const p = list.find(x => x.name === i.name); return s + (p ? (Number(p.price) || 0) * i.qty : 0); }, 0);
+        totalEl.textContent = t ? 'Tạm tính: ' + fmt(t) : '';
+      }
+      document.getElementById('of-add').onclick = () => addRow();
+      addRow();
+
+      // Nút "Đặt mua" trên thẻ sản phẩm: chọn sẵn sản phẩm đó
+      document.addEventListener('click', e => {
+        const a = e.target.closest('.product-buy');
+        if (!a) return;
+        const name = a.dataset.product || (a.closest('.product-card')?.querySelector('.product-name')?.textContent || '').trim();
+        const first = box.querySelector('select');
+        if (name && first && [...first.options].some(o => o.value === name)) { first.value = name; update(); }
+        setTimeout(() => form.querySelector('[name=name]').focus({ preventScroll: true }), 600);
+      });
+
+      form.addEventListener('submit', async e => {
+        e.preventDefault();
+        msg.className = 'of-msg'; msg.textContent = '';
+        const fd = new FormData(form);
+        const payload = { name: fd.get('name'), phone: fd.get('phone'), address: fd.get('address'), note: fd.get('note'), website: fd.get('website'), items: items(), source: 'web' };
+        if (!String(payload.name || '').trim() || !String(payload.phone || '').trim()) { msg.className = 'of-msg err'; msg.textContent = 'Vui lòng nhập họ tên và số điện thoại.'; return; }
+        const btn = document.getElementById('of-submit');
+        btn.disabled = true; btn.textContent = 'Đang gửi…';
+        try {
+          const r = await fetch('/api/order', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+          const d = await r.json();
+          if (!r.ok || d.status !== 'success') throw new Error(d.msg || 'Chưa gửi được đơn.');
+          form.reset(); box.innerHTML = ''; addRow();
+          msg.className = 'of-msg ok';
+          msg.innerHTML = `✓ Đã nhận đơn <strong>${esc(d.code)}</strong>. HTX sẽ gọi lại xác nhận trong ngày. Cần gấp? Gọi <a href="tel:0941336669">0941 336 669</a>.`;
+        } catch (err) {
+          msg.className = 'of-msg err';
+          msg.innerHTML = esc(err.message) + ' Bạn có thể gọi <a href="tel:0941336669">0941 336 669</a> hoặc <a href="https://zalo.me/0941336669">nhắn Zalo</a>.';
+        } finally {
+          btn.disabled = false; btn.textContent = 'Gửi đơn đặt hàng';
+        }
+      });
+    })();
   </script>
 </body>
 

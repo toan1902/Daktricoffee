@@ -236,7 +236,53 @@ function verifyToken(token) {
   }
 }
 
+// ---------- Đơn hàng: mỗi đơn là một file riêng orders/<thời gian>-<mã>.json ----------
+async function putJson(pathname, obj, { overwrite = false } = {}) {
+  return blob().put(pathname, JSON.stringify(obj), {
+    access: 'private',
+    contentType: 'application/json; charset=utf-8',
+    addRandomSuffix: false,
+    allowOverwrite: overwrite,
+    cacheControlMaxAge: 60,
+  });
+}
+
+async function getJson(pathname, { fresh = true } = {}) {
+  const res = await blob().get(pathname, { access: 'private', useCache: !fresh });
+  if (!res || res.statusCode !== 200 || !res.stream) return null;
+  return JSON.parse(await streamToString(res.stream));
+}
+
+async function listOrders(limit = 200) {
+  const out = [];
+  let cursor;
+  do {
+    const r = await blob().list({ prefix: 'orders/', limit: 1000, cursor });
+    out.push(...r.blobs);
+    cursor = r.hasMore ? r.cursor : undefined;
+  } while (cursor && out.length < 5000);
+  out.sort((a, b) => String(b.pathname).localeCompare(String(a.pathname)));
+  const picked = out.slice(0, limit);
+  const rows = await Promise.all(picked.map(async b => {
+    try {
+      const o = await getJson(b.pathname);
+      return o ? { ...o, id: b.pathname } : null;
+    } catch (e) {
+      return null;
+    }
+  }));
+  return { rows: rows.filter(Boolean), total: out.length };
+}
+
+async function deleteBlob(pathname) {
+  return blob().del(pathname);
+}
+
 module.exports = {
+  putJson,
+  getJson,
+  listOrders,
+  deleteBlob,
   DB_PATH,
   blobEnabled,
   nowStr,

@@ -3,7 +3,7 @@
   "trailingSlash": false,
   "functions": {
     "api/**/*.js": {
-      "includeFiles": "{templates/**,data/**}",
+      "includeFiles": "{templates/**,data/**,about.html}",
       "maxDuration": 15
     },
     "api/**/*.mjs": {
@@ -15,6 +15,18 @@
     {
       "source": "/",
       "destination": "/api/home"
+    },
+    {
+      "source": "/qr/:p",
+      "destination": "/api/trace?p=:p"
+    },
+    {
+      "source": "/truy-xuat",
+      "destination": "/api/trace"
+    },
+    {
+      "source": "/truy-xuat/:code",
+      "destination": "/api/trace?code=:code"
     },
     {
       "source": "/media/:path*",

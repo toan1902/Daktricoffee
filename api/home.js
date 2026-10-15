@@ -60,7 +60,7 @@ function card(p) {
             ${isNaN(price) ? '' : price.toLocaleString('vi-VN')}<small>đ</small>
             ${formatWeight(p.weight)}
           </div>
-          <a href="#order" class="product-buy">Đặt mua</a>
+          <a href="#order" class="product-buy" data-product="${esc(p.name)}">Đặt mua</a>
         </div>
       </div>
     </article>`;
@@ -102,6 +102,9 @@ module.exports = async (req, res) => {
   let products = await store.publicProducts();
   const fromStore = !!(products && products.length);
   if (!fromStore) products = localProducts();
+  // danh sách sản phẩm cho form đặt hàng
+  const forForm = products.map(p => ({ name: p.name, price: Number(p.price) || 0, weight: Number(p.weight) || 0 }));
+  html = html.replace('</head>', `  <script>window.__PRODUCTS__ = ${JSON.stringify(forForm).replace(/</g, '\\u003c')};</script>\n</head>`);
   try {
 
     if (products.length) {

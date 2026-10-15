@@ -7,7 +7,10 @@ const TABLES = {
   products: ['name', 'slug', 'description', 'price', 'weight', 'image_url', 'category', 'process_type', 'tags'],
   blogs: ['title', 'slug', 'excerpt', 'cover_image', 'author', 'status'],
   blog_blocks: ['blog_id', 'type', 'position', 'content'],
+  // Lô hàng để truy xuất nguồn gốc (trang /truy-xuat, mã QR trên bao bì)
+  lots: ['code', 'product_name', 'origin', 'farmer', 'harvest_date', 'process', 'drying', 'roast_date', 'roaster', 'roast_profile', 'lab_result', 'lab_url', 'note', 'status'],
 };
+const ORDER_STATUS = new Set(['new', 'confirmed', 'shipping', 'done', 'cancelled']);
 const NUMERIC = new Set(['price', 'weight', 'blog_id', 'position']);
 const BLOCK_TYPES = new Set(['heading', 'text', 'list', 'image', 'pullquote']);
 const IMAGE_TYPES = { 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp', 'image/gif': 'gif', 'image/avif': 'avif' };
@@ -58,10 +61,34 @@ export async function GET(request) {
   const action = url.searchParams.get('action') || 'list';
   const isAdmin = !!authed(request);
 
+  if (table === 'orders') {
+    if (!isAdmin) return fail(401, 'Cần đăng nhập để xem đơn hàng.');
+    if (!store.blobEnabled()) return fail(503, 'Chưa kết nối kho dữ liệu daktri.vn (Vercel Blob).');
+    const { rows } = await store.listOrders(300);
+    let items = rows;
+    const st = url.searchParams.get('status');
+    if (st) items = items.filter(o => o.status === st);
+    const q = (url.searchParams.get('search') || '').trim().toLowerCase();
+    if (q) items = items.filter(o => `${o.name} ${o.phone} ${o.code}`.toLowerCase().includes(q));
+    return json(200, paginate(items, url));
+  }
   if (!TABLES[table]) return fail(400, 'Bảng dữ liệu không hợp lệ.');
   if (!store.blobEnabled()) return fail(503, 'Chưa kết nối kho dữ liệu daktri.vn (Vercel Blob).');
 
   const { db } = await store.readDb({ fresh: isAdmin });
+
+  if (table === 'lots') {
+    let items = (db.lots || []).slice().sort(byNewest);
+    if (!isAdmin) items = items.filter(l => l.status !== 'draft');
+    const q = (url.searchParams.get('search') || '').trim().toLowerCase();
+    if (q) items = items.filter(l => `${l.code} ${l.product_name} ${l.origin} ${l.farmer}`.toLowerCase().includes(q));
+    if (action === 'detail') {
+      const code = (url.searchParams.get('code') || '').toUpperCase();
+      const l = items.find(x => String(x.code).toUpperCase() === code);
+      return l ? json(200, { status: 'success', data: l }) : fail(404, 'Không tìm thấy lô hàng.');
+    }
+    return json(200, paginate(items, url));
+  }
   const search = (url.searchParams.get('search') || '').trim().toLowerCase();
 
   if (table === 'products') {
@@ -131,6 +158,29 @@ export async function POST(request) {
 
   try {
     if (action === 'upload') return await handleUpload(request, url);
+
+    if (table === 'orders') {
+      const form = await request.formData();
+      const id = String(form.get('id') || '');
+      if (!/^orders\/[\w.-]+\.json$/.test(id)) return fail(400, 'Mã đơn không hợp lệ.');
+      if (action === 'delete') {
+        await store.deleteBlob(id);
+        return json(200, { status: 'success', msg: 'Đã xoá đơn', id });
+      }
+      if (action === 'update') {
+        const order = await store.getJson(id);
+        if (!order) return fail(404, 'Không tìm thấy đơn.');
+        const status = String(form.get('status') || order.status);
+        if (!ORDER_STATUS.has(status)) return fail(400, 'Trạng thái không hợp lệ.');
+        order.status = status;
+        if (form.has('admin_note')) order.admin_note = String(form.get('admin_note') || '').slice(0, 1000);
+        order.updated_at = store.nowStr();
+        await store.putJson(id, order, { overwrite: true });
+        return json(200, { status: 'success', msg: 'Đã cập nhật đơn', id, data: { ...order, id } });
+      }
+      return fail(400, 'Thao tác không hợp lệ.');
+    }
+
     if (!TABLES[table]) return fail(400, 'Bảng dữ liệu không hợp lệ.');
 
     const form = await request.formData();
@@ -150,6 +200,12 @@ export async function POST(request) {
         if ('status' in fields) fields.status = fields.status === 'published' ? 'published' : 'draft';
       }
       if (table === 'products' && 'slug' in fields) fields.slug = slugify(fields.slug || fields.name);
+      if (table === 'lots') {
+        if ('code' in fields) fields.code = String(fields.code || '').toUpperCase().replace(/[^A-Z0-9-]/g, '').slice(0, 40);
+        if (action === 'create' && !fields.code) throw new Error('Mã lô không được để trống (ví dụ: LIB-2526-01).');
+        if (fields.code && list.some(l => l.code === fields.code && l.id !== id)) throw new Error('Mã lô đã tồn tại.');
+        if ('status' in fields) fields.status = fields.status === 'draft' ? 'draft' : 'published';
+      }
       if (table === 'blog_blocks' && 'type' in fields && !BLOCK_TYPES.has(fields.type)) throw new Error('Loại khối không hợp lệ.');
 
       // sửa khối của bài cũ -> trang công khai chuyển sang hiển thị theo khối

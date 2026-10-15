@@ -419,6 +419,18 @@
                         </svg>
                         <span>Bài viết</span>
                     </button>
+                    <p class="px-3 pt-4 text-[10px] uppercase tracking-wider text-white/35 font-semibold mb-2">Bán hàng</p>
+                    <button data-tab="orders" onclick="switchTab('orders')"
+                        class="nav-btn tab-inactive w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="M6 2l-2 4v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6l-2-4z"></path><path d="M4 6h16"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                        <span>Đơn hàng</span>
+                        <span id="orders-new-badge" class="hidden ml-auto text-[10px] font-semibold bg-amber-400 text-ink rounded-full px-2 py-0.5"></span>
+                    </button>
+                    <button data-tab="lots" onclick="switchTab('lots')"
+                        class="nav-btn tab-inactive w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><path d="M14 14h3v3h-3zM18 18h3v3h-3z"></path></svg>
+                        <span>Lô hàng (truy xuất QR)</span>
+                    </button>
                 </nav>
 
                 <div class="px-4 py-4 border-t border-white/10 space-y-3">
@@ -605,12 +617,89 @@
                     </div>
                 </section>
 
+                <!-- ---------- ORDERS VIEW ---------- -->
+                <section id="view-orders" class="hidden flex-1 flex-col overflow-hidden">
+                    <header class="px-8 py-6 border-b border-line bg-white/70 backdrop-blur-sm flex items-center justify-between shrink-0">
+                        <div>
+                            <p class="text-[11px] uppercase tracking-wider text-moss-600 font-semibold mb-1">Bán hàng</p>
+                            <h1 class="font-display text-xl font-semibold tracking-tight">Đơn hàng</h1>
+                            <p class="text-sm text-ink/50 mt-0.5">Đơn khách gửi từ form trên daktri.vn</p>
+                        </div>
+                        <button onclick="loadOrders()" class="bg-white border border-line hover:bg-paper text-ink/80 text-sm font-medium px-4 py-2.5 rounded-lg">↻ Tải lại</button>
+                    </header>
+                    <div class="px-8 py-4 flex items-center gap-3 shrink-0 flex-wrap">
+                        <input id="order-search" oninput="renderOrders()" type="text" placeholder="Tìm theo tên, SĐT, mã đơn..." class="w-72 px-4 py-2.5 border border-line rounded-lg text-sm bg-white shadow-card">
+                        <select id="order-filter" onchange="renderOrders()" class="px-3 py-2.5 border border-line rounded-lg text-sm bg-white shadow-card">
+                            <option value="">Tất cả trạng thái</option>
+                            <option value="new">Mới</option><option value="confirmed">Đã xác nhận</option><option value="shipping">Đang giao</option><option value="done">Hoàn thành</option><option value="cancelled">Đã huỷ</option>
+                        </select>
+                        <span id="order-count" class="text-sm text-ink/40"></span>
+                    </div>
+                    <div class="flex-1 overflow-auto px-8 pb-6">
+                        <div id="orders-list" class="space-y-3"></div>
+                        <div id="orders-empty" class="hidden bg-white border border-line rounded-xl py-16 text-center text-ink/40 text-sm">Chưa có đơn hàng nào.</div>
+                    </div>
+                </section>
+
+                <!-- ---------- LOTS VIEW ---------- -->
+                <section id="view-lots" class="hidden flex-1 flex-col overflow-hidden">
+                    <header class="px-8 py-6 border-b border-line bg-white/70 backdrop-blur-sm flex items-center justify-between shrink-0">
+                        <div>
+                            <p class="text-[11px] uppercase tracking-wider text-moss-600 font-semibold mb-1">Truy xuất nguồn gốc</p>
+                            <h1 class="font-display text-xl font-semibold tracking-tight">Lô hàng</h1>
+                            <p class="text-sm text-ink/50 mt-0.5">Trang công khai: <a href="/truy-xuat" target="_blank" class="text-moss-600 underline">daktri.vn/truy-xuat</a> · mã QR từng lô: daktri.vn/truy-xuat/MÃ-LÔ</p>
+                        </div>
+                        <button onclick="openLotModal()" class="btn-primary bg-moss hover:bg-moss-600 text-white text-sm font-medium px-4 py-2.5 rounded-lg">+ Thêm lô hàng</button>
+                    </header>
+                    <div class="flex-1 overflow-auto px-8 py-5">
+                        <div class="bg-white border border-line rounded-xl overflow-hidden shadow-card">
+                            <table class="w-full text-sm">
+                                <thead><tr class="text-left text-ink/45 text-[11px] uppercase tracking-wide border-b border-line bg-paper/60">
+                                    <th class="px-5 py-3.5 font-semibold">Mã lô</th><th class="px-5 py-3.5 font-semibold">Sản phẩm / Vườn</th><th class="px-5 py-3.5 font-semibold">Ngày rang</th><th class="px-5 py-3.5 font-semibold">Trạng thái</th><th class="px-5 py-3.5 font-semibold text-right">Thao tác</th>
+                                </tr></thead>
+                                <tbody id="lots-tbody"></tbody>
+                            </table>
+                            <div id="lots-empty" class="hidden py-14 text-center text-ink/40 text-sm">Chưa có lô nào. Bấm “Thêm lô hàng” để tạo lô đầu tiên, rồi in mã QR lên bao bì.</div>
+                        </div>
+                    </div>
+                </section>
             </main>
         </div>
     </div>
     <!-- /#dashboard-root -->
 
     <!-- ============ TOAST CONTAINER ============ -->
+
+    <!-- ============ LOT MODAL ============ -->
+    <div id="lot-modal" class="hidden fixed inset-0 z-50 modal-backdrop flex items-center justify-center p-4">
+        <div class="modal-panel bg-white w-full max-w-2xl rounded-2xl shadow-pop max-h-[90vh] overflow-hidden flex flex-col">
+            <div class="px-6 py-5 border-b border-line flex items-center justify-between">
+                <h2 id="lot-modal-title" class="font-display text-lg font-semibold">Thêm lô hàng</h2>
+                <button onclick="closeModal('lot-modal')" class="text-ink/40 hover:text-ink text-xl">×</button>
+            </div>
+            <form id="lot-form" onsubmit="handleLotSubmit(event)" class="flex-1 overflow-auto px-6 py-5 grid grid-cols-2 gap-4 text-sm">
+                <input type="hidden" id="lot-id">
+                <label>Mã lô *<input id="lot-code" required placeholder="LIB-2526-01" class="mt-1 w-full px-3 py-2.5 border border-line rounded-lg uppercase"></label>
+                <label>Sản phẩm<input id="lot-product_name" placeholder="Liberica Honey Process" class="mt-1 w-full px-3 py-2.5 border border-line rounded-lg"></label>
+                <label>Vườn / vùng trồng<input id="lot-origin" placeholder="Thôn Tân Hoà, xã Tân Lập" class="mt-1 w-full px-3 py-2.5 border border-line rounded-lg"></label>
+                <label>Hộ trồng<input id="lot-farmer" placeholder="Tên hộ / nhóm hộ" class="mt-1 w-full px-3 py-2.5 border border-line rounded-lg"></label>
+                <label>Ngày thu hái<input id="lot-harvest_date" type="date" class="mt-1 w-full px-3 py-2.5 border border-line rounded-lg"></label>
+                <label>Phương pháp sơ chế<input id="lot-process" placeholder="Red Honey / Natural…" class="mt-1 w-full px-3 py-2.5 border border-line rounded-lg"></label>
+                <label>Phơi / sấy<input id="lot-drying" placeholder="Phơi giàn cao 21 ngày" class="mt-1 w-full px-3 py-2.5 border border-line rounded-lg"></label>
+                <label>Ngày rang<input id="lot-roast_date" type="date" class="mt-1 w-full px-3 py-2.5 border border-line rounded-lg"></label>
+                <label>Nơi rang<input id="lot-roaster" placeholder="Xưởng rang đối tác, Đắk Lắk" class="mt-1 w-full px-3 py-2.5 border border-line rounded-lg"></label>
+                <label>Hồ sơ rang<input id="lot-roast_profile" placeholder="Light–Medium" class="mt-1 w-full px-3 py-2.5 border border-line rounded-lg"></label>
+                <label>Kết quả kiểm nghiệm<input id="lot-lab_result" placeholder="Đạt các chỉ tiêu…" class="mt-1 w-full px-3 py-2.5 border border-line rounded-lg"></label>
+                <label>Link phiếu kiểm nghiệm<input id="lot-lab_url" type="url" placeholder="https://…" class="mt-1 w-full px-3 py-2.5 border border-line rounded-lg"></label>
+                <label class="col-span-2">Ghi chú<textarea id="lot-note" rows="2" class="mt-1 w-full px-3 py-2.5 border border-line rounded-lg"></textarea></label>
+                <label>Trạng thái<select id="lot-status" class="mt-1 w-full px-3 py-2.5 border border-line rounded-lg"><option value="published">Công bố</option><option value="draft">Nháp (ẩn)</option></select></label>
+            </form>
+            <div class="px-6 py-4 border-t border-line flex justify-end gap-2">
+                <button onclick="closeModal('lot-modal')" class="px-4 py-2.5 rounded-lg border border-line text-sm">Huỷ</button>
+                <button onclick="document.getElementById('lot-form').requestSubmit()" class="btn-primary bg-moss hover:bg-moss-600 text-white text-sm font-medium px-4 py-2.5 rounded-lg">Lưu lô hàng</button>
+            </div>
+        </div>
+    </div>
     <div id="toast-container" class="fixed top-5 right-5 z-[100] flex flex-col gap-2.5 w-80"></div>
 
     <!-- ============ PRODUCT MODAL ============ -->
@@ -1347,19 +1436,21 @@
            TAB SWITCHING
            ========================================================================= */
         function switchTab(tab) {
-            document.getElementById('view-products').classList.toggle('hidden', tab !== 'products');
-            document.getElementById('view-products').classList.toggle('flex', tab === 'products');
-            document.getElementById('view-blogs').classList.toggle('hidden', tab !== 'blogs');
-            document.getElementById('view-blogs').classList.toggle('flex', tab === 'blogs');
-
+            ['products', 'blogs', 'orders', 'lots'].forEach(t => {
+                const el = document.getElementById('view-' + t);
+                if (!el) return;
+                el.classList.toggle('hidden', tab !== t);
+                el.classList.toggle('flex', tab === t);
+            });
             document.querySelectorAll('.nav-btn').forEach(btn => {
                 const isActive = btn.dataset.tab === tab;
                 btn.classList.toggle('tab-active', isActive);
                 btn.classList.toggle('tab-inactive', !isActive);
             });
-
             if (tab === 'products' && state.products.length === 0) loadProducts();
             if (tab === 'blogs' && state.blogs.length === 0) loadBlogs();
+            if (tab === 'orders') loadOrders();
+            if (tab === 'lots') loadLots();
         }
 
         /* =========================================================================
@@ -2234,6 +2325,156 @@
            INIT
            ========================================================================= */
         checkAuthOnLoad();
+    </script>
+    <script>
+        /* =========================================================================
+           ĐƠN HÀNG
+           ========================================================================= */
+        const ORDER_STATUS = { new: ['Mới', 'bg-amber-100 text-amber-800'], confirmed: ['Đã xác nhận', 'bg-sky-100 text-sky-800'], shipping: ['Đang giao', 'bg-indigo-100 text-indigo-800'], done: ['Hoàn thành', 'bg-emerald-100 text-emerald-800'], cancelled: ['Đã huỷ', 'bg-gray-100 text-gray-500'] };
+        let ordersData = [];
+        const money = n => Number(n || 0).toLocaleString('vi-VN') + 'đ';
+
+        async function loadOrders() {
+            try {
+                const resp = await fetchAPI({ table: 'orders', action: 'list', limit: 300 });
+                ordersData = extractList(resp);
+                renderOrders();
+                const n = ordersData.filter(o => o.status === 'new').length;
+                const b = document.getElementById('orders-new-badge');
+                b.textContent = n; b.classList.toggle('hidden', !n);
+            } catch (err) { showToast('Không tải được đơn hàng: ' + err.message, 'error'); }
+        }
+
+        function renderOrders() {
+            const q = (document.getElementById('order-search').value || '').toLowerCase();
+            const st = document.getElementById('order-filter').value;
+            const rows = ordersData.filter(o => (!st || o.status === st) && (!q || `${o.name} ${o.phone} ${o.code}`.toLowerCase().includes(q)));
+            document.getElementById('order-count').textContent = rows.length + ' đơn';
+            document.getElementById('orders-empty').classList.toggle('hidden', rows.length > 0);
+            document.getElementById('orders-list').innerHTML = rows.map((o, idx) => {
+                const s = ORDER_STATUS[o.status] || ORDER_STATUS.new;
+                const items = (o.items || []).map(i => `<li>${escapeHtml(i.name)} × ${i.qty}${i.price ? ' — ' + money(i.price * i.qty) : ''}</li>`).join('');
+                const opts = Object.entries(ORDER_STATUS).map(([k, v]) => `<option value="${k}" ${k === o.status ? 'selected' : ''}>${v[0]}</option>`).join('');
+                const zalo = String(o.phone || '').replace(/^\+?84/, '0');
+                return `<div class="bg-white border border-line rounded-xl p-5 shadow-card">
+                    <div class="flex flex-wrap items-start justify-between gap-3">
+                        <div>
+                            <div class="flex items-center gap-2 flex-wrap"><span class="font-mono text-xs bg-paper border border-line rounded px-2 py-0.5">${escapeHtml(o.code)}</span><span class="text-xs px-2 py-0.5 rounded-full ${s[1]}">${s[0]}</span><span class="text-xs text-ink/40">${escapeHtml(o.created_at || '')}</span></div>
+                            <p class="mt-2 font-semibold">${escapeHtml(o.name)} · <a class="text-moss-600" href="tel:${escapeHtml(o.phone)}">${escapeHtml(o.phone)}</a> · <a class="text-moss-600" target="_blank" href="https://zalo.me/${escapeHtml(zalo)}">Zalo</a></p>
+                            ${o.address ? `<p class="text-sm text-ink/60 mt-0.5">📍 ${escapeHtml(o.address)}</p>` : ''}
+                        </div>
+                        <div class="text-right"><p class="font-semibold">${money(o.total)}</p><p class="text-xs text-ink/40">tạm tính</p></div>
+                    </div>
+                    <ul class="mt-3 text-sm list-disc pl-5 text-ink/80">${items}</ul>
+                    ${o.note ? `<p class="mt-2 text-sm bg-paper rounded-lg px-3 py-2">💬 ${escapeHtml(o.note)}</p>` : ''}
+                    <div class="mt-3 flex flex-wrap items-center gap-2">
+                        <select onchange="updateOrder(${ordersData.indexOf(o)}, this.value)" class="px-3 py-2 border border-line rounded-lg text-sm">${opts}</select>
+                        <input id="order-note-${ordersData.indexOf(o)}" value="${escapeHtml(o.admin_note || '')}" placeholder="Ghi chú nội bộ…" class="flex-1 min-w-[180px] px-3 py-2 border border-line rounded-lg text-sm">
+                        <button onclick="updateOrder(${ordersData.indexOf(o)}, null)" class="px-3 py-2 border border-line rounded-lg text-sm hover:bg-paper">Lưu ghi chú</button>
+                        <button onclick="deleteOrder(${ordersData.indexOf(o)})" class="px-3 py-2 rounded-lg text-sm text-danger hover:bg-danger/5">Xoá</button>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        async function updateOrder(index, status) {
+            const o = ordersData[index];
+            if (!o) return;
+            const fd = new FormData();
+            fd.append('id', o.id);
+            fd.append('status', status || o.status);
+            const noteEl = document.getElementById('order-note-' + index);
+            if (noteEl) fd.append('admin_note', noteEl.value);
+            try {
+                const r = await fetchAPI({ table: 'orders', action: 'update' }, { method: 'POST', body: fd });
+                Object.assign(o, r.data || {});
+                showToast('Đã cập nhật đơn ' + o.code, 'success');
+                renderOrders();
+                const n = ordersData.filter(x => x.status === 'new').length;
+                const b = document.getElementById('orders-new-badge');
+                b.textContent = n; b.classList.toggle('hidden', !n);
+            } catch (err) { showToast(err.message, 'error'); }
+        }
+
+        function deleteOrder(index) {
+            const o = ordersData[index];
+            if (!o) return;
+            showConfirm('Xoá đơn ' + o.code + '? Không khôi phục được.', async () => {
+                const fd = new FormData(); fd.append('id', o.id);
+                try {
+                    await fetchAPI({ table: 'orders', action: 'delete' }, { method: 'POST', body: fd });
+                    ordersData = ordersData.filter(x => x !== o);
+                    renderOrders(); showToast('Đã xoá đơn', 'success');
+                } catch (err) { showToast(err.message, 'error'); }
+            });
+        }
+
+        /* =========================================================================
+           LÔ HÀNG (truy xuất nguồn gốc)
+           ========================================================================= */
+        const LOT_FIELDS = ['code', 'product_name', 'origin', 'farmer', 'harvest_date', 'process', 'drying', 'roast_date', 'roaster', 'roast_profile', 'lab_result', 'lab_url', 'note', 'status'];
+        let lotsData = [];
+
+        async function loadLots() {
+            try {
+                const resp = await fetchAPI({ table: 'lots', action: 'list', limit: 500 });
+                lotsData = extractList(resp);
+                document.getElementById('lots-empty').classList.toggle('hidden', lotsData.length > 0);
+                document.getElementById('lots-tbody').innerHTML = lotsData.map(l => `<tr class="border-b border-line/70 last:border-0">
+                    <td class="px-5 py-3.5"><span class="font-mono text-xs bg-paper border border-line rounded px-2 py-0.5">${escapeHtml(l.code)}</span></td>
+                    <td class="px-5 py-3.5"><p class="font-medium">${escapeHtml(l.product_name || '—')}</p><p class="text-xs text-ink/50">${escapeHtml(l.origin || '')}</p></td>
+                    <td class="px-5 py-3.5 text-ink/70">${escapeHtml(l.roast_date || '—')}</td>
+                    <td class="px-5 py-3.5"><span class="text-xs px-2 py-0.5 rounded-full ${l.status === 'draft' ? 'bg-gray-100 text-gray-500' : 'bg-emerald-100 text-emerald-800'}">${l.status === 'draft' ? 'Nháp' : 'Công bố'}</span></td>
+                    <td class="px-5 py-3.5 text-right whitespace-nowrap">
+                        <a class="text-moss-600 text-xs mr-3" target="_blank" href="/truy-xuat/${encodeURIComponent(l.code)}">Xem trang</a>
+                        <a class="text-moss-600 text-xs mr-3" target="_blank" href="https://api.qrserver.com/v1/create-qr-code/?size=600x600&margin=10&data=${encodeURIComponent('https://daktri.vn/truy-xuat/' + l.code)}">Tải mã QR</a>
+                        <button class="text-xs mr-3" onclick="openLotModal(${Number(l.id)})">Sửa</button>
+                        <button class="text-xs text-danger" onclick="deleteLot(${Number(l.id)})">Xoá</button>
+                    </td></tr>`).join('');
+            } catch (err) { showToast('Không tải được lô hàng: ' + err.message, 'error'); }
+        }
+
+        function openLotModal(id) {
+            const l = id ? lotsData.find(x => x.id === id) : null;
+            document.getElementById('lot-modal-title').textContent = l ? 'Sửa lô ' + l.code : 'Thêm lô hàng';
+            document.getElementById('lot-id').value = l ? l.id : '';
+            LOT_FIELDS.forEach(f => {
+                const el = document.getElementById('lot-' + f);
+                if (el) el.value = l ? (l[f] || '') : (f === 'status' ? 'published' : '');
+            });
+            openModal('lot-modal');
+        }
+
+        async function handleLotSubmit(e) {
+            e.preventDefault();
+            const id = document.getElementById('lot-id').value;
+            const fd = new FormData();
+            if (id) fd.append('id', id);
+            LOT_FIELDS.forEach(f => fd.append(f, (document.getElementById('lot-' + f).value || '').trim()));
+            try {
+                await fetchAPI({ table: 'lots', action: id ? 'update' : 'create' }, { method: 'POST', body: fd });
+                showToast(id ? 'Đã cập nhật lô hàng' : 'Đã thêm lô hàng', 'success');
+                closeModal('lot-modal');
+                loadLots();
+            } catch (err) { showToast(err.message, 'error'); }
+        }
+
+        function deleteLot(id) {
+            showConfirm('Xoá lô hàng này? Mã QR của lô sẽ không còn hiển thị thông tin.', async () => {
+                const fd = new FormData(); fd.append('id', id);
+                try {
+                    await fetchAPI({ table: 'lots', action: 'delete' }, { method: 'POST', body: fd });
+                    showToast('Đã xoá lô', 'success');
+                    loadLots();
+                } catch (err) { showToast(err.message, 'error'); }
+            });
+        }
+
+        // Hiện số đơn mới ngay khi mở admin
+        window.addEventListener('load', () => {
+            setTimeout(() => { try { if (getAuthToken()) loadOrders(); } catch (e) { } }, 1200);
+        });
+
     </script>
 </body>
 
