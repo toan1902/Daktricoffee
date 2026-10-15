@@ -6,7 +6,7 @@ const path = require('path');
 const DOMAIN = 'https://daktri.vn';
 const API_BASE = 'https://libericakhesanh.net/api/index.php';
 const SITE_BASE = 'https://libericakhesanh.net';
-const DEFAULT_IMAGE = 'https://libericakhesanh.net/assets/images/brands/daktri-logo.png';
+const DEFAULT_IMAGE = 'https://daktri.vn/assets/images/brand/daktri-logo.png';
 const DEFAULT_DESC = 'Kiến thức nông nghiệp tử tế từ HTX Daktri Khe Sanh — cà phê Liberica, đất khỏe, canh tác hữu cơ.';
 
 const templateCache = {};
