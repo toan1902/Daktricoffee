@@ -1,4 +1,4 @@
-const { apiGet, renderPost, renderPostFallback } = require('../_lib/blog');
+const { apiGet, renderPost, renderPostFallback, renderArchivedPost } = require('../_lib/blog');
 
 function extractDetail(resp) {
   if (resp && typeof resp === 'object' && resp.data && typeof resp.data === 'object' && !Array.isArray(resp.data)) {
@@ -21,6 +21,12 @@ module.exports = async (req, res) => {
     const data = ok ? extractDetail(json) : null;
 
     if (!data || typeof data !== 'object' || !data.title) {
+      const archived = renderArchivedPost(slug);
+      if (archived) {
+        res.statusCode = 200;
+        res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=86400');
+        return res.end(archived);
+      }
       res.statusCode = 404;
       res.setHeader('Cache-Control', 'public, s-maxage=60');
       return res.end(renderPostFallback(slug, { notFound: true }));
@@ -33,7 +39,14 @@ module.exports = async (req, res) => {
     return res.end(renderPost(data));
   } catch (err) {
     console.error('blog ssr error', slug, err && err.message, err && err.cause && (err.cause.code || err.cause.message));
-    // API lỗi tạm thời: trả template để trình duyệt tự tải nội dung, không cache
+    // API lỗi: dùng bản lưu sẵn trong repo nếu có
+    const archived = renderArchivedPost(slug);
+    if (archived) {
+      res.statusCode = 200;
+      res.setHeader('Cache-Control', 'public, s-maxage=120, stale-while-revalidate=86400');
+      return res.end(archived);
+    }
+    // không có bản lưu: trả template để trình duyệt tự tải, không cache
     res.statusCode = 200;
     res.setHeader('Cache-Control', 'no-store');
     return res.end(renderPostFallback(slug, { notFound: false }));

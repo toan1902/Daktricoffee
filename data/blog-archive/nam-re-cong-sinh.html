@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mạng lưới ngầm 400 triệu năm tuổi — Vì sao đất của bà con ngày càng "mệt"?</title>
+<meta name="description" content="Mỗi cây trồng tự nguyện 'biếu không' 20% năng lượng quang hợp cho một loài nấm sống dưới đất. Đây là khoản đầu tư vĩ đại nhất trong 400 triệu năm tiến hóa — và lý do đất Tây Nguyên, Quảng Trị đang 'lờn phân'.">
+<meta property="og:title" content="Mạng lưới ngầm 400 triệu năm tuổi — Vì sao đất của bà con ngày càng mệt?">
+<meta property="og:description" content="Khoản 'hối lộ' 20% vĩ đại nhất của mọi cây trồng — và cách trả lại sự sống cho đất.">
+<meta property="og:type" content="article">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --cream:       #f5f0e0;
+    --cream-deep:  #ebe3cc;
+    --paper:       #faf6e9;
+    --ink:         #1c1208;
+    --ink-soft:    #3d2c1a;
+    --ink-mid:     #5d4830;
+    --moss:        #2e6b3f;
+    --moss-deep:   #1f4a2c;
+    --moss-soft:   #6d8e4b;
+    --gold:        #d4af4c;
+    --gold-deep:   #a68228;
+    --rust:        #af3c32;
+    --soil:        #68472c;
+    --rule:        #c9b88a;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.35;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(104,71,44,0.04) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(46,107,63,0.04) 0%, transparent 50%);
+  }
+
+  .article {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  .hero {
+    position: relative;
+    margin: 0 -24px 56px;
+    overflow: hidden;
+  }
+  .hero img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 48px 0 24px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--moss);
+    font-weight: 600;
+  }
+  .eyebrow::before, .eyebrow::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  h1.title {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: clamp(36px, 6vw, 62px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0 0 28px;
+    text-align: center;
+    font-variation-settings: "opsz" 144;
+  }
+  h1.title em {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--moss-deep);
+  }
+
+  .deck {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(18px, 2.2vw, 22px);
+    line-height: 1.5;
+    color: var(--ink-mid);
+    text-align: center;
+    max-width: 580px;
+    margin: 0 auto 40px;
+  }
+
+  .byline {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--ink-mid);
+    margin: 0 0 56px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .byline strong { color: var(--moss-deep); font-weight: 600; }
+
+  .article p {
+    font-size: 18px;
+    line-height: 1.75;
+    margin: 0 0 22px;
+    color: var(--ink-soft);
+  }
+
+  .lede::first-letter {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 5.2em;
+    line-height: 0.85;
+    float: left;
+    padding: 8px 14px 0 0;
+    color: var(--moss-deep);
+    font-variation-settings: "opsz" 144;
+  }
+
+  .article p strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .highlight {
+    background: linear-gradient(180deg, transparent 60%, rgba(212,175,76,0.35) 60%);
+    padding: 0 2px;
+  }
+
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: clamp(28px, 4vw, 38px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 64px 0 24px;
+    position: relative;
+    font-variation-settings: "opsz" 144;
+  }
+  h2::before {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 3px;
+    background: var(--moss);
+    margin-bottom: 18px;
+  }
+
+  h3 {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--moss-deep);
+    margin: 32px 0 12px;
+    letter-spacing: 0.01em;
+  }
+  h3 .num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 600;
+    color: var(--gold-deep);
+    margin-right: 10px;
+  }
+
+  .article ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 28px;
+  }
+  .article ul li {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 14px;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+  .article ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 14px;
+    width: 14px;
+    height: 2px;
+    background: var(--moss);
+  }
+  .article ul li strong { color: var(--ink); font-weight: 600; }
+
+  figure {
+    margin: 48px -24px;
+  }
+  figure img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+    box-shadow: 0 8px 32px rgba(28,18,8,0.12);
+  }
+  figcaption {
+    margin-top: 16px;
+    padding: 0 24px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--ink-mid);
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  .pullquote {
+    margin: 56px -12px;
+    padding: 40px 32px 36px;
+    background: linear-gradient(135deg, rgba(46,107,63,0.06), rgba(212,175,76,0.06));
+    border-left: 4px solid var(--moss);
+    position: relative;
+  }
+  .pullquote::before {
+    content: "\201C";
+    position: absolute;
+    top: -10px;
+    left: 24px;
+    font-family: 'Fraunces', serif;
+    font-size: 96px;
+    color: var(--moss);
+    opacity: 0.25;
+    line-height: 1;
+  }
+  .pullquote p {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(20px, 2.6vw, 26px);
+    line-height: 1.4;
+    color: var(--ink);
+    margin: 0;
+    font-variation-settings: "opsz" 144;
+  }
+  .pullquote .question {
+    margin-top: 16px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--moss-deep);
+  }
+
+  .solution {
+    margin: 48px -12px;
+    padding: 36px 32px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    position: relative;
+  }
+  .solution::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--moss), var(--gold));
+  }
+  .solution h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--moss-deep);
+    margin: 0 0 12px;
+  }
+  .solution p {
+    font-size: 17px;
+    margin: 0;
+  }
+
+  .article-footer {
+    margin-top: 80px;
+    padding: 48px 0 0;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+  }
+  .author-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--ink);
+    margin: 0 0 6px;
+  }
+  .author-role {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 14px;
+    color: var(--ink-mid);
+    margin: 0 0 24px;
+  }
+  .contact-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 28px;
+    background: var(--moss-deep);
+    color: var(--cream);
+    border-radius: 100px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .contact-card .label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+  .contact-card .phone {
+    color: var(--gold);
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 18px;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 48px 0;
+  }
+  .divider .line {
+    width: 60px;
+    height: 1px;
+    background: var(--rule);
+  }
+  .divider .dot {
+    width: 8px;
+    height: 8px;
+    background: var(--moss);
+    border-radius: 50%;
+  }
+  .divider .dot.alt {
+    width: 5px; height: 5px;
+    background: var(--gold);
+  }
+
+  @media (max-width: 640px) {
+    .article { padding: 0 18px 60px; }
+    .hero, figure { margin-left: -18px; margin-right: -18px; }
+    .pullquote, .solution { margin-left: 0; margin-right: 0; }
+    .article p { font-size: 16.5px; }
+    .lede::first-letter { font-size: 4.2em; padding: 6px 10px 0 0; }
+  }
+</style>
+</head>
+<body>
+
+<article class="article">
+
+  <div class="hero">
+    <img src="/assets/images/blog/nam-re-cong-sinh-1.webp" alt="Khoản hối lộ vĩ đại nhất của mọi cây trồng — 20%">
+  </div>
+
+  <div class="eyebrow">Nông nghiệp tử tế · Kiến thức nhà nông</div>
+
+  <h1 class="title">Mạng lưới ngầm <em>400&nbsp;triệu&nbsp;năm&nbsp;tuổi:</em><br>Vì sao đất của bà con ngày càng "mệt"?</h1>
+
+  <p class="deck">Mỗi cây trồng khỏe mạnh đều âm thầm "biếu không" tới 20% lượng đường nó vất vả quang hợp được — cho một loài nấm sống dưới đất. Đây không phải sự lãng phí. Đây là khoản đầu tư sinh tồn vĩ đại nhất trong lịch sử thực vật.</p>
+
+  <div class="byline">
+    Bài viết bởi <strong>Lê Quang Toàn</strong> · Vinaxanh Quảng Trị · HTX Daktri Khe Sanh
+  </div>
+
+  <p class="lede">Có một sự thật khoa học mà ít ai để ý, nhưng nó đang quyết định năng suất vườn cà phê, vườn tiêu, vườn cây ăn trái của bà con mỗi vụ: <strong>mọi cây trồng khỏe mạnh đều âm thầm "biếu không" tới 20% lượng đường mà nó quang hợp được</strong> — cho một loài nấm sống dưới đất.</p>
+
+  <p>Loài nấm đó tên là <strong>nấm rễ cộng sinh</strong> (mycorrhizal fungi). Và việc "biếu" 20% năng lượng này không phải là lãng phí — đây là khoản đầu tư sinh tồn vĩ đại nhất trong suốt 400 triệu năm thực vật tiến hóa trên cạn.</p>
+
+  <div class="divider">
+    <span class="line"></span>
+    <span class="dot alt"></span>
+    <span class="dot"></span>
+    <span class="dot alt"></span>
+    <span class="line"></span>
+  </div>
+
+  <h2>Cây trồng có "cơ thể thứ hai" mà mắt thường không thấy</h2>
+
+  <p>Khi bà con nhìn một gốc tiêu, một gốc cà phê, một cây bơ — phần nhìn thấy chỉ là <strong>10% câu chuyện sinh tồn</strong> của nó.</p>
+
+  <p>90% còn lại là hệ rễ cùng <strong>mạng lưới sợi nấm cực mảnh đang len lỏi vào từng kẽ đất</strong>, vào những khe hở mà rễ cây không bao giờ với tới. Trong một mét vuông đất khỏe, tổng chiều dài sợi nấm có thể lên tới <span class="highlight">vài chục km</span>. Đây là "Internet sinh học" mà các nhà khoa học gọi là <strong>Wood Wide Web</strong>.</p>
+
+  <h2>Hợp đồng "đường đổi lân" sòng phẳng nhất tự nhiên</h2>
+
+  <figure>
+    <img src="/assets/images/blog/nam-re-cong-sinh-2.webp" alt="Hợp đồng đường đổi lân giữa cây trồng và nấm rễ cộng sinh">
+    <figcaption>Bản hợp đồng đã ký giữa cây trồng và nấm rễ — 400 triệu năm vẫn còn hiệu lực.</figcaption>
+  </figure>
+
+  <p><strong>Cây trồng đưa cho nấm:</strong> 20% lượng đường, lipid sản xuất ra từ quang hợp.</p>
+
+  <p><strong>Nấm trả lại cho cây:</strong></p>
+
+  <ul>
+    <li><strong>Lân (phốt-pho)</strong> — chất cây cần nhất nhưng khó hấp thu vì lân trong đất chủ yếu ở dạng không tan. Sợi nấm "moi" được lân từ khoáng đất ra rồi đưa thẳng vào rễ.</li>
+    <li><strong>Đạm, kali, canxi, kẽm, magie</strong> và hàng chục vi lượng khác.</li>
+    <li><strong>Nước</strong> — cực quý trong mùa khô Tây Nguyên, mùa gió Lào Quảng Trị.</li>
+    <li><strong>"Vệ sĩ"</strong> — nấm rễ tiết chất ức chế tuyến trùng, nấm bệnh, vi khuẩn vùng rễ. Đây là lý do nhiều vườn tiêu, vườn sầu riêng "tự nhiên không bị chết nhanh chết chậm" trong khi vườn bên cạnh chết hàng loạt.</li>
+    <li><strong>Khả năng chịu hạn, chịu phèn, chịu mặn</strong> — đặc biệt quý trong điều kiện khí hậu Quảng Trị, Tây Nguyên.</li>
+  </ul>
+
+  <p>Cây chỉ "biếu" 20% đường, đổi lại <span class="highlight">vùng hút dinh dưỡng rộng gấp 100–1000 lần</span> so với chỉ dùng rễ thường. Bỏ 1 đồng — lời cả nghìn. Nhà nông nào tỉnh táo cũng phải gật đầu.</p>
+
+  <h2>Vì sao đất của bà con ngày càng "lờn phân"?</h2>
+
+  <figure>
+    <img src="/assets/images/blog/nam-re-cong-sinh-3.webp" alt="3 thủ phạm giết mạng lưới nấm rễ cộng sinh trong đất">
+    <figcaption>Ba việc làm hằng ngày đang âm thầm phá huỷ mạng lưới sống dưới chân ta.</figcaption>
+  </figure>
+
+  <p>Mạng lưới nấm rễ cộng sinh cực kỳ mong manh trước <strong>ba thứ chúng ta đang làm hàng ngày trên vườn:</strong></p>
+
+  <h3><span class="num">01.</span> Lạm dụng phân lân hóa học dễ tan</h3>
+  <p>Super lân, DAP nồng độ cao bón liên tục. Khi cây "no" lân từ phân hóa học, nó <strong>ngừng "trả lương" cho nấm rễ</strong>. Hệ nấm teo dần rồi chết. Vụ sau, không có nấm hỗ trợ, cây càng đòi nhiều phân hơn. Đây là vòng xoáy lệ thuộc.</p>
+
+  <h3><span class="num">02.</span> Cày xới sâu, làm cỏ trắng đất</h3>
+  <p>Sợi nấm cực mảnh bị đứt vụn khi xáo trộn đất. Mất 2–3 năm mới phục hồi lại được, nếu may mắn. Đất phơi nắng trực tiếp cũng mất hữu cơ và mất ẩm rất nhanh.</p>
+
+  <h3><span class="num">03.</span> Thuốc trừ nấm phổ rộng + thuốc cỏ tiếp đất</h3>
+  <p>Diệt sạch không phân biệt nấm có lợi hay nấm bệnh. <strong>Đất "sạch khuẩn" cũng chính là đất chết.</strong> Càng dùng nhiều, sâu bệnh càng dễ bùng phát vụ sau.</p>
+
+  <div class="pullquote">
+    <p>Bà con bón phân ngày càng nhiều mà năng suất không tăng tương xứng — không phải do giống xấu, mà do đã giết mất "đối tác làm ăn 400 triệu năm" của cây trồng.</p>
+  </div>
+
+  <h2>Đường về: Trả lại sự sống cho đất</h2>
+
+  <figure>
+    <img src="/assets/images/blog/nam-re-cong-sinh-4.webp" alt="4 bước nuôi đất sống — phục hồi mạng lưới nấm rễ cộng sinh">
+    <figcaption>Bốn bước thực hành để mạng lưới ngầm dưới vườn của bà con sống lại.</figcaption>
+  </figure>
+
+  <p>Hệ nấm rễ phục hồi mạnh khi đất được:</p>
+
+  <ul>
+    <li><strong>Tủ gốc, phủ hữu cơ thường xuyên</strong> — vỏ cà phê, rơm rạ, lá cây mục. Giữ ẩm, nuôi vi sinh vật, che mát hệ sợi nấm.</li>
+    <li><strong>Giảm cày xới</strong>, ưu tiên cuốc tay quanh tán, không lật úp đất. Giữ cấu trúc đất nguyên vẹn.</li>
+    <li><strong>Bón phân hữu cơ vi sinh có chứa quần thể sinh học cộng sinh</strong> — Mycorrhiza (nấm rễ cộng sinh), Trichoderma (đối kháng nấm bệnh), Bacillus (cải tạo cấu trúc đất), vi khuẩn cố định đạm và phân giải lân.</li>
+    <li><strong>Giảm dần phân hóa học</strong>, đặc biệt là phân lân dễ tan — để cây buộc phải "bắt tay lại" với nấm rễ.</li>
+  </ul>
+
+  <div class="solution">
+    <h4>Triết lý của Vinaxanh</h4>
+    <p>Đây cũng chính là triết lý mà <strong>Vinaxanh</strong> theo đuổi suốt nhiều năm qua, và là lý do dòng phân bón hữu cơ vi sinh của Vinaxanh được nhiều nhà vườn cà phê, tiêu, sầu riêng, cây ăn trái ở Tây Nguyên và Quảng Trị tin dùng: <strong>không chỉ cung cấp dinh dưỡng, mà còn nuôi lại hệ vi sinh vật sống trong đất</strong> — đặc biệt là quần thể nấm cộng sinh vùng rễ.</p>
+    <p style="margin-top: 14px;">Đất khỏe trở lại, cây mới khỏe lại. Năng suất tự đến.</p>
+  </div>
+
+  <div class="pullquote">
+    <p>Đất chết là đất đã mất mạng lưới sống ngầm bên dưới. Đất sống là đất vẫn còn 20% "khoản hối lộ" được trả đều đặn mỗi ngày dưới mỗi gốc cây của bà con.</p>
+    <p class="question">Bà con đang nuôi đất hay đang "đốt" đất?</p>
+  </div>
+
+  <footer class="article-footer">
+    <p class="author-name">Lê Quang Toàn</p>
+    <p class="author-role">Nhà phân phối Vinaxanh khu vực Quảng Trị · HTX Daktri Khe Sanh</p>
+    <a class="contact-card" href="tel:0941336669">
+      <span class="label">Hotline · Zalo</span>
+      <span class="phone">0941 336 669</span>
+    </a>
+  </footer>
+
+</article>
+
+</body>
+</html>

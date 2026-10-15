@@ -1,5 +1,5 @@
 // Sitemap tự động: luôn có đủ bài mới đăng từ admin, không cần sửa tay
-const { DOMAIN, apiGet, toDate } = require('./_lib/blog');
+const { DOMAIN, apiGet, toDate, readArchiveIndex } = require('./_lib/blog');
 
 const STATIC_PAGES = [
   { loc: '/', changefreq: 'weekly', priority: '1.0' },
@@ -23,6 +23,10 @@ module.exports = async (req, res) => {
     console.error('sitemap api error', err && err.message);
   }
 
+  // gộp bài lưu sẵn (khi API lỗi vẫn đủ bài trong sitemap)
+  const seen = new Set(blogs.map(b => b.slug));
+  readArchiveIndex().forEach(b => { if (!seen.has(b.slug)) blogs.push(b); });
+
   const urls = STATIC_PAGES.map(p => `  <url>
     <loc>${DOMAIN}${p.loc === '/' ? '/' : p.loc}</loc>
     <changefreq>${p.changefreq}</changefreq>
@@ -42,7 +46,7 @@ module.exports = async (req, res) => {
 
   res.statusCode = 200;
   res.setHeader('Content-Type', 'application/xml; charset=utf-8');
-  res.setHeader('Cache-Control', ok ? 'public, s-maxage=3600, stale-while-revalidate=86400' : 'no-store');
+  res.setHeader('Cache-Control', ok ? 'public, s-maxage=3600, stale-while-revalidate=86400' : 'public, s-maxage=300');
   res.end(`<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.join('\n')}

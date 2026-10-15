@@ -279,4 +279,82 @@ function renderList(result) {
   return html;
 }
 
-module.exports = { DOMAIN, apiGet, readTemplate, renderPost, renderPostFallback, renderList, toDate };
+
+// ===================== KHO DỰ PHÒNG (khi API libericakhesanh.net lỗi) =====================
+// Bài viết & danh sách lưu sẵn trong repo (data/blog-archive) để web không bao giờ trống.
+let archiveIndex = null;
+function readArchiveIndex() {
+  if (!archiveIndex) {
+    try {
+      archiveIndex = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data', 'blog-archive', 'index.json'), 'utf8'));
+    } catch (e) {
+      archiveIndex = [];
+    }
+  }
+  return archiveIndex;
+}
+
+const ARCHIVE_BAR = `
+<div style="position:sticky;top:0;z-index:1000;background:#1a2e1e;color:#faf7f0;font:500 14px/1.4 system-ui,sans-serif;padding:10px 16px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+  <a href="/" style="color:#faf7f0;text-decoration:none;display:flex;align-items:center;gap:8px"><img src="/assets/images/brand/daktri-logo.png" alt="Logo HTX Daktri Khe Sanh" width="28" height="28" style="border-radius:50%;background:#fff">Daktri Khe Sanh</a>
+  <span style="display:flex;gap:16px;flex-wrap:wrap"><a href="/blog" style="color:#f5a623;text-decoration:none">← Tất cả bài viết</a><a href="/#products" style="color:#faf7f0;text-decoration:none">Sản phẩm</a><a href="tel:0941336669" style="color:#faf7f0;text-decoration:none">📞 0941 336 669</a></span>
+</div>`;
+
+function renderArchivedPost(slug) {
+  const meta = readArchiveIndex().find(p => p.slug === slug);
+  if (!meta) return null;
+  let html;
+  try {
+    html = fs.readFileSync(path.join(process.cwd(), 'data', 'blog-archive', `${slug}.html`), 'utf8');
+  } catch (e) {
+    return null;
+  }
+  const url = `${DOMAIN}/blog/${encodeURIComponent(slug)}`;
+  const image = meta.image ? DOMAIN + meta.image : DOMAIN + '/assets/images/og-daktri.jpg';
+  const published = toDate(meta.created_at);
+  const ld = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: meta.title,
+    description: meta.excerpt,
+    image: [image],
+    url,
+    mainEntityOfPage: url,
+    inLanguage: 'vi-VN',
+    author: { '@type': 'Organization', name: 'HTX Daktri Khe Sanh' },
+    publisher: { '@type': 'Organization', name: 'HTX Daktri Khe Sanh', logo: { '@type': 'ImageObject', url: DEFAULT_IMAGE } },
+    ...(published ? { datePublished: published.toISOString() } : {}),
+  };
+  // bỏ thẻ SEO cũ để không bị trùng, rồi chèn bộ chuẩn
+  html = html
+    .replace(/<link rel="canonical"[^>]*>\s*/gi, '')
+    .replace(/<meta (?:property|name)="(?:og:[a-z:_]+|twitter:[a-z:_]+|robots|description)"[^>]*>\s*/gi, '')
+    .replace(/<link rel="icon"[^>]*>\s*/gi, '');
+  const head = `
+  <meta name="description" content="${esc(meta.excerpt)}" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="${esc(url)}" />
+  <link rel="icon" href="/assets/images/brand/daktri-logo.png" type="image/png" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="vi_VN" />
+  <meta property="og:site_name" content="HTX Daktri Khe Sanh" />
+  <meta property="og:title" content="${esc(meta.title)}" />
+  <meta property="og:description" content="${esc(meta.excerpt)}" />
+  <meta property="og:url" content="${esc(url)}" />
+  <meta property="og:image" content="${esc(image)}" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script type="application/ld+json">${jsonForScript(ld)}</script>
+</head>`;
+  html = html.replace(/<\/head>/i, head);
+  html = html.replace(/<body([^>]*)>/i, `<body$1>${ARCHIVE_BAR}`);
+  return html;
+}
+
+function archivedListResult() {
+  const data = readArchiveIndex()
+    .slice()
+    .sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)));
+  return { data, pagination: { current_page: 1, total_pages: 1 } };
+}
+
+module.exports = { DOMAIN, apiGet, readTemplate, renderPost, renderPostFallback, renderList, toDate, renderArchivedPost, archivedListResult, readArchiveIndex };

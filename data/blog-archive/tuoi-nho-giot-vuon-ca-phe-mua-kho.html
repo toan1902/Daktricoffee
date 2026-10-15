@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tưới Nhỏ Giọt Cho Vườn Cà Phê Mùa Khô – Tiết Kiệm Nước, Tăng Năng Suất | Daktri</title>
+<meta name="description" content="Hệ thống tưới nhỏ giọt giúp vườn cà phê Tây Nguyên tiết kiệm 40–60% nước tưới mùa khô, giảm công lao động, tăng đều độ ẩm gốc. Hướng dẫn lắp đặt và chi phí thực tế." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --moss: #2e6b3f; --moss2: #245530; --honey: #f5a623;
+    --cream: #faf7f0; --dark: #1a2e1e; --text: #2c2c2c;
+    --muted: #666; --border: #e0dbd0;
+  }
+  body { font-family: system-ui, -apple-system, sans-serif; background: var(--cream); color: var(--text); line-height: 1.75; font-size: 16px; }
+  .wrap { max-width: 740px; margin: 0 auto; padding: 0 20px; }
+  .hero { background: var(--moss); padding: 52px 40px 44px; position: relative; overflow: hidden; }
+  .hero::before { content: ""; position: absolute; top: -60px; right: -60px; width: 240px; height: 240px; border-radius: 50%; background: rgba(255,255,255,.06); }
+  .hero::after { content: ""; position: absolute; bottom: -30px; left: 80px; width: 140px; height: 140px; border-radius: 50%; background: rgba(245,166,35,.14); }
+  .hero__badge { display: inline-flex; align-items: center; gap: 6px; background: var(--honey); color: var(--dark); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 18px; }
+  .hero__tagline { color: rgba(255,255,255,.72); font-style: italic; font-size: 15px; margin-bottom: 10px; }
+  .hero__title { font-family: 'Fraunces', Georgia, serif; font-size: clamp(24px, 4vw, 36px); font-weight: 700; color: #fff; line-height: 1.25; max-width: 600px; }
+  .hero__meta { margin-top: 28px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; font-size: 13px; color: rgba(255,255,255,.6); position: relative; z-index: 1; }
+  .hero__hotline { color: var(--honey); font-weight: 700; font-size: 15px; }
+  .post-meta { border-bottom: 1px solid var(--border); padding: 14px 0; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--muted); }
+  .post-meta__slug { font-family: monospace; color: var(--moss); }
+  .post-meta__tag { background: rgba(46,107,63,.1); color: var(--moss); font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+  .intro { border-left: 4px solid var(--moss); padding: 18px 24px; margin: 32px 0; background: rgba(46,107,63,.04); border-radius: 0 8px 8px 0; }
+  .intro p { font-family: 'Fraunces', Georgia, serif; font-size: 17px; line-height: 1.8; color: #333; font-style: italic; }
+  .infographic { border-radius: 14px; padding: 24px 28px; margin: 36px 0; }
+  .infographic--green { background: linear-gradient(135deg, rgba(46,107,63,.1), rgba(46,107,63,.03)); border: 1.5px solid rgba(46,107,63,.3); }
+  .infographic--honey { background: linear-gradient(135deg, rgba(245,166,35,.12), rgba(245,166,35,.03)); border: 1.5px solid rgba(245,166,35,.4); }
+  .infographic__title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 20px; }
+  .infographic--green .infographic__title { color: var(--moss); }
+  .infographic--honey .infographic__title { color: #8b6914; }
+  .infographic__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 14px; }
+  .infographic__card { background: #fff; border-radius: 10px; padding: 16px 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,.07); }
+  .infographic__icon { font-size: 26px; margin-bottom: 6px; }
+  .infographic__value { font-size: 15px; font-weight: 700; color: var(--dark); margin-bottom: 4px; line-height: 1.2; }
+  .infographic__label { font-size: 11px; color: #666; line-height: 1.3; }
+  .section { margin-bottom: 36px; }
+  .section__heading { font-family: 'Fraunces', Georgia, serif; font-size: 21px; font-weight: 700; color: var(--dark); border-left: 4px solid var(--honey); padding-left: 14px; margin-bottom: 14px; line-height: 1.3; }
+  .section p { font-size: 15.5px; line-height: 1.85; margin-bottom: 12px; }
+  .section ul, .section ol { padding-left: 22px; }
+  .section li { font-size: 15.5px; line-height: 1.85; margin-bottom: 8px; }
+  .section li strong { color: var(--moss); }
+  /* So sánh tưới */
+  .compare-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  .compare-table th { background: var(--moss); color: #fff; padding: 10px 14px; text-align: left; font-weight: 600; }
+  .compare-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .compare-table tr:nth-child(even) td { background: rgba(46,107,63,.03); }
+  .compare-table .good { color: var(--moss); font-weight: 600; }
+  .compare-table .bad  { color: #c0392b; }
+  /* Chi phí box */
+  .cost-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 16px 0; }
+  .cost-card { background: #fff; border: 1.5px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+  .cost-card__item { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+  .cost-card__price { font-size: 16px; font-weight: 700; color: var(--dark); }
+  .cost-card__note { font-size: 11px; color: #888; margin-top: 4px; line-height: 1.4; }
+  .tip-box { background: var(--moss); border-radius: 14px; padding: 22px 28px; margin: 36px 0 32px; display: flex; gap: 16px; align-items: flex-start; }
+  .tip-box__icon { font-size: 28px; flex-shrink: 0; margin-top: 2px; }
+  .tip-box__label { color: var(--honey); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; margin-bottom: 6px; }
+  .tip-box__text { color: #fff; font-size: 14.5px; line-height: 1.75; }
+  .conclusion { font-style: italic; font-size: 15.5px; line-height: 1.85; color: #444; margin-bottom: 40px; border-left: 3px solid var(--border); padding-left: 18px; }
+  .cta { background: #fff; border-top: 3px solid var(--moss); border-radius: 0 0 16px 16px; padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  .cta__label { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+  .cta__phone { font-size: 28px; font-weight: 700; color: var(--moss); }
+  .cta__btn { display: inline-block; background: var(--moss); color: #fff; font-size: 14px; font-weight: 600; padding: 13px 28px; border-radius: 10px; text-decoration: none; }
+  .article { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 24px rgba(0,0,0,.07); margin: 32px 0 48px; }
+  .article__body { padding: 0 40px 40px; }
+  @media (max-width: 600px) {
+    .hero { padding: 36px 22px 32px; }
+    .article__body { padding: 0 18px 28px; }
+    .cta { padding: 22px 18px; flex-direction: column; }
+    .compare-table { font-size: 13px; }
+    .compare-table th, .compare-table td { padding: 8px 10px; }
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <article class="article">
+
+    <header class="hero">
+      <div class="hero__badge">🌿 Daktri × Vinaxanh</div>
+      <p class="hero__tagline">Nước nhỏ từng giọt — vườn xanh cả mùa</p>
+      <h1 class="hero__title">Tưới Nhỏ Giọt Cho Vườn Cà Phê Mùa Khô: Tiết Kiệm Nước, Cây Khoẻ Hơn</h1>
+      <div class="hero__meta">
+        <span>📞 <span class="hero__hotline">0941 336 669</span></span>
+        <span>•</span>
+        <span>Daktri.vn — Nông nghiệp hữu cơ</span>
+      </div>
+    </header>
+
+    <div class="article__body">
+
+      <div class="post-meta">
+        <span class="post-meta__slug">/blog/tuoi-nho-giot-vuon-ca-phe-mua-kho</span>
+        <span>18/05/2026</span>
+        <span class="post-meta__tag">Kỹ thuật tưới tiêu</span>
+        <span class="post-meta__tag">Tiết kiệm nước</span>
+      </div>
+
+      <blockquote class="intro">
+        <p>Mùa khô Tây Nguyên năm nào cũng vậy — giếng cạn dần, hồ chứa rút xuống, bà con phải xếp hàng bơm nước tưới cà phê mà vẫn lo không đủ. Nhiều vườn tưới tràn, nước chảy hết ra rãnh còn đất gốc thì vẫn khô. Tưới nhỏ giọt giải quyết đúng cái vòng luẩn quẩn đó: ít nước hơn, nhưng nước đến đúng chỗ cây cần.</p>
+      </blockquote>
+
+      <!-- INFOGRAPHIC 1 -->
+      <div class="infographic infographic--green" role="figure" aria-label="Hiệu quả tưới nhỏ giọt so với tưới tràn">
+        <p class="infographic__title">💧 Tưới nhỏ giọt — con số thực tế</p>
+        <div class="infographic__grid">
+          <div class="infographic__card">
+            <div class="infographic__icon">💧</div>
+            <div class="infographic__value">Tiết kiệm 40–60%</div>
+            <div class="infographic__label">Lượng nước so với tưới tràn</div>
+          </div>
+          <div class="infographic__card">
+            <div class="infographic__icon">⏱️</div>
+            <div class="infographic__value">Giảm 80%</div>
+            <div class="infographic__label">Công lao động tưới mỗi tuần</div>
+          </div>
+          <div class="infographic__card">
+            <div class="infographic__icon">🌱</div>
+            <div class="infographic__value">Đều hơn 3×</div>
+            <div class="infographic__label">Độ ẩm đất quanh vùng rễ</div>
+          </div>
+          <div class="infographic__card">
+            <div class="infographic__icon">📈</div>
+            <div class="infographic__value">Tăng 15–20%</div>
+            <div class="infographic__label">Năng suất vụ đầu sau lắp đặt</div>
+          </div>
+          <div class="infographic__card">
+            <div class="infographic__icon">💰</div>
+            <div class="infographic__value">1,5–2 năm</div>
+            <div class="infographic__label">Thời gian hoàn vốn đầu tư</div>
+          </div>
+        </div>
+      </div>
+
+      <section class="section">
+        <h2 class="section__heading">Tưới nhỏ giọt và tưới tràn — khác nhau chỗ nào?</h2>
+        <table class="compare-table" aria-label="So sánh tưới nhỏ giọt và tưới tràn">
+          <thead>
+            <tr><th>Tiêu chí</th><th>Tưới tràn / béc phun</th><th>Tưới nhỏ giọt</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Lượng nước / cây / lần</td><td class="bad">150–200 lít</td><td class="good">60–80 lít</td></tr>
+            <tr><td>Độ ẩm đất vùng rễ</td><td class="bad">Không đều, mặt ướt gốc khô</td><td class="good">Đều và ổn định</td></tr>
+            <tr><td>Bốc hơi nước</td><td class="bad">Cao — tưới buổi trưa mất 30%</td><td class="good">Thấp — nước thấm thẳng vào đất</td></tr>
+            <tr><td>Cỏ dại giữa hàng</td><td class="bad">Bùng phát sau mỗi lần tưới</td><td class="good">Ít hơn — vùng ẩm nhỏ, cỏ khó mọc</td></tr>
+            <tr><td>Công lao động</td><td class="bad">Cao — kéo ống, di chuyển béc</td><td class="good">Thấp — bật van, đi làm việc khác</td></tr>
+            <tr><td>Chi phí lắp ban đầu</td><td class="good">Thấp</td><td class="bad">Trung bình — hoàn vốn sau 1,5–2 năm</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- INFOGRAPHIC 2 -->
+      <div class="infographic infographic--honey" role="figure" aria-label="Hướng dẫn lắp đặt tưới nhỏ giọt">
+        <p class="infographic__title">🔧 Cách lắp hệ thống tưới nhỏ giọt cơ bản</p>
+        <div class="infographic__grid">
+          <div class="infographic__card">
+            <div class="infographic__icon">🗺️</div>
+            <div class="infographic__value">Bước 1</div>
+            <div class="infographic__label">Vẽ sơ đồ vườn, chia khu tưới theo hàng cây</div>
+          </div>
+          <div class="infographic__card">
+            <div class="infographic__icon">🛢️</div>
+            <div class="infographic__value">Bước 2</div>
+            <div class="infographic__label">Đặt bồn chứa cao 1–2 m hoặc nối máy bơm áp thấp</div>
+          </div>
+          <div class="infographic__card">
+            <div class="infographic__icon">🔵</div>
+            <div class="infographic__value">Bước 3</div>
+            <div class="infographic__label">Kéo ống chính Ø25–32 mm dọc hàng cây</div>
+          </div>
+          <div class="infographic__card">
+            <div class="infographic__icon">💦</div>
+            <div class="infographic__value">Bước 4</div>
+            <div class="infographic__label">Cắm đầu nhỏ giọt 2–4 lít/giờ gần gốc mỗi cây</div>
+          </div>
+          <div class="infographic__card">
+            <div class="infographic__icon">⚙️</div>
+            <div class="infographic__value">Bước 5</div>
+            <div class="infographic__label">Cài đồng hồ hẹn giờ: tưới 3–4 giờ, cách ngày</div>
+          </div>
+        </div>
+      </div>
+
+      <section class="section">
+        <h2 class="section__heading">Chi phí thực tế cho 1 ha cà phê</h2>
+        <p>Với vườn cà phê 1 ha, mật độ khoảng 1.100–1.200 cây, chi phí lắp hệ thống tưới nhỏ giọt cơ bản dao động tuỳ loại vật tư:</p>
+        <div class="cost-grid">
+          <div class="cost-card">
+            <div class="cost-card__item">Đầu nhỏ giọt + ống nhánh</div>
+            <div class="cost-card__price">3–5 triệu đ</div>
+            <div class="cost-card__note">Loại nhập Thái hoặc Israel</div>
+          </div>
+          <div class="cost-card">
+            <div class="cost-card__item">Ống chính + khớp nối</div>
+            <div class="cost-card__price">2–3 triệu đ</div>
+            <div class="cost-card__note">PE Ø25–32 mm, dài ~500 m</div>
+          </div>
+          <div class="cost-card">
+            <div class="cost-card__item">Bơm + đồng hồ hẹn giờ</div>
+            <div class="cost-card__price">2–4 triệu đ</div>
+            <div class="cost-card__note">Bơm 0.5–1 HP là đủ</div>
+          </div>
+          <div class="cost-card">
+            <div class="cost-card__item">Công lắp đặt</div>
+            <div class="cost-card__price">1–2 triệu đ</div>
+            <div class="cost-card__note">Có thể tự làm nếu có hướng dẫn</div>
+          </div>
+        </div>
+        <p style="margin-top:12px; font-size:14px; color:var(--muted);">Tổng đầu tư: khoảng <strong style="color:var(--moss)">8–14 triệu đồng / ha</strong>. Mỗi mùa khô tiết kiệm được 3–5 triệu tiền điện bơm và công tưới — hoàn vốn sau 1,5–2 năm.</p>
+      </section>
+
+      <section class="section">
+        <h2 class="section__heading">Bảo trì để hệ thống dùng được 5–10 năm</h2>
+        <ul>
+          <li><strong>Xả cặn đầu mùa khô:</strong> Mở van xả cuối đường ống cho nước chảy mạnh 5–10 phút, cuốn cặn bùn tích tụ trong ống ra ngoài.</li>
+          <li><strong>Kiểm tra đầu nhỏ giọt bị tắc:</strong> Mỗi tháng tưới qua một lần bằng nước pha axit citric loãng (1 muỗng canh / 10 lít nước) để rửa cặn canxi trong đầu nhỏ giọt.</li>
+          <li><strong>Thu ống vào mùa mưa:</strong> Nếu không tưới mùa mưa, thu ống lại cất cho ống khỏi bị giòn vì nắng. Ống để lộ thiên 3–4 mùa là bắt đầu nứt.</li>
+          <li><strong>Lọc nước đầu nguồn:</strong> Lắp lọc Y-filter tại van tổng — đây là thứ đáng tiền nhất vì giúp đầu nhỏ giọt không bị tắc từ đầu.</li>
+        </ul>
+      </section>
+
+      <div class="tip-box" role="note">
+        <div class="tip-box__icon">🌿</div>
+        <div>
+          <p class="tip-box__label">Mẹo vàng Daktri</p>
+          <p class="tip-box__text">Kết hợp tưới nhỏ giọt với bón phân qua nước (fertigation): pha loãng phân bón lỏng Vinaxanh vào bồn chứa rồi tưới cùng — dinh dưỡng đi thẳng vào vùng rễ, không thất thoát, cây hấp thu nhanh hơn bón gốc thông thường đến 2–3 lần.</p>
+        </div>
+      </div>
+
+      <p class="conclusion">Đầu tư một lần lắp hệ thống tưới nhỏ giọt, bà con sẽ không còn phải lo mùa khô năm sau — nước đủ, cây đủ ẩm, công nhàn hơn, và vườn cà phê cho trái đều hơn rõ rệt.</p>
+
+      <footer class="cta">
+        <div>
+          <p class="cta__label">Tư vấn hệ thống tưới và phân bón hữu cơ</p>
+          <p class="cta__phone">0941 336 669</p>
+        </div>
+        <a href="tel:0941336669" class="cta__btn">Đặt hàng ngay →</a>
+      </footer>
+
+    </div>
+  </article>
+</main>
+</body>
+</html>

@@ -1,0 +1,32 @@
+[
+ {
+  "name": "Liberica Honey Process",
+  "description": "Sơ chế honey giữ lại lớp mật quanh hạt, cho hương trái cây nhiệt đới đặc trưng và hậu vị ngọt sâu kéo dài.",
+  "tags": "Mít chín,Mật ong rừng,Ca cao",
+  "category": "Signature",
+  "price": 140000,
+  "weight": 250,
+  "image_url": "/assets/images/products/liberica-honey-process.webp",
+  "image_alt": "Giàn phơi Honey Process của HTX Daktri Khe Sanh dưới biển hiệu thương hiệu — quả Liberica đã sát vỏ phơi cùng lớp mật"
+ },
+ {
+  "name": "Liberica Natural Process",
+  "description": "Phơi nguyên trái lên men chậm dưới nắng cao nguyên 20–30 ngày. Lớp mật quanh hạt lên men tự nhiên, tạo chiều sâu hương vị phức tạp — đậm đà, hậu vị dài, mang dấu ấn rượu vang nhẹ.",
+  "tags": "Lên men 20–30 ngày,Sầu riêng chín,Vang nhẹ,Đường nâu",
+  "category": "Mới",
+  "price": 150000,
+  "weight": 250,
+  "image_url": "/assets/images/products/liberica-natural-process.webp",
+  "image_alt": "Giàn phơi Natural lên men tại HTX Daktri Khe Sanh — quả Liberica nguyên trái đang trong giai đoạn lên men, màu chuyển từ đỏ tươi sang đỏ tím"
+ },
+ {
+  "name": "Liberica Daktri Khe Sanh",
+  "description": "Cà phê bột nguyên chất 100% Liberica, đóng gói thương hiệu HTX. Kèm phin truyền thống — pha là có ngay tách cà phê đậm vị quê hương.",
+  "tags": "Sô-cô-la đắng,Hạt dẻ rang,Khói nhẹ",
+  "category": "Bán chạy",
+  "price": 280000,
+  "weight": 500,
+  "image_url": "/assets/images/products/liberica-daktri-khe-sanh.webp",
+  "image_alt": "Đại diện HTX Daktri Khe Sanh và khách hàng cầm túi cà phê bột Liberica thương hiệu cùng phin truyền thống"
+ }
+]
