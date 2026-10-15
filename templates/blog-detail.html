@@ -4,20 +4,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Đang tải bài viết... | Daktri</title>
-  <meta name="description"
-    content="Từ vùng đất gió Lào, Daktri Khe Sanh chia sẻ cách làm phân hữu cơ tự ủ để giữ đất khỏe, nuôi cây bền vững và không đánh mất những gì thuộc về tự nhiên." />
+  <!--SSR:HEAD-->
+  <title>Blog | Daktri Khe Sanh</title>
+  <meta name="description" content="Kiến thức nông nghiệp tử tế từ HTX Daktri Khe Sanh — cà phê Liberica, đất khỏe, canh tác hữu cơ." />
+  <meta name="robots" content="noindex, follow" />
+  <!--/SSR:HEAD-->
   <meta name="author" content="Daktri Khe Sanh" />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://daktri.vn/blog/ca-phe-liberica" />
-  <!-- Tối ưu hiển thị khi share link lên Facebook Page & Zalo -->
-  <meta property="og:type" content="website" /> <!-- Dùng 'website' hoặc 'profile' cho trang giới thiệu thương hiệu -->
-  <meta property="og:title" content="Liberica Khe Sanh — HTX Daktri | Giữ đất · Giữ giống · Giữ cho mai sau" />
-  <meta property="og:description"
-  content="Daktri Khe Sanh – hợp tác xã gìn giữ cà phê Liberica cổ thụ tại Quảng Trị. Bắt đầu từ vùng đất gió Lào, chúng tôi giữ đất, giữ giống cho mai sau." />
-  <meta property="og:url" content="https://daktri.vn/blog/ca-phe-liberica" />
-  <meta property="og:image" content="https://libericakhesanh.net/assets/images/brands/daktri-logo.png" />
-  <!-- Lưu ý: Thay bằng link ảnh thực tế chụp vườn cà phê cổ hoặc logo HTX để làm ảnh đại diện khi share link -->
   <meta property="og:site_name" content="HTX Daktri Khe Sanh" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -520,11 +512,9 @@
       <header class="hero" id="hero" style="min-height:0;">
         <div class="hero__overlay" id="hero-overlay"></div>
         <div class="hero__badge">🌿 Daktri × Vinaxanh</div>
-        <p id="hero-tagline" class="hero__tagline"></p>
-        <h1 class="hero__title" id="hero-title">
-          <span class="skeleton-line" style="width:90%"></span>
-          <span class="skeleton-line" style="width:60%"></span>
-        </h1>
+        <p id="hero-tagline" class="hero__tagline"><!--SSR:TAGLINE--></p>
+        <h1 class="hero__title" id="hero-title"><!--SSR:TITLE--><span class="skeleton-line" style="width:90%"></span>
+          <span class="skeleton-line" style="width:60%"></span><!--/SSR:TITLE--></h1>
         <div class="hero__meta">
           <span>📞 <span class="hero__hotline">0941 336 669</span></span>
           <span>•</span>
@@ -535,19 +525,18 @@
       <div class="article__body">
 
         <div class="post-meta">
-          <span class="post-meta__slug" id="post-meta-slug">/blog/...</span>
-          <span id="post-meta-date"></span>
-          <span id="post-meta-author"></span>
-          <span class="post-meta__tag">Phân bón hữu cơ</span>
-          <span class="post-meta__tag">Cải tạo đất</span>
+          <span class="post-meta__slug" id="post-meta-slug"><!--SSR:SLUG-->/blog/...<!--/SSR:SLUG--></span>
+          <span id="post-meta-date"><!--SSR:DATE--></span>
+          <span id="post-meta-author"><!--SSR:AUTHOR--></span>
+          <!--SSR:TAGS--><!--/SSR:TAGS-->
         </div>
 
         <div id="blog-content-root">
-          <div id="blog-loading" class="blog-loading">
+          <!--SSR:BODY--><div id="blog-loading" class="blog-loading">
             <span class="blog-spinner"></span>
             <span>Đang tải nội dung bài viết...</span>
           </div>
-          <div id="blog-blocks" style="display:none;"></div>
+          <div id="blog-blocks" style="display:none;"></div><!--/SSR:BODY-->
           <div id="blog-error" class="blog-error" style="display:none;"></div>
         </div>
         <!-- ============ /NỘI DUNG BÀI VIẾT ============ -->
@@ -631,7 +620,7 @@
 
       <div class="footer-bottom">
         <div>© 2026 HTX Daktri Khe Sanh. Tất cả các quyền được bảo lưu.</div>
-        <div>Thiết kế bởi <a href="#">STC CROP</a></div>
+        <div>Thiết kế bởi <a href="https://smarthomedaklak.com" target="_blank" rel="noopener">STC CROP</a></div>
       </div>
     </div>
   </footer>
@@ -786,7 +775,7 @@
           }
           // Ưu tiên 3: Fallback chung cho tất cả bài viết
           else {
-            taglineText = "Rác nhà vườn thành vàng cho đất";   // Bạn có thể thay câu này
+            taglineText = "Giữ đất · Giữ giống · Giữ cho mai sau";   // Bạn có thể thay câu này
             // Hoặc dùng câu chung khác: "Kiến thức hữu cơ - Làm vườn bền vững"
           }
 
@@ -823,6 +812,9 @@
         const blocksEl = document.getElementById('blog-blocks');
         const errorEl = document.getElementById('blog-error');
 
+        // Nội dung đã được render sẵn từ server (SEO) → không cần tải lại
+        if (window.__BLOG_DATA__ && blocksEl && blocksEl.dataset.ssr === '1') return;
+
         const slug = getBlogSlug();
         errorEl.style.display = 'none';
         loadingEl.style.display = 'flex';
@@ -836,15 +828,21 @@
         }
 
         try {
-          const url = `${API_BASE}?table=blogs&action=detail&slug=${encodeURIComponent(slug)}`;
-          const res = await fetch(url);
-          let resp = await res.json();
+          let data;
+          const ssr = window.__BLOG_DATA__;
+          if (ssr && ssr.slug === slug) {
+            data = ssr;
+          } else {
+            const url = `${API_BASE}?table=blogs&action=detail&slug=${encodeURIComponent(slug)}`;
+            const res = await fetch(url);
+            let resp = await res.json();
 
-          if (!res.ok || resp?.status === 'error') {
-            throw new Error(resp?.msg || 'Không tải được bài viết.');
+            if (!res.ok || resp?.status === 'error') {
+              throw new Error(resp?.msg || 'Không tải được bài viết.');
+            }
+
+            data = extractDetail(resp);
           }
-
-          const data = extractDetail(resp);
           if (!data || typeof data !== 'object') {
             throw new Error('Không có dữ liệu bài viết.');
           }

@@ -1,10 +1,48 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "functions": {
+    "api/**/*.js": {
+      "includeFiles": "templates/**",
+      "maxDuration": 15
+    }
+  },
   "rewrites": [
     {
+      "source": "/",
+      "destination": "/api/home"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap"
+    },
+    {
+      "source": "/blog",
+      "destination": "/api/blog-index"
+    },
+    {
       "source": "/blog/:slug",
-      "destination": "/blog/blog-detail?slug=:slug"
+      "destination": "/api/blog/:slug"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/templates/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    },
+    {
+      "source": "/assets/images/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000, stale-while-revalidate=86400"
+        }
+      ]
     }
   ]
 }

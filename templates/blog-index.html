@@ -9,13 +9,13 @@
     content="Kiến thức nông nghiệp tử tế từ HTX Daktri Khe Sanh và Vinaxanh Quảng Trị — cà phê Liberica, phân hữu cơ vi sinh, đất khỏe.">
   <meta name="robots" content="index, follow" />
   <meta name="author" content="Daktri Khe Sanh" />
-  <link rel="canonical" href="https://daktri.vn/blog/" />
+  <link rel="canonical" href="https://daktri.vn/blog" />
   <!-- Tối ưu hiển thị khi share link lên Facebook Page & Zalo -->
   <meta property="og:type" content="website" /> <!-- Dùng 'website' hoặc 'profile' cho trang giới thiệu thương hiệu -->
-  <meta property="og:title" content="Liberica Khe Sanh — HTX Daktri | Giữ đất · Giữ giống · Giữ cho mai sau" />
+  <meta property="og:title" content="Blog Nông nghiệp tử tế — HTX Daktri Khe Sanh" />
   <meta property="og:description"
     content="Daktri Khe Sanh – hợp tác xã gìn giữ cà phê Liberica cổ thụ tại Quảng Trị. Bắt đầu từ vùng đất gió Lào, chúng tôi giữ đất, giữ giống cho mai sau." />
-  <meta property="og:url" content="https://daktri.vn/blog/" />
+  <meta property="og:url" content="https://daktri.vn/blog" />
   <meta property="og:image" content="https://libericakhesanh.net/assets/images/brands/daktri-logo.png" />
   <!-- Lưu ý: Thay bằng link ảnh thực tế chụp vườn cà phê cổ hoặc logo HTX để làm ảnh đại diện khi share link -->
   <meta property="og:site_name" content="HTX Daktri Khe Sanh" />
@@ -275,9 +275,7 @@
 
     <h2 class="section-title">Bài viết</h2>
 
-    <ul class="post-list" id="post-list">
-
-    </ul>
+    <ul class="post-list" id="post-list"><!--SSR:LIST--></ul><!--SSR:PAGINATION-->
 
 
   </div>
@@ -349,7 +347,7 @@
 
       <div class="footer-bottom">
         <div>© 2026 HTX Daktri Khe Sanh. Tất cả các quyền được bảo lưu.</div>
-        <div>Thiết kế bởi <a href="#">STC CROP</a></div>
+        <div>Thiết kế bởi <a href="https://smarthomedaklak.com" target="_blank" rel="noopener">STC CROP</a></div>
       </div>
     </div>
   </footer>
@@ -428,7 +426,8 @@
     </div>
   `;
 
-      // Thêm phân trang vào sau danh sách
+      // Thêm phân trang vào sau danh sách (xoá phân trang cũ để không bị nhân đôi)
+      document.querySelectorAll('.pagination').forEach(el => el.remove());
       const listEl = document.getElementById('post-list');
       listEl.insertAdjacentHTML('afterend', paginationHTML);
     }
@@ -452,6 +451,9 @@
 
     // Load khi trang sẵn sàng
     document.addEventListener('DOMContentLoaded', () => {
+      // Danh sách đã được render sẵn từ server (SEO) → không cần tải lại trang 1
+      const listEl = document.getElementById('post-list');
+      if (listEl && listEl.dataset.ssr === '1') return;
       loadBlogs(1);
     });
   </script>
