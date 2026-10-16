@@ -307,6 +307,68 @@
 
     <!-- Container để render động -->
     <div class="product-grid" id="product-grid"><!--SSR:PRODUCTS--><div class="loading">Đang tải sản phẩm...</div><!--/SSR:PRODUCTS--></div>
+
+    <!-- BỘ SƯU TẬP NGŨ ÂM -->
+    <style>
+      .ngu-am{max-width:1200px;margin:5rem auto 0}
+      .ngu-am-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:1.6rem}
+      .ngu-am-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--moss);margin:0 0 .5rem}
+      .ngu-am-title{font-family:'Fraunces',Georgia,serif;font-weight:400;font-size:clamp(1.8rem,3.6vw,2.6rem);line-height:1.1;margin:0;color:var(--ink)}
+      .ngu-am-title em{color:var(--terracotta)}
+      .ngu-am-intro{max-width:460px;color:var(--ink-soft);line-height:1.7;margin:0}
+      .ngu-am-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+      .ngu-am-card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+      .ngu-am-card img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;background:var(--cream)}
+      .ngu-am-body{padding:14px 14px 16px;display:flex;flex-direction:column;gap:4px;flex:1}
+      .ngu-am-no{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--ink-muted);letter-spacing:.08em}
+      .ngu-am-name{font-family:'Fraunces',Georgia,serif;font-size:1.35rem;letter-spacing:.04em;color:var(--ink);margin:0}
+      .ngu-am-en{font-style:italic;color:var(--espresso);font-size:.92rem}
+      .ngu-am-tag{color:var(--ink-soft);font-size:.9rem;line-height:1.55;margin:.35rem 0 .5rem}
+      .ngu-am-meta{margin-top:auto;font-size:.78rem;color:var(--ink-muted);border-top:1px dashed var(--line);padding-top:8px;line-height:1.5}
+      @media (max-width:1000px){.ngu-am-grid{grid-template-columns:repeat(3,1fr)}}
+      @media (max-width:640px){.ngu-am{margin-top:3.5rem}.ngu-am-grid{grid-template-columns:repeat(2,1fr);gap:10px}.ngu-am-name{font-size:1.15rem}}
+    </style>
+    <div class="ngu-am" id="ngu-am">
+      <div class="ngu-am-head">
+        <div>
+          <p class="ngu-am-eyebrow">Bộ sưu tập</p>
+          <h3 class="ngu-am-title">Ngũ Âm <em>DAKTRI</em></h3>
+        </div>
+        <p class="ngu-am-intro">Năm sản phẩm, năm nốt nhạc trong bản hoà âm của đất và người Khe Sanh.</p>
+      </div>
+      <div class="ngu-am-grid">
+        <article class="ngu-am-card">
+          <img src="/assets/images/products/bao-bi-liberica-250g-800.webp" alt="Hồi Âm — cà phê rang Liberica" loading="lazy" decoding="async">
+          <div class="ngu-am-body"><span class="ngu-am-no">01 · LIBERICA</span><h4 class="ngu-am-name">HỒI ÂM</h4><span class="ngu-am-en">The Echo</span>
+            <p class="ngu-am-tag">Trăm năm vọng lại từ đất sương mù Khe Sanh</p>
+            <p class="ngu-am-meta">Cà phê rang Liberica Hồi Âm<br>Dạng hạt / bột</p></div>
+        </article>
+        <article class="ngu-am-card">
+          <img src="/assets/images/products/bao-bi-arabica-800.webp" alt="Cao Âm — cà phê rang Arabica" loading="lazy" decoding="async">
+          <div class="ngu-am-body"><span class="ngu-am-no">02 · ARABICA</span><h4 class="ngu-am-name">CAO ÂM</h4><span class="ngu-am-en">The High Note</span>
+            <p class="ngu-am-tag">Nốt cao trên đỉnh mây ngàn</p>
+            <p class="ngu-am-meta">Cà phê rang Arabica Cao Âm<br>Dạng hạt / bột</p></div>
+        </article>
+        <article class="ngu-am-card">
+          <img src="/assets/images/products/bao-bi-robusta-800.webp" alt="Đại Âm — cà phê rang Robusta" loading="lazy" decoding="async">
+          <div class="ngu-am-body"><span class="ngu-am-no">03 · ROBUSTA</span><h4 class="ngu-am-name">ĐẠI ÂM</h4><span class="ngu-am-en">The Grand Note</span>
+            <p class="ngu-am-tag">Đậm đà tiếng gọi đại ngàn</p>
+            <p class="ngu-am-meta">Cà phê rang Robusta Đại Âm<br>Dạng hạt / bột</p></div>
+        </article>
+        <article class="ngu-am-card">
+          <img src="/assets/images/products/hoa-am-say-lanh-800.webp" alt="Hoà Âm — cà phê hoà tan sấy lạnh" loading="lazy" decoding="async">
+          <div class="ngu-am-body"><span class="ngu-am-no">04 · HOÀ TAN</span><h4 class="ngu-am-name">HÒA ÂM</h4><span class="ngu-am-en">Harmony &amp; Aroma</span>
+            <p class="ngu-am-tag">Hòa quyện tinh túy hai miền</p>
+            <p class="ngu-am-meta">Cà phê hòa tan sấy lạnh Hòa Âm</p></div>
+        </article>
+        <article class="ngu-am-card">
+          <img src="/assets/images/thu-vien/hoa-liberica-nhat-ky-24-04-2026-800.webp" alt="Hoa cà phê — nguyên liệu trà hoa Xuân Âm" loading="lazy" decoding="async">
+          <div class="ngu-am-body"><span class="ngu-am-no">05 · TRÀ HOA</span><h4 class="ngu-am-name">XUÂN ÂM</h4><span class="ngu-am-en">Spring Note</span>
+            <p class="ngu-am-tag">Hoa nở trên rẫy, khúc dạo đầu mùa cà phê</p>
+            <p class="ngu-am-meta">Trà hoa cà phê Xuân Âm</p></div>
+        </article>
+      </div>
+    </div>
   </section>
   <!-- PROCESS -->
   <section class="process" id="process">
