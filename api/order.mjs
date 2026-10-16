@@ -1,6 +1,7 @@
 // Nhận đơn đặt hàng từ form trên daktri.vn — mỗi đơn lưu thành một file riêng trong kho
 import crypto from 'node:crypto';
 import store from './_lib/store.js';
+import mail from './_lib/mail.js';
 
 const json = (status, body) =>
   new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' } });
@@ -69,6 +70,15 @@ export async function POST(request) {
   } catch (e) {
     console.error('order save error', e && e.message);
     return json(500, { status: 'error', msg: 'Chưa gửi được đơn. Vui lòng gọi 0941 336 669 hoặc nhắn Zalo.' });
+  }
+  // Báo email cho HTX (lỗi email không làm hỏng đơn — đơn đã lưu ở trên)
+  try {
+    await Promise.race([
+      mail.sendOrderEmail(order),
+      new Promise((_, rej) => setTimeout(() => rej(new Error('mail timeout')), 12000)),
+    ]);
+  } catch (e) {
+    console.error('order mail error', e && e.message);
   }
   return json(200, { status: 'success', code, total: order.total, msg: 'Đã nhận đơn. HTX sẽ gọi lại xác nhận trong ngày.' });
 }
