@@ -109,7 +109,7 @@ module.exports = async (req, res) => {
     ${others.length ? others.map(l => lotCard(l, false)).join('') : `<div class="tx-empty">HTX đang cập nhật thông tin các lô của vụ mới. Nếu bạn cần thông tin về gói cà phê đang dùng, hãy nhắn Zalo <a href="https://zalo.me/0941336669">0941 336 669</a> kèm ảnh bao bì.</div>`}
     <h2 class="tx-h2">Vùng nguyên liệu</h2>
     <div class="tx-facts">
-      <div><span>Địa điểm</span><strong>Tân Lập, Hướng Hoá, Quảng Trị</strong></div>
+      <div><span>Địa điểm</span><strong>Tân Lập, Quảng Trị</strong></div>
       <div><span>Cao độ</span><strong>600–800 m</strong></div>
       <div><span>Loại đất</span><strong>Bazan đỏ</strong></div>
       <div><span>Mùa thu hoạch</span><strong>Tháng 3 – Tháng 4</strong></div>
