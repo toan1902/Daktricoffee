@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const DOMAIN = 'https://daktri.vn';
-const DEFAULT_IMAGE = 'https://daktri.vn/assets/images/brand/daktri-logo.png';
+const DEFAULT_IMAGE = 'https://daktri.vn/assets/images/brand/daktri-logo.png?v=2';
 const DEFAULT_DESC = 'Kiến thức nông nghiệp tử tế từ HTX Daktri Khe Sanh — cà phê Liberica, đất khỏe, canh tác hữu cơ.';
 
 const templateCache = {};
@@ -279,7 +279,7 @@ function readArchiveIndex() {
 
 const ARCHIVE_BAR = `
 <div style="position:sticky;top:0;z-index:1000;background:#1a2e1e;color:#faf7f0;font:500 14px/1.4 system-ui,sans-serif;padding:10px 16px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap">
-  <a href="/" style="color:#faf7f0;text-decoration:none;display:flex;align-items:center;gap:8px"><img src="/assets/images/brand/daktri-logo.png" alt="Logo HTX Daktri Khe Sanh" width="28" height="28" style="border-radius:50%;background:#fff">Daktri Khe Sanh</a>
+  <a href="/" style="color:#faf7f0;text-decoration:none;display:flex;align-items:center;gap:8px"><img src="/assets/images/brand/daktri-logo.png?v=2" alt="Logo HTX Daktri Khe Sanh" width="28" height="28" style="border-radius:50%;background:#fff">Daktri Khe Sanh</a>
   <span style="display:flex;gap:16px;flex-wrap:wrap"><a href="/blog" style="color:#f5a623;text-decoration:none">← Tất cả bài viết</a><a href="/#products" style="color:#faf7f0;text-decoration:none">Sản phẩm</a><a href="tel:0941336669" style="color:#faf7f0;text-decoration:none">📞 0941 336 669</a></span>
 </div>`;
 
@@ -322,7 +322,7 @@ function renderArchivedPost(slug, override) {
   <meta name="description" content="${esc(meta.excerpt)}" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <link rel="canonical" href="${esc(url)}" />
-  <link rel="icon" href="/assets/images/brand/daktri-logo.png" type="image/png" />
+  <link rel="icon" href="/assets/images/brand/daktri-logo.png?v=2" type="image/png" />
   <meta property="og:type" content="article" />
   <meta property="og:locale" content="vi_VN" />
   <meta property="og:site_name" content="HTX Daktri Khe Sanh" />
