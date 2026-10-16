@@ -112,7 +112,7 @@ module.exports = async (req, res) => {
       <div><span>Địa điểm</span><strong>Tân Lập, Hướng Hoá, Quảng Trị</strong></div>
       <div><span>Cao độ</span><strong>600–800 m</strong></div>
       <div><span>Loại đất</span><strong>Bazan đỏ</strong></div>
-      <div><span>Mùa thu hoạch</span><strong>Tháng 11 – Tháng 2</strong></div>
+      <div><span>Mùa thu hoạch</span><strong>Tháng 3 – Tháng 4</strong></div>
     </div>
     <p class="tx-lead" style="margin-top:1.2rem">Xem thêm <a href="/about">câu chuyện HTX</a> và <a href="/thu-vien">ảnh thực địa vườn Liberica</a>.</p>
   </main>`;
