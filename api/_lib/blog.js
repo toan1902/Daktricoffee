@@ -311,6 +311,8 @@ function renderArchivedPost(slug, override) {
     publisher: { '@type': 'Organization', name: 'HTX Daktri Khe Sanh', logo: { '@type': 'ImageObject', url: DEFAULT_IMAGE } },
     ...(published ? { datePublished: published.toISOString() } : {}),
   };
+  const cover = override && override.cover_image;
+  const coverInBody = cover && html.includes(cover);
   // bỏ thẻ SEO cũ để không bị trùng, rồi chèn bộ chuẩn
   html = html
     .replace(/<link rel="canonical"[^>]*>\s*/gi, '')
@@ -333,6 +335,11 @@ function renderArchivedPost(slug, override) {
 </head>`;
   html = html.replace(/<\/head>/i, head);
   html = html.replace(/<body([^>]*)>/i, `<body$1>${ARCHIVE_BAR}`);
+  // ảnh bìa đặt trong admin -> hiện ngay dưới tiêu đề (nếu bài gốc chưa có ảnh này)
+  if (cover && !coverInBody && /<div class="article__body">/.test(html)) {
+    html = html.replace(/<div class="article__body">/,
+      `<div class="article__body"><figure style="margin:24px 0 8px"><img src="${esc(cover)}" alt="${esc(meta.title)}" width="1200" height="630" style="width:100%;height:auto;border-radius:12px;display:block" fetchpriority="high"></figure>`);
+  }
   return html;
 }
 
