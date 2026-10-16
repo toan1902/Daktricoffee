@@ -199,7 +199,14 @@ export async function POST(request) {
         if ('slug' in fields) fields.slug = slugify(fields.slug || fields.title);
         if ('status' in fields) fields.status = fields.status === 'published' ? 'published' : 'draft';
       }
-      if (table === 'products' && 'slug' in fields) fields.slug = slugify(fields.slug || fields.name);
+      if (table === 'products' && ('slug' in fields || action === 'create')) {
+        // slug sản phẩm luôn duy nhất: trùng thì tự thêm -2, -3…
+        const cur = action === 'create' ? null : list.find(x => x.id === id);
+        let base = slugify(fields.slug || fields.name || (cur && cur.name)) || 'san-pham';
+        let slug = base, n = 2;
+        while (list.some(x => x.slug === slug && x.id !== id)) slug = `${base}-${n++}`;
+        fields.slug = slug;
+      }
       if (table === 'lots') {
         if ('code' in fields) fields.code = String(fields.code || '').toUpperCase().replace(/[^A-Z0-9-]/g, '').slice(0, 40);
         if (action === 'create' && !fields.code) throw new Error('Mã lô không được để trống (ví dụ: LIB-2526-01).');
