@@ -42,18 +42,22 @@ function seedDb() {
 // Đưa các bài lưu sẵn (data/blog-archive) vào kho một lần, để admin thấy và sửa được.
 // Bài nhập vào có layout 'legacy': trang công khai vẫn hiện giao diện gốc cho tới khi
 // bạn sửa nội dung khối trong admin (khi đó chuyển sang layout 'blocks').
+// Bài mới thêm vào repo về sau mang "import_version" lớn hơn: chỉ những bài đó được nhập
+// thêm một lần (bài cũ bạn đã xoá trong admin không bị nhập lại).
 function importLegacy(db) {
-  if (db.legacy_imported) return db;
+  const doneVersion = Number(db.legacy_import_version) || (db.legacy_imported ? 1 : 0);
   let index = [];
   try {
     index = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data', 'blog-archive', 'index.json'), 'utf8'));
   } catch (e) {
     return db;
   }
+  const pending = index.filter(it => (Number(it.import_version) || 1) > doneVersion);
+  if (!pending.length) return db;
   db.blogs = db.blogs || [];
   db.blog_blocks = db.blog_blocks || [];
   db.seq = db.seq || {};
-  const sorted = index.slice().sort((a, b) => String(a.created_at).localeCompare(String(b.created_at)));
+  const sorted = pending.slice().sort((a, b) => String(a.created_at).localeCompare(String(b.created_at)));
   for (const it of sorted) {
     if (db.blogs.some(b => b.slug === it.slug)) continue;
     let blocks = [];
@@ -87,6 +91,7 @@ function importLegacy(db) {
     });
   }
   db.legacy_imported = true;
+  db.legacy_import_version = Math.max(doneVersion, ...index.map(it => Number(it.import_version) || 1));
   return db;
 }
 
