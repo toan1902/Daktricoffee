@@ -98,6 +98,13 @@
   "content": "Tối cùng ngày, sân khấu Lễ ra mắt sách Trăm năm cà phê Khe Sanh sáng đèn. Phông nền được thiết kế như một cuốn sách mở hai trang xanh, phía trên là biểu tượng \"100 năm – Cà phê Khe Sanh – Hương vị Hòa bình, 1926–2026\" với hình cánh chim hòa bình. Hai bên là những kệ sách vừa ra mắt."
  },
  {
+  "type": "image",
+  "content": {
+   "url": "/assets/images/blog/tram-nam-ca-phe-khe-sanh/le-ra-mat-sach.webp",
+   "caption": "Sân khấu Lễ ra mắt sách Trăm năm cà phê Khe Sanh."
+  }
+ },
+ {
   "type": "text",
   "content": "Cuốn sách do nhiều tác giả biên soạn, Nhà xuất bản Thuận Hóa ấn hành, ra đời đúng tháng 10/2026 để kỷ niệm mốc 1926–2026. Sách gồm ba phần: Từ nơi ươm mầm, Hương vị bay xa và Bên ly cà phê, kể chuyện vùng đất. Các bài viết đan xen ký ức về đồn điền xưa, những năm chiến tranh và nhịp hồi sinh hôm nay của Khe Sanh."
  },
@@ -190,13 +197,6 @@
  {
   "type": "text",
   "content": "Sáng hôm sau, triển lãm hình ảnh, tư liệu \"Ký ức 100 năm cà phê Khe Sanh – Từ lịch sử đến hội nhập\" đón khách tham quan. Không gian giới thiệu phim tư liệu, hiện vật, hình ảnh, sản phẩm OCOP, cà phê đặc sản và bản đồ số vùng trồng."
- },
- {
-  "type": "image",
-  "content": {
-   "url": "/assets/images/blog/tram-nam-ca-phe-khe-sanh/trien-lam-ky-uc-100-nam.webp",
-   "caption": "Triển lãm hình ảnh, tư liệu \"Ký ức 100 năm cà phê Khe Sanh – Từ lịch sử đến hội nhập\"."
-  }
  },
  {
   "type": "text",
