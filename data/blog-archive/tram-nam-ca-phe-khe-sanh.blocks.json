@@ -2,8 +2,8 @@
  {
   "type": "image",
   "content": {
-   "url": "/assets/images/blog/tram-nam-ca-phe-khe-sanh/doan-khach-vung-trong.webp",
-   "caption": "Đoàn khách trong chuyến tham quan vùng trồng cà phê Khe Sanh, trong đó có Giáo sư Akihiko, Đại học Tokyo (Nhật Bản)."
+   "url": "/assets/images/blog/tram-nam-ca-phe-khe-sanh/pano-trai-tim-dscf1841.webp",
+   "caption": "Tấm pano \"Khe Sanh trong trí nhớ của trái tim\" giới thiệu cuốn sách Trăm năm cà phê Khe Sanh."
   }
  },
  {
@@ -219,6 +219,13 @@
  {
   "type": "text",
   "content": "Rời triển lãm, đoàn khách theo hành trình trải nghiệm \"Make coffee, not war\" về vùng trồng cà phê và các bản làng của đồng bào Vân Kiều. Trong đoàn có Giáo sư Akihiko đến từ Đại học Tokyo (Nhật Bản). Giữa nắng sớm, mọi người cùng dừng chân chụp ảnh dưới tán cây lớn, phía sau là những triền đồi xanh."
+ },
+ {
+  "type": "image",
+  "content": {
+   "url": "/assets/images/blog/tram-nam-ca-phe-khe-sanh/doan-khach-vung-trong.webp",
+   "caption": "Đoàn khách trong chuyến tham quan vùng trồng cà phê Khe Sanh, trong đó có Giáo sư Akihiko, Đại học Tokyo (Nhật Bản)."
+  }
  },
  {
   "type": "text",
